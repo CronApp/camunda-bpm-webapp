@@ -49,7 +49,7 @@ public abstract class AbstractRestQueryParametersDto<T> extends QueryParameters<
 
   private static final List<String> VALID_SORT_ORDER_VALUES;
   static {
-    VALID_SORT_ORDER_VALUES = new ArrayList<String>();
+    VALID_SORT_ORDER_VALUES = new ArrayList<>();
     VALID_SORT_ORDER_VALUES.add(SORT_ORDER_ASC_VALUE);
     VALID_SORT_ORDER_VALUES.add(SORT_ORDER_DESC_VALUE);
   }

@@ -13,6 +13,8 @@
     "cockpitSourceDir": "ui/cockpit/client",
     "tasklistBuildTarget": "target/webapp/app/tasklist",
     "tasklistSourceDir": "ui/tasklist/client",
+    "modelerBuildTarget": "target/webapp/app/modeler",
+    "modelerSourceDir": "ui/modeler/client",
     "pluginBuildTarget": "target/webapp/plugin",
     "pluginSourceDir": "ui",
     "libTargetDir": "target/webapp/lib",

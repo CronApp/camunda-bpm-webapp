@@ -38,12 +38,14 @@ module.exports = function(grunt) {
   require('./ui/admin/grunt/config/browserify')(config, browserifyConf);
   require('./ui/tasklist/grunt/config/browserify')(config, browserifyConf);
   require('./ui/cockpit/grunt/config/browserify')(config, browserifyConf);
+  require('./ui/modeler/grunt/config/browserify')(config, browserifyConf);
 
   var copyConf = require('./grunt/config/copy');
   require('./ui/welcome/grunt/config/copy')(config, copyConf);
   require('./ui/admin/grunt/config/copy')(config, copyConf);
   require('./ui/cockpit/grunt/config/copy')(config, copyConf);
   require('./ui/tasklist/grunt/config/copy')(config, copyConf);
+  require('./ui/modeler/grunt/config/copy')(config, copyConf);
 
   var lessConf = { };
   require('./grunt/config/less')(config, lessConf, {
@@ -88,6 +90,12 @@ module.exports = function(grunt) {
     plugin: true
   });
 
+  require('./grunt/config/less')(config, lessConf, {
+    appName: 'modeler',
+    sourceDir: pkg.gruntConfig.modelerSourceDir,
+    buildTarget: pkg.gruntConfig.modelerBuildTarget
+  });
+
   var localesConf = { };
   require('./grunt/config/localescompile')(config, localesConf, {
     appName: 'tasklist',
@@ -113,6 +121,12 @@ module.exports = function(grunt) {
     buildTarget: pkg.gruntConfig.cockpitBuildTarget
   });
 
+  require('./grunt/config/localescompile')(config, localesConf, {
+    appName: 'modeler',
+    sourceDir: pkg.gruntConfig.modelerSourceDir,
+    buildTarget: pkg.gruntConfig.modelerBuildTarget
+  });
+
   var watchConf = {
     commons_styles: {
       options: {
@@ -129,6 +143,7 @@ module.exports = function(grunt) {
   require('./ui/tasklist/grunt/config/watch')(config, watchConf);
   require('./ui/cockpit/grunt/config/watch')(config, watchConf);
   require('./ui/admin/grunt/config/watch')(config, watchConf);
+  require('./ui/modeler/grunt/config/watch')(config, watchConf);
   require('./ui/common/grunt/config/watch')(config, watchConf);
 
   var uglifyConf = {};
@@ -137,12 +152,14 @@ module.exports = function(grunt) {
   require('./ui/admin/grunt/config/uglify')(config, uglifyConf);
   require('./ui/tasklist/grunt/config/uglify')(config, uglifyConf);
   require('./ui/cockpit/grunt/config/uglify')(config, uglifyConf);
+  require('./ui/modeler/grunt/config/uglify')(config, uglifyConf);
 
   var eslintConf = {};
   require('./ui/welcome/grunt/config/eslint')(config, eslintConf);
   require('./ui/admin/grunt/config/eslint')(config, eslintConf);
   require('./ui/tasklist/grunt/config/eslint')(config, eslintConf);
   require('./ui/cockpit/grunt/config/eslint')(config, eslintConf);
+  require('./ui/modeler/grunt/config/eslint')(config, eslintConf);
   require('./ui/common/grunt/config/eslint')(config, eslintConf);
 
 

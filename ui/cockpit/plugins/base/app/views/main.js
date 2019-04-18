@@ -73,6 +73,8 @@ ngModule.config(dashboardProcesses);
 ngModule.config(dashboardDecisions);
 ngModule.config(dashboardTasks);
 
+console.log('cockpit.plugin.base.views');
+
 ngModule.config(processDefinitions);
 
 ngModule.config(processInstanceTable);

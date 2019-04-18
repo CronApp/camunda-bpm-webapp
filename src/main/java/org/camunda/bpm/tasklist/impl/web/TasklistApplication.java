@@ -16,42 +16,19 @@
  */
 package org.camunda.bpm.tasklist.impl.web;
 
-import java.util.HashSet;
+import org.camunda.bpm.tasklist.Tasklist;
+import org.camunda.bpm.tasklist.plugin.spi.TasklistPlugin;
+import org.camunda.bpm.webapp.impl.AbstractApplication;
+
 import java.util.List;
 import java.util.Set;
 
-import javax.ws.rs.core.Application;
-
-import org.camunda.bpm.engine.rest.exception.ExceptionHandler;
-import org.camunda.bpm.engine.rest.exception.RestExceptionHandler;
-import org.camunda.bpm.engine.rest.mapper.JacksonConfigurator;
-import org.camunda.bpm.tasklist.Tasklist;
-import org.camunda.bpm.tasklist.plugin.spi.TasklistPlugin;
-
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-
 /**
  * @author Roman Smirnov
- *
  */
-public class TasklistApplication extends Application {
+public class TasklistApplication extends AbstractApplication {
 
-  @Override
-  public Set<Class<?>> getClasses() {
-    Set<Class<?>> classes = new HashSet<Class<?>>();
-
-    classes.add(JacksonConfigurator.class);
-    classes.add(JacksonJsonProvider.class);
-    classes.add(ExceptionHandler.class);
-    classes.add(RestExceptionHandler.class);
-
-    addPluginResourceClasses(classes);
-
-    return classes;
-  }
-
-  private void addPluginResourceClasses(Set<Class<?>> classes) {
-
+  protected void addPluginResourceClasses(Set<Class<?>> classes) {
     List<TasklistPlugin> plugins = getTasklistPlugins();
 
     for (TasklistPlugin plugin : plugins) {

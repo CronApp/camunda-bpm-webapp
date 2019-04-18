@@ -16,44 +16,21 @@
  */
 package org.camunda.bpm.welcome.impl.web;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.ws.rs.core.Application;
-
-import org.camunda.bpm.engine.rest.exception.ExceptionHandler;
-import org.camunda.bpm.engine.rest.exception.RestExceptionHandler;
-import org.camunda.bpm.engine.rest.mapper.JacksonConfigurator;
+import org.camunda.bpm.webapp.impl.AbstractApplication;
 import org.camunda.bpm.welcome.Welcome;
 import org.camunda.bpm.welcome.plugin.spi.WelcomePlugin;
 
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import java.util.List;
+import java.util.Set;
 
 /**
  * The rest api exposed by the welcome application
  *
  * @author Daniel Meyer
  */
-public class WelcomeApplication extends Application {
+public class WelcomeApplication extends AbstractApplication {
 
-  @Override
-  public Set<Class<?>> getClasses() {
-    Set<Class<?>> classes = new HashSet<Class<?>>();
-
-    classes.add(JacksonConfigurator.class);
-    classes.add(JacksonJsonProvider.class);
-    classes.add(RestExceptionHandler.class);
-    classes.add(ExceptionHandler.class);
-
-    addPluginResourceClasses(classes);
-
-    return classes;
-  }
-
-
-  private void addPluginResourceClasses(Set<Class<?>> classes) {
-
+  protected void addPluginResourceClasses(Set<Class<?>> classes) {
     List<WelcomePlugin> plugins = getPlugins();
 
     for (WelcomePlugin plugin : plugins) {

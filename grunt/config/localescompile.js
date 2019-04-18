@@ -1,6 +1,10 @@
 module.exports = function(config, localesConfig, pathConfig) {
   'use strict';
 
+  var appName = pathConfig.appName === 'modeler' ? 'welcome' : pathConfig.appName;
+
+  console.log('pathConfig.appName=' + pathConfig.appName + '. appName=' + appName);
+
   localesConfig[pathConfig.appName + '_locales'] = {
       options: {
         dest: pathConfig.buildTarget + '/locales',
@@ -8,7 +12,7 @@ module.exports = function(config, localesConfig, pathConfig) {
         anOption: 'for production'
       },
       src: [
-        '<%= pkg.gruntConfig.enTranslationDir %>/' + pathConfig.appName + '/en.json'
+        '<%= pkg.gruntConfig.enTranslationDir %>/' + appName + '/en.json'
       ]
   };
 };

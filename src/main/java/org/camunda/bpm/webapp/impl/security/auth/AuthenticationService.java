@@ -36,7 +36,7 @@ import org.camunda.bpm.webapp.impl.util.ProcessEngineUtil;
 
 public class AuthenticationService {
 
-  public static final String[] APPS = new String[] { "cockpit", "tasklist", "admin"};
+  public static final String[] APPS = new String[] { "cockpit", "tasklist", "admin", "modeler" };
   public static final String APP_WELCOME = "welcome";
 
   public Authentication createAuthenticate(String engineName, String username) {

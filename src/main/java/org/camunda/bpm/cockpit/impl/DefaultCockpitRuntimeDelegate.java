@@ -49,7 +49,7 @@ public class DefaultCockpitRuntimeDelegate extends AbstractAppRuntimeDelegate<Co
 
   public DefaultCockpitRuntimeDelegate() {
     super(CockpitPlugin.class);
-    this.commandExecutors = new HashMap<String, CommandExecutor>();
+    this.commandExecutors = new HashMap<>();
   }
 
   @Override

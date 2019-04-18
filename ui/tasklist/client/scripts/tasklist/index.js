@@ -24,8 +24,9 @@ var angular = require('camunda-commons-ui/vendor/angular'),
 
     /* directives */
     camTasklistTasks = require('./directives/cam-tasklist-tasks'),
+    customWidgetHeader = require('./../../../../common/scripts/directives/custom-widget-header'),
 
-    /* plugins */
+  /* plugins */
     camTasklistSearchPlugin = require('./plugins/cam-tasklist-search-plugin');
 
 var ngModule = angular.module('cam.tasklist.tasklist', [
@@ -37,6 +38,7 @@ ngModule.controller('camListCtrl', camTasklistListCtrl);
 
 /* directives */
 ngModule.directive('camTasks', camTasklistTasks);
+ngModule.directive('customWidgetHeader', customWidgetHeader);
 
 /* plugins */
 ngModule.config(camTasklistSearchPlugin);

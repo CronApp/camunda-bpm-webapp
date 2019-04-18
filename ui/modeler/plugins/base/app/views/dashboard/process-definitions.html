@@ -1,0 +1,34 @@
+<section class="processes-dashboard">
+  <div class="inner">
+    <header ng-if="processDefinitionsCount">
+      <div class="row">
+        <h1 class="col-xs-6 section-title">
+          {{ processDefinitionsCount }} {{ (processDefinitionsCount > 1 ? 'PLUGIN_PROCESS_DEF_PROCESS_DEFINITIONS_DEPLOYED' : 'PLUGIN_PROCESS_DEF_PROCESS_DEFINITION_DEPLOYED' | translate) }}
+        </h1>
+      </div>
+    </header>
+
+    <header class="header-empty" ng-if="!processDefinitionsCount && loadingState !== 'LOADING'">
+      <h1 class="section-title">{{'PLUGIN_PROCESS_DEF_NO_PROCESS_DEF' | translate}}</h1>
+    </header>
+
+    <div cam-widget-loader loading-state="{{loadingState}}" class="deployed-processes">
+      <table ng-if="processDefinitionsCount" class="process-definitions-list cam-table">
+        <thead sortable-table-head
+               head-columns="headColumns"
+               on-sort-change="onSortChange(sortObj)"
+               default-sort="sortObj">
+        </thead>
+        <tbody>
+          <tr ng-repeat="pd in processDefinitionData | orderBy:sortObj.sortBy:sortObj.sortReverse">
+            <td class="name">
+              <a href="#/process-definition/{{ pd.id }}">
+                {{ pd.label }}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
