@@ -39,7 +39,9 @@ module.exports = Base.extend({
   tasklistWebappLink: function() {
     return this.webappLinks().element(by.css('.tasklist-app'));
   },
-
+  modelerWebappLink: function() {
+    return this.webappLinks().element(by.css('.modeler-app'));
+  },
 
 
 

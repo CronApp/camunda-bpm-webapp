@@ -37,6 +37,7 @@ describe('Welcome Welcome page Spec', function() {
       expect(page.adminWebappLink().isDisplayed()).to.eventually.eql(true);
       expect(page.cockpitWebappLink().isDisplayed()).to.eventually.eql(true);
       expect(page.tasklistWebappLink().isDisplayed()).to.eventually.eql(true);
+      expect(page.modelerWebappLink().isDisplayed()).to.eventually.eql(true);
     });
 
     it('link should lead to current engine', function(done) {
@@ -53,6 +54,9 @@ describe('Welcome Welcome page Spec', function() {
           ).to.eventually.contain(currentEngine);
           expect(
             page.tasklistWebappLink().element(by.css('a')).getAttribute('href')
+          ).to.eventually.contain(currentEngine);
+          expect(
+            page.modelerWebappLink().element(by.css('a')).getAttribute('href')
           ).to.eventually.contain(currentEngine);
 
           done();

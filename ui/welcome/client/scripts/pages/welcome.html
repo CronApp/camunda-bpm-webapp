@@ -45,6 +45,17 @@
               <a ng-href="./../../admin/{{currentEngine}}/">{{'ADMIN' | translate}}</a>
             </h3>
           </div>
+
+          <div ng-if="canAccessApp('modeler')"
+               ng-class="'col-xs-' + cols"
+               class="modeler-app">
+            <a class="app-label-wrapper"
+               ng-href="./../../modeler/{{currentEngine}}/">
+            </a>
+            <h3 class="app-name">
+              <a ng-href="./../../modeler/{{currentEngine}}/">Modeler</a>
+            </h3>
+          </div>
         </div>
       </div>
     </section>

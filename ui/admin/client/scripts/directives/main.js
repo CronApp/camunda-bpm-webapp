@@ -19,9 +19,11 @@
 
 var angular = require('camunda-commons-ui/vendor/angular'),
 
+    customWidgetHeader = require('./../../../../common/scripts/directives/custom-widget-header'),
     breadcrumbs = require('./../../../../common/scripts/directives/breadcrumbs'),
     date = require('./../../../../common/scripts/directives/date');
 
 var directivesModule = module.exports = angular.module('cam.admin.directives', []);
+directivesModule.directive('customWidgetHeader', customWidgetHeader);
 directivesModule.directive('camBreadcrumbsPanel', breadcrumbs);
 directivesModule.directive('date', date);

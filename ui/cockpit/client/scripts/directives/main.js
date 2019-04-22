@@ -19,6 +19,7 @@
 
 var angular = require('camunda-commons-ui/vendor/angular'),
 
+    customWidgetHeader = require('./../../../../common/scripts/directives/custom-widget-header'),
     breadcrumbs = require('./../../../../common/scripts/directives/breadcrumbs'),
     numeric = require('./numeric'),
     date = require('./../../../../common/scripts/directives/date'),
@@ -48,6 +49,7 @@ var directivesModule = angular.module('cam.cockpit.directives', [
   camCommon.name
 ]);
 
+directivesModule.directive('customWidgetHeader', customWidgetHeader);
 directivesModule.directive('camBreadcrumbsPanel', breadcrumbs);
 directivesModule.directive('numeric', numeric);
 directivesModule.directive('date', date);
