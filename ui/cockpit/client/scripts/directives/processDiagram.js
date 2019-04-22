@@ -66,6 +66,7 @@ var DirectiveController = [
     });
 
     $scope.onLoad = function() {
+      console.log('loaded');
       $scope.diagramLoaded = true;
       $scope.viewer = $scope.control.getViewer();
       decorateDiagram($scope.processDiagram.bpmnElements);
