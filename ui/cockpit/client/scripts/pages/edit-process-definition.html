@@ -1,128 +1,20 @@
 <div class="ctn-fixed-view">
-  <div class="ctn-content-container"
-       ctn-collapsable-parent="sidebar"
-       ctn-min-width=".nav-tabs li">
+  <div class="ctn-content-container">
 
-    <!-- tool bar -->
-    <!--<div class="ctn-toolbar">-->
-
-      <!--&lt;!&ndash; Toolbar actions are provided by plugins &ndash;&gt;-->
-      <!--<span ng-repeat="actionProvider in processDefinitionActions">-->
-        <!--<view provider="actionProvider"-->
-              <!--vars="processDefinitionVars" />-->
-      <!--</span>-->
-    <!--</div>-->
-
-    <!-- sidebar -->
-    <div class="ctn-column ctn-sidebar ctn-scroll"
-         cam-hover-area
-         ctn-collapsable="left">
-
-      <dl class="process-information">
-        <dt>{{ 'PROCESS_DEFINITION_DEFINITION_VERSION' | translate }}</dt>
-        <dd class="definition-version">
-          <div class="dropdown"
-               ng-if="allDefinitions.length > 1">
-            <a href
-               class="dropdown-toggle">
-              {{ processDefinition.version }}
-              <span class="caret"></span>
-            </a>
-
-            <ul class="dropdown-menu">
-              <li ng-repeat="definition in allDefinitions">
-                <a ng-href="#/process-definition/{{ definition.id }}">
-                  {{ definition.version }}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <span ng-if="allDefinitions.length < 2">
-            {{ processDefinition.version }}
-          </span>
-        </dd>
-
-        <dt>{{ 'PROCESS_DEFINITION_VERSION_TAG' | translate }}</dt>
-        <dd class="version-tag"
-            ng-if="processDefinition.versionTag">{{ processDefinition.versionTag }}</dd>
-        <dd class="version-tag"
-            ng-if="!processDefinition.versionTag"><span class="null-value">{{ 'PROCESS_DEFINITION_NULL' | translate }}</span></dd>
-
-        <dt cam-widget-clipboard="processDefinition.id"
-            cam-hoverable-title="definition-id">{{ 'PROCESS_DEFINITION_DEFINITION_ID' | translate }}</dt>
-        <dd class="definition-id" cam-hover-trigger="definition-id">{{ processDefinition.id }}</dd>
-
-        <dt cam-widget-clipboard="processDefinition.key"
-            cam-hoverable-title="definition-key">{{ 'PROCESS_DEFINITION_DEFINITION_KEY' | translate }}</dt>
-        <dd class="definition-key" cam-hover-trigger="definition-key">{{ processDefinition.key }}</dd>
-
-        <dt>{{ 'PROCESS_DEFINITION_DEFINITION_NAME' | translate }}</dt>
-        <dd class="definition-name"
-            ng-if="processDefinition.name && processDefinition.name !== processDefinition.key">{{ processDefinition.name }}</dd>
-        <dd class="definition-name"
-            ng-if="!processDefinition.name || processDefinition.name === processDefinition.key"><span class="null-value">{{ 'PROCESS_DEFINITION_NULL' | translate }}</span></dd>
-
-        <dt cam-widget-clipboard="processDefinition.historyTimeToLive"
-            cam-hoverable-title="history-time-to-live">
-          {{ 'PROCESS_DEFINITION_HISTORY_TIME_TO_LIVE' | translate }}
-        </dt>
-        <dd class="history-time-to-live" cam-hover-trigger="history-time-to-live">
-          <span time-to-live="processDefinition" resource="process-definition"></span>
-        </dd>
-
-        <dt ng-if="processDefinition.tenantId"
-            cam-widget-clipboard="processDefinition.tenantId"
-            cam-hoverable-title="tenant-id">{{ 'PROCESS_DEFINITION_TENANT_ID' | translate }}</dt>
-        <dd class="tenant-id"
-            ng-if="processDefinition.tenantId" cam-hover-trigger="tenant-id">
-          {{ processDefinition.tenantId }}
-        </dd>
-        <dt ng-if="!processDefinition.tenantId">{{ 'PROCESS_DEFINITION_TENANT_ID' | translate }}</dt>
-        <dd class="tenant-id"
-            ng-if="!processDefinition.tenantId"><span class="null-value">{{ 'PROCESS_DEFINITION_NULL' | translate }}</span></dd>
-
-        <dt cam-widget-clipboard="processDefinition.deploymentId"
-            cam-hoverable-title="deployment-id">{{ 'PROCESS_DEFINITION_DEPLOYMENT_ID' | translate }}</dt>
-        <dd class="deployment-id" cam-hover-trigger="deployment-id">
-          <a ng-href="{{ getDeploymentUrl() }}">{{ processDefinition.deploymentId }}</a>
-        </dd>
-      </dl>
-
-      <a class="hide-collapsable pull-right"></a>
+    <div class="ctn-toolbar">
+      <span ng-repeat="actionProvider in editProcessDefinitionActions">
+        <view provider="actionProvider"
+              vars="editProcessDefinitionVars" />
+      </span>
     </div>
 
-    <div class="ctn-column ctn-content"
-         ctn-collapsable-parent="tabs">
-      <a class="show-collapsable"></a>
+    <div class="ctn-column ctn-content">
 
-      <!-- content top pane -->
-      <div class="ctn-row ctn-content-top"
-           is-sidebar-collapsed="onDiagramCollapseChange(collapsed)"
-           ctn-collapsable="top">
-        <div process-diagram="processDiagram"
-             key="{{processDefinition.id}}"
-             process-data="processData"
-             page-data="pageData"
-             collapsed="diagramCollapsed"
-             overlay-provider-component="cockpit.processDefinition.diagram.overlay"
-             diagram-provider-component="cockpit.processDefinition.diagram.plugin"
-             action-provider-component="cockpit.processDefinition.diagram.action"
-             viewer="diagramViewer"></div>
-
-        <a class="hide-collapsable vertical-collapse"
-           title="{{ 'PROCESS_DEFINITION_SHOW_TABS' | translate }}"></a>
-
-        <a class="maximize-collapsable vertical-collapse"
-           maximize-parent-direction="left"
-           title="{{ 'PROCESS_DEFINITION_MAXIMIZE_DIAGRAM' | translate }}"></a>
-
-        <a class="restore-collapsable vertical-collapse"
-           maximize-parent-direction="left"
-           title="{{ 'PROCESS_DEFINITION_RESTORE_DEFAULT_SIZE' | translate }}"></a>
+      <div class="ctn-row ctn-content-top">
+        <div process-diagram-modeler process-definition-id="processDefinition.id"></div>
       </div>
 
     </div>
   </div>
 
-</div><!-- end .ctn-fixed-view -->
+</div>
