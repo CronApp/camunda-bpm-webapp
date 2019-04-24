@@ -28,7 +28,7 @@ var DirectiveController = [
       $scope.overlayProviders = null;
 
       var control = $scope.control;
-      var viewer = control.getViewer();
+      var viewer = control.getModeler();
       var canvas = viewer.get('canvas');
       var elementRegistry = viewer.get('elementRegistry');
 
@@ -67,7 +67,7 @@ var DirectiveController = [
 
     $scope.onLoad = function() {
       $scope.diagramLoaded = true;
-      $scope.viewer = $scope.control.getViewer();
+      $scope.viewer = $scope.control.getModeler();
       decorateDiagram($scope.processDiagram.bpmnElements);
 
       if ($scope.actionProviderComponent) {
@@ -116,7 +116,7 @@ var DirectiveController = [
 
     $scope.onMouseEnter = function(element) {
       if(bpmnElements[element.businessObject.id] && isElementSelectable(bpmnElements[element.businessObject.id])) {
-        $scope.control.getViewer().get('canvas').addMarker(element.businessObject.id, 'selectable');
+        $scope.control.getModeler().get('canvas').addMarker(element.businessObject.id, 'selectable');
         $scope.control.highlight(element.businessObject.id);
       }
     };
@@ -126,7 +126,7 @@ var DirectiveController = [
       isElementSelectable(bpmnElements[element.businessObject.id]) &&
       (!selection || selection.indexOf(element.businessObject.id) === -1) &&
       (!selection || selection.indexOf(element.businessObject.id + '#multiInstanceBody') === -1)) {
-        $scope.control.getViewer().get('canvas').removeMarker(element.businessObject.id, 'selectable');
+        $scope.control.getModeler().get('canvas').removeMarker(element.businessObject.id, 'selectable');
         $scope.control.clearHighlight(element.businessObject.id);
       }
     };

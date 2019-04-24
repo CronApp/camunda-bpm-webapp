@@ -28,6 +28,7 @@ var angular = require('angular'),
 
     // edit process definition
     saveProcessDefinitionAction = require('./editProcessDefinition/saveProcessDefinitionAction'),
+    deployProcessDefinitionAction = require('./editProcessDefinition/deployProcessDefinitionAction'),
 
     // process instance
     variableInstancesTab = require('./processInstance/variableInstancesTab'),
@@ -68,6 +69,7 @@ ngModule.config(editProcessDefinitionAction);
 ngModule.controller('UpdateProcessDefinitionSuspensionStateController', updateSuspensionStateDialog);
 ngModule.config(pdIncidentsTab);
 ngModule.config(saveProcessDefinitionAction);
+ngModule.config(deployProcessDefinitionAction);
 
 variableInstancesTab(ngModule);
 ngModule.config(incidentsTab);

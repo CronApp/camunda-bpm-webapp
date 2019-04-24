@@ -1,0 +1,36 @@
+<div class="alert alert-danger"
+     ng-if="error">
+  <span>
+    <strong>{{ 'CAM_WIDGET_BPMN_VIEWER_ERROR' | translate }}</strong>
+  </span>
+  <span>
+   {{ error.message }}
+  </span>
+</div>
+
+<div ng-show="!error">
+
+  <div ng-if="!loaded" class="placeholder-container">
+    <div class="placeholder-content">
+      <span class="glyphicon glyphicon-refresh animate-spin"></span>
+      <span class="loading-text">{{ 'CAM_WIDGET_BPMN_VIEWER_LOADING' | translate }}</span>
+    </div>
+  </div>
+
+  <div class="diagram-holder" ng-class='{"diagram-holder": true, "grab-cursor": !grabbing, "djs-cursor-move": grabbing}'></div>
+
+  <div class="actions"></div>
+
+  <div class="navigation zoom">
+    <button class="btn btn-default in"
+            title="zoom in"
+            ng-click="zoomIn()">
+      <span class="glyphicon glyphicon-plus"></span>
+    </button>
+    <button class="btn btn-default out"
+            title="zoom out"
+            ng-click="zoomOut()">
+      <span class="glyphicon glyphicon-minus"></span>
+    </button>
+  </div>
+</div>

@@ -7,6 +7,7 @@ var angular = require('camunda-commons-ui/vendor/angular'),
     date = require('./../../../../common/scripts/directives/date'),
     processDiagram = require('./processDiagram'),
     processDiagramModeler = require('./processDiagramModeler'),
+    camWidgetBpmnModeler = require('./camWidgetBpmnModeler'),
     decisionTable = require('./decisionTable'),
     processDiagramPreview = require('./processDiagramPreview'),
     activityInstanceTree = require('./activityInstanceTree'),
@@ -37,6 +38,7 @@ directivesModule.directive('numeric', numeric);
 directivesModule.directive('date', date);
 directivesModule.directive('processDiagram', processDiagram);
 directivesModule.directive('processDiagramModeler', processDiagramModeler);
+directivesModule.directive('camWidgetBpmnModeler', camWidgetBpmnModeler);
 directivesModule.directive('decisionTable', decisionTable);
 directivesModule.directive('processDiagramPreview', processDiagramPreview);
 directivesModule.directive('activityInstanceTree', activityInstanceTree);

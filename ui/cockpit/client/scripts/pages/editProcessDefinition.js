@@ -93,30 +93,30 @@ var Controller = [
 
     $scope.processDefinition = processDefinition;
 
-    $scope.editProcessDefinitionVars = { read: [ 'processDefinition', 'selection', 'processData' ] };
+    $scope.editProcessDefinitionVars = { read: [ 'processDefinition', 'processData' ] };
     $scope.editProcessDefinitionActions = Views.getProviders({ component: 'cockpit.editProcessDefinition.edit.action' });
   }];
 
 var RouteConfig = [ '$routeProvider', function($routeProvider) {
-    $routeProvider
-      .when('/process-definition/:id/edit', {
-        template: template,
-        controller: Controller,
-        authentication: 'required',
-        resolve: {
-          processDefinition: [ 'ResourceResolver', 'ProcessDefinitionResource',
-            function(ResourceResolver, ProcessDefinitionResource) {
-              return ResourceResolver.getByRouteParam('id', {
-                name: 'process definition',
-                resolve: function(id) {
-                  return ProcessDefinitionResource.get({ id : id });
-                }
-              });
-            }]
-        },
-        reloadOnSearch: false
-      });
-  }];
+  $routeProvider
+    .when('/process-definition/:id/edit', {
+      template: template,
+      controller: Controller,
+      authentication: 'required',
+      resolve: {
+        processDefinition: [ 'ResourceResolver', 'ProcessDefinitionResource',
+          function(ResourceResolver, ProcessDefinitionResource) {
+            return ResourceResolver.getByRouteParam('id', {
+              name: 'process definition',
+              resolve: function(id) {
+                return ProcessDefinitionResource.get({ id : id });
+              }
+            });
+          }]
+      },
+      reloadOnSearch: false
+    });
+}];
 
 var ViewConfig = [ 'ViewsProvider', function(ViewsProvider) {
   ViewsProvider.registerDefaultView('cockpit.editProcessDefinition.view', {
