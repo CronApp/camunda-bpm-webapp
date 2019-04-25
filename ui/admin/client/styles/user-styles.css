@@ -1,11 +1,92 @@
-/*
 .navbar-brand {
+  /* endereço do logo */
   text-indent: -999em;
-  background-image: url(./path/to/the/logo.png);
-  width: 80px;
+  background-image: url(../../../common/styles/images/logo.svg);
+  background-repeat: no-repeat;
+  width: 102px;
+  height: 25px !important;
+  /* largura do logo */
+  margin-left: 10px;
+  margin-top: 8px;
+  margin-right: 8px;
 }
 
-[cam-widget-header] {
-  border-bottom-color: blue;
+.btn-primary {
+  color: #fff;
+  background-color: #3b448e;
+  border-color: #3b448e;
 }
-*/
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #272f61;
+  border-color: #272f61;
+}
+
+.ctn-main {
+  position: absolute;
+  top: 45px;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  background-color: #fafafa;
+}
+
+/* header comum para todas as telas   */
+[cam-widget-header] {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 45px;
+  z-index: 1030;
+  margin-bottom: 0;
+  box-shadow: 0 2px 10px -4px #555;
+  border-top: 0;
+  color: #f8f8f8;
+  background-color: #3b448e;
+  font-size: 14px;
+}
+
+/* fonte dos links do header, comum para todas as telas */
+[cam-widget-header] a {
+  color: #f8f8f8;
+  text-decoration: none;
+}
+
+[cam-widget-header] [ng-transclude] {
+  float: right;
+  border-right: 0;
+}
+
+[cam-widget-header] .brand-logo:before {
+  display:none;
+}
+
+[cam-widget-header] .sections-menu>ul>li>a {
+  display: block;
+  height: 45px;
+  line-height: 45px;
+  padding: 0px 15px;
+}
+
+/* cor da fonte no hover, tirei o decoration para ficar nos padrões do cronapp */
+[cam-widget-header] a:hover, [cam-widget-header] a:focus {
+  text-decoration: none;
+  color: #f8f8f8;
+}
+
+/* inner page do welcome, as shadows */
+.welcome-page section>.inner {
+  background-color: #fff;
+  padding: 15px;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+/* inner page das outras, serve pra todas eu acho, as shadows */
+.dashboard section>.inner, .cockpit-section-dashboard section>.inner {
+  background-color: #fff;
+  padding: 15px;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}

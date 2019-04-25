@@ -19,16 +19,12 @@
     <base href="$BASE"
           admin-api="$APP_ROOT/api/admin/"
           engine-api="$APP_ROOT/api/engine/"
-          app-root="$APP_ROOT" />
+          app-root="$APP_ROOT"
+          cam-exclude-plugins="admin.dashboard.section:tenants" />
 
     <!-- an example of plugin/feature exclusion -->
-    <!--
-    <base href="$BASE"
-          admin-api="$APP_ROOT/api/admin/"
-          engine-api="$APP_ROOT/api/engine/"
-          app-root="$APP_ROOT"
-          cam-exclude-plugins="admin.dashboard:process-definition-tiles" />
-    -->
+          
+
 
 
     <!-- styles -->
@@ -70,9 +66,9 @@
           <a href="#/groups">{{ 'GROUPS_GROUPS' | translate }}</a>
         </li>
 
-        <li ng-class="activeClass('#/tenant')">
+        <!-- <li ng-class="activeClass('#/tenant')">
           <a href="#/tenants">{{ 'TENANTS_TENANTS' | translate }}</a>
-        </li>
+        </li> -->
 
         <li ng-class="activeClass('#/authorization')"
             show-if-authorized
