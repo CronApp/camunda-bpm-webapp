@@ -11,7 +11,7 @@ module.exports = ['ViewsProvider',  function(ViewsProvider) {
     overlay: [
       '$scope', 'control', 'processData', 'processDiagram',
       function($scope, control, processData, processDiagram) {
-        var viewer = control.getModeler();
+        var viewer = control.getViewer();
         var overlays = viewer.get('overlays');
         var elementRegistry = viewer.get('elementRegistry');
 

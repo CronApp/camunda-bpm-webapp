@@ -1,9 +1,7 @@
 'use strict';
 var fs = require('fs');
 
-var angular = require('camunda-bpm-sdk-js/vendor/angular'),
-
-    Modeler = require('./modeler'),
+var Modeler = require('./modeler'),
 
     template = fs.readFileSync(__dirname + '/camWidgetBpmnModeler.html', 'utf8');
 
@@ -43,127 +41,6 @@ module.exports = ['$q', '$document', '$compile', '$location', '$rootScope', 'sea
         // --- CONTROL FUNCTIONS ---
         $scope.control = $scope.control || {};
 
-        $scope.control.highlight = function(id) {
-          canvas.addMarker(id, 'highlight');
-
-          $element.find('[data-element-id="'+id+'"]>.djs-outline').attr({
-            rx: '14px',
-            ry: '14px'
-          });
-        };
-
-        $scope.control.clearHighlight = function(id) {
-          canvas.removeMarker(id, 'highlight');
-        };
-
-        $scope.control.isHighlighted = function(id) {
-          return canvas.hasMarker(id, 'highlight');
-        };
-
-        // removes all badges for an element with a given id
-        $scope.control.removeBadges = function(id) {
-          modeler.get('overlays').remove({element:id});
-        };
-
-        // removes a single badge with a given id
-        $scope.control.removeBadge = function(id) {
-          modeler.get('overlays').remove(id);
-        };
-
-        $scope.control.getModeler = function() {
-          return modeler;
-        };
-
-        $scope.control.scrollToElement = function(element) {
-          var height, width, x, y;
-
-          var elem = modeler.get('elementRegistry').get(element);
-          var viewbox = canvas.viewbox();
-
-          height = Math.max(viewbox.height, elem.height);
-          width  = Math.max(viewbox.width,  elem.width);
-
-          x = Math.min(Math.max(viewbox.x, elem.x - viewbox.width + elem.width), elem.x);
-          y = Math.min(Math.max(viewbox.y, elem.y - viewbox.height + elem.height), elem.y);
-
-          canvas.viewbox({
-            x: x,
-            y: y,
-            width: width,
-            height: height
-          });
-        };
-
-        $scope.control.getElement = function(elementId) {
-          return modeler.get('elementRegistry').get(elementId);
-        };
-
-        $scope.control.getElements = function(filter) {
-          return modeler.get('elementRegistry').filter(filter);
-        };
-
-        $scope.loaded = false;
-        $scope.control.isLoaded = function() {
-          return $scope.loaded;
-        };
-
-        $scope.control.addAction = function(config) {
-          var container = $element.find('.actions');
-          var htmlElement = config.html;
-          container.append(htmlElement);
-          $compile(htmlElement)($scope);
-        };
-
-        var heatmapImage;
-
-        $scope.control.addImage = function(image, x, y) {
-          return preloadImage(image)
-            .then(
-              function(preloadedElement) {
-                var width = preloadedElement.offsetWidth;
-                var height = preloadedElement.offsetHeight;
-                var imageElement = $document[0].createElementNS('http://www.w3.org/2000/svg', 'image');
-
-                imageElement.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', image);
-                imageElement.setAttributeNS(null, 'width', width);
-                imageElement.setAttributeNS(null, 'height', height);
-                imageElement.setAttributeNS(null, 'x', x);
-                imageElement.setAttributeNS(null, 'y', y);
-
-                $document[0].body.removeChild(preloadedElement);
-                canvas._viewport.appendChild(imageElement);
-
-                heatmapImage = angular.element(imageElement);
-                return heatmapImage;
-              },
-              function(preloadedElement) {
-                $document[0].body.removeChild(preloadedElement);
-              }
-            );
-        };
-
-        function preloadImage(img) {
-          var body = $document[0].body;
-          var deferred = $q.defer();
-          var imageElement = angular.element('<img>')
-            .css('position', 'absolute')
-            .css('left', '-9999em')
-            .css('top', '-9999em')
-            .attr('src', img)[0];
-
-          imageElement.onload = function() {
-            deferred.resolve(imageElement);
-          };
-
-          imageElement.onerror = function() {
-            deferred.reject(imageElement);
-          };
-
-          body.appendChild(imageElement);
-
-          return deferred.promise;
-        }
-
         function generateAndConfigureModeler() {
           modeler = Modeler.generateModeler({
             width: '100%',
@@ -171,7 +48,10 @@ module.exports = ['$q', '$document', '$compile', '$location', '$rootScope', 'sea
             canvas: {
               deferUpdate: false
             },
-            key: $scope.key
+            key: $scope.key,
+            keyboard: {
+              bindTo: window
+            }
           });
 
           if(!modeler.cached) {

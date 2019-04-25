@@ -110,6 +110,15 @@ module.exports = function(config, copyConf) {
           ],
           dest: '<%= pkg.gruntConfig.cockpitBuildTarget %>/fonts/'
         },
+        // bpmn fonts for modeler
+        {
+          expand: true,
+          cwd: 'node_modules/bpmn-font/dist/font',
+          src: [
+            '*.{eot,ttf,svg,woff}'
+          ],
+          dest: '<%= pkg.gruntConfig.cockpitBuildTarget %>/font/'
+        },
         // open sans
         {
           expand: true,

@@ -15,7 +15,7 @@ module.exports = ['ProcessDefinitionResource', 'debounce', function(ProcessDefin
     }],
     link: function(scope, element, attrs) {
       function applyCss(element) {
-        element.find('[cam-widget-bpmn-viewer]').css({
+        element.find('[cam-widget-bpmn-modeler]').css({
           width : parseInt(element.parent().width(), 10),
           height : element.parent().height()
         });

@@ -1,6 +1,6 @@
 'use strict';
 
-var Modeler = require('camunda-commons-ui/bpmn-js/node_modules/bpmn-js/dist/bpmn-modeler.development');
+var Modeler = require('bpmn-js/dist/bpmn-modeler.development');
 
 var modelers = {};
 

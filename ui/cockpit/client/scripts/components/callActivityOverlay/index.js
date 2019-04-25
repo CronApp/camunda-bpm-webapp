@@ -152,8 +152,8 @@ module.exports = function(viewContext) {
       }
 
       var overlaysNodes = {};
-      var overlays = control.getModeler().get('overlays');
-      var elementRegistry = control.getModeler().get('elementRegistry');
+      var overlays = control.getViewer().get('overlays');
+      var elementRegistry = control.getViewer().get('elementRegistry');
       var TAB_NAME = 'called-process-instances-tab';
       var flowNodes = getFlowNodes();
       var callActivityToInstancesMap = {};
