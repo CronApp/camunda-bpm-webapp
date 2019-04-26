@@ -1,4 +1,8 @@
 window.camTasklistConf = {
+  'locales':{
+    'availableLocales': ['en', 'pt-BR'],
+    'fallbackLocale': 'pt-BR'
+  },
   // change the app name and vendor
   // app: {
   //   name: 'Todos',
