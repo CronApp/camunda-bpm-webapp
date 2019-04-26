@@ -1,12 +1,13 @@
-@import (less) "bpmn-js/dist/assets/diagram-js.css";
-@import (less) "bpmn-js/dist/assets/bpmn-font/css/bpmn.css";
-
 @bpmn-nav-radius: 3px;
 [cam-widget-bpmn-modeler] {
   border: 1px solid @gray-lighter;
   position: relative;
   min-height: 85vh;
 
+  @import (less) "bpmn-js/dist/assets/diagram-js.css";
+  @import (less) "bpmn-js/dist/assets/bpmn-font/css/bpmn.css";
+  @import (less) "bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css";
+  @import (less) "diagram-js-minimap/assets/diagram-js-minimap.css";
 
   .placeholder-container {
     display:table;

@@ -7,6 +7,13 @@ module.exports = function(config, browserifyConfig) {
         standalone: 'CamundaCockpitUi',
         debug: true
       },
+      transform: [
+        [ 'babelify', {
+          global: true,
+          compact: false,
+          presets: ['env']
+        }]
+      ],
       watch: true,
       postBundleCB: function(err, src, next) {
 
