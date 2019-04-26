@@ -26,6 +26,8 @@ module.exports = ['$q', '$document', '$compile', '$location',
 
       link: function($scope, $element) {
 
+        console.log('minimap=' + JSON.stringify(minimap));
+
         var modeler = null;
         var canvas = null;
         var definitions;
@@ -45,9 +47,9 @@ module.exports = ['$q', '$document', '$compile', '$location',
 
         function generateAndConfigureModeler() {
           modeler = Modeler.generateModeler({
-            container: '.diagram-holder',
+            container: '#canvas',
             propertiesPanel: {
-              parent: '.properties-panel-parent'
+              parent: '#properties'
             },
             additionalModules: [
               propertiesPanel,
@@ -55,6 +57,9 @@ module.exports = ['$q', '$document', '$compile', '$location',
               camundaPropertiesProvider,
               minimap
             ],
+            canvas: {
+              deferUpdate: false
+            },
             key: $scope.key,
             keyboard: {
               bindTo: window
@@ -68,10 +73,10 @@ module.exports = ['$q', '$document', '$compile', '$location',
             console.log('commandStack.changed');
           });
 
-          if(!modeler.cached) {
-            // attach diagram immediately to avoid having the bpmn logo for viewers that are not cached
-            attachDiagram();
-          }
+          // if(!modeler.cached) {
+          //   // attach diagram immediately to avoid having the bpmn logo for viewers that are not cached
+          //   attachDiagram();
+          // }
 
           var diagramData = null;
 

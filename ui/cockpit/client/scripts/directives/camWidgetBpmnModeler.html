@@ -17,10 +17,12 @@
     </div>
   </div>
 
-  <div class="diagram-holder" ng-class='{"diagram-holder": true, "grab-cursor": !grabbing, "djs-cursor-move": grabbing}'></div>
-  <div class="properties-panel-parent"></div>
+  <div class="content with-diagram">
+    <div class="diagram-holder canvas" id="canvas" ng-class='{"diagram-holder": true, "grab-cursor": !grabbing, "djs-cursor-move": grabbing}'></div>
+    <div class="properties-panel-parent" id="properties"></div>
+  </div>
 
-  <div class="actions"></div>
+  <!--<div class="actions"></div>-->
 
   <div class="navigation zoom">
     <button class="btn btn-default in"

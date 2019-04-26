@@ -7,6 +7,64 @@
   @import (less) "bpmn-js/dist/assets/diagram-js.css";
   @import (less) "bpmn-js/dist/assets/bpmn-font/css/bpmn.css";
   @import (less) "bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css";
+
+  .content .canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .content.with-diagram .canvas,
+  .content.with-diagram .properties-panel-parent {
+    display: block;
+  }
+  .buttons {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .buttons > li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .buttons > li > a {
+    background: #DDD;
+    border: solid 1px #666;
+    display: inline-block;
+    padding: 5px;
+  }
+  .buttons a {
+    opacity: 0.3;
+  }
+  .buttons a.active {
+    opacity: 1.0;
+  }
+  .properties-panel-parent {
+    background-color: #f8f8f8;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 260px;
+    z-index: 10;
+    border-left: 1px solid #ccc;
+    overflow: auto;
+  }
+  .properties-panel-parent:empty {
+    display: none;
+  }
+  .properties-panel-parent > .djs-properties-panel {
+    padding-bottom: 70px;
+    min-height: 100%;
+  }
+  .bpp-properties-header > .label {
+    color: #555;
+  }
+
   @import (less) "diagram-js-minimap/assets/diagram-js-minimap.css";
 
   .placeholder-container {
@@ -103,7 +161,7 @@
     }
   }
 
-  .actions {
+  /*.actions {
     float: right;
     position: relative;
     right: 15px;
@@ -115,7 +173,7 @@
 
     }
 
-  }
+  }*/
 
 }
 
