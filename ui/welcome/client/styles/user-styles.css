@@ -1,7 +1,7 @@
 .navbar-brand {
   /* endereço do logo */
   text-indent: -999em;
-  background-image: url(../../../common/styles/images/logo.svg);
+  background-image: url('../assets/images/logo.svg');
   background-repeat: no-repeat;
   width: 102px;
   height: 25px !important;

@@ -1,4 +1,8 @@
 window.camAdminConf = {
+  'locales':{
+    'availableLocales': ['en', 'pt-BR'],
+    'fallbackLocale': 'pt-BR'
+  }
   // // custom libraries and scripts loading and initialization,
   // // see: http://docs.camunda.org/guides/user-guide/#tasklist-customizing-custom-scripts
   // customScripts: {
