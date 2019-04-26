@@ -33,6 +33,10 @@
   background-color: #fafafa;
 }
 
+.welcome-page {
+  height: 100% !important; 
+}
+
 /* header comum para todas as telas   */
 [cam-widget-header] {
   width: 100%;

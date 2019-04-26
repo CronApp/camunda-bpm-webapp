@@ -21,7 +21,7 @@
           cockpit-api="$APP_ROOT/api/cockpit/"
           engine-api="$APP_ROOT/api/engine/"
           app-root="$APP_ROOT"
-          cam-exclude-plugins="cockpit.navigation:decisions" />
+          cam-exclude-plugins="cockpit.navigation:decisions, cockpit.decisions.dashboard" />
 
     <!-- an example of plugin/feature exclusion -->
     <!--
@@ -115,8 +115,8 @@
     </div>
 
     <!-- footer -->
-    <footer cam-widget-footer
-            version="v${project.version}"></footer>
+    <!-- <footer cam-widget-footer
+            version="v${project.version}"></footer> -->
 
     <script type="application/javascript">
       var cockpitConf = window.camCockpitConf = {};

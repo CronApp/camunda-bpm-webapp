@@ -33,6 +33,10 @@
   background-color: #fafafa;
 }
 
+.three-cols-layout {
+  height: 100%;
+}
+
 /* header comum para todas as telas   */
 [cam-widget-header] {
   width: 100%;
