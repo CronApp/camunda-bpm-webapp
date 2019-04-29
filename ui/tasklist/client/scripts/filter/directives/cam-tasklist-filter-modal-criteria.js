@@ -250,16 +250,6 @@
           name: 'minPriority',
           label: 'Priority Min',
           validate: isValid(numberRegex, 'number')
-        },
-        {
-          name: 'tenantIdIn',
-          label: 'Tenant ID In',
-          help: commaSeparatedValues
-        },
-        {
-          name: 'withoutTenantId',
-          label: 'Without Tenant ID',
-          bool: true
         }
       ]
     },

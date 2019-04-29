@@ -15,19 +15,17 @@
  */
 package org.camunda.bpm.cockpit.impl.web;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.ws.rs.core.Application;
-
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import org.camunda.bpm.cockpit.Cockpit;
 import org.camunda.bpm.cockpit.plugin.spi.CockpitPlugin;
 import org.camunda.bpm.engine.rest.exception.ExceptionHandler;
 import org.camunda.bpm.engine.rest.exception.RestExceptionHandler;
 import org.camunda.bpm.engine.rest.mapper.JacksonConfigurator;
 
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import javax.ws.rs.core.Application;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * The cockpit rest api exposed by the application.
@@ -38,7 +36,7 @@ public class CockpitApplication extends Application {
 
   @Override
   public Set<Class<?>> getClasses() {
-    Set<Class<?>> classes = new HashSet<Class<?>>();
+    Set<Class<?>> classes = new HashSet<>();
 
     classes.add(JacksonConfigurator.class);
     classes.add(JacksonJsonProvider.class);
@@ -60,6 +58,6 @@ public class CockpitApplication extends Application {
   }
 
   private List<CockpitPlugin> getCockpitPlugins() {
-    return Cockpit.getRuntimeDelegate().getPluginRegistry().getPlugins();
+    return Cockpit.getRuntimeDelegate().getAppPluginRegistry().getPlugins();
   }
 }

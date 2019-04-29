@@ -32,5 +32,5 @@ public interface CommandExecutor {
    *
    * @return
    */
-  public <T> T executeCommand(Command<T> command);
+  <T> T executeCommand(Command<T> command);
 }

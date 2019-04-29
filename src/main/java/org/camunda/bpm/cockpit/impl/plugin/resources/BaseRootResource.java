@@ -15,16 +15,15 @@
  */
 package org.camunda.bpm.cockpit.impl.plugin.resources;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.camunda.bpm.cockpit.plugin.resource.AbstractCockpitPluginRootResource;
+import org.camunda.bpm.engine.rest.util.ProvidersUtil;
+
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.Providers;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.camunda.bpm.cockpit.impl.plugin.CockpitPlugins;
-import org.camunda.bpm.cockpit.plugin.resource.AbstractCockpitPluginRootResource;
-import org.camunda.bpm.engine.rest.util.ProvidersUtil;
 
 /**
  *
@@ -57,13 +56,11 @@ public class BaseRootResource extends AbstractCockpitPluginRootResource {
   }
 
   protected ObjectMapper getObjectMapper() {
-    if(providers != null) {
-      return ProvidersUtil
-        .resolveFromContext(providers, ObjectMapper.class, MediaType.APPLICATION_JSON_TYPE, this.getClass());
-    }
-    else {
+    if (providers == null) {
       return null;
     }
+    return ProvidersUtil
+      .resolveFromContext(providers, ObjectMapper.class, MediaType.APPLICATION_JSON_TYPE, this.getClass());
   }
 
 }

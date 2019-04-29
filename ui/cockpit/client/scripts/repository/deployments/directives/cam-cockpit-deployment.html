@@ -16,10 +16,4 @@
   <dd class="source undefined"
       ng-if="!deployment.source"><span class="null-value">{{ 'REPOSITORY_DEPLOYMENTS_NULL' | translate }}</span>
 
-  <dt>{{ 'REPOSITORY_DEPLOYMENTS_TENANT_ID' | translate }}</dt>
-  <dd class="tenant-id"
-      ng-if="deployment.tenantId">{{ deployment.tenantId }}</dd>
-  <dd class="tenant-id"
-      ng-if="!deployment.tenantId"><span class="null-value">{{ 'REPOSITORY_DEPLOYMENTS_NULL' | translate }}</span></dd>
-
 </dl>

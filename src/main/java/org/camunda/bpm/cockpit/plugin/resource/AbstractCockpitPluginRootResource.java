@@ -29,7 +29,6 @@ public class AbstractCockpitPluginRootResource extends AbstractAppPluginRootReso
 
   /**
    * @param pluginName
-   * @param runtimeDelegate
    */
   public AbstractCockpitPluginRootResource(String pluginName) {
     super(pluginName, Cockpit.getRuntimeDelegate());

@@ -19,9 +19,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 import org.camunda.bpm.cockpit.impl.plugin.base.sub.resources.ProcessDefinitionResource;
-import org.camunda.bpm.cockpit.plugin.resource.AbstractPluginResource;
+import org.camunda.bpm.cockpit.plugin.resource.AbstractCockpitPluginResource;
 
-public class ProcessDefinitionRestService extends AbstractPluginResource {
+public class ProcessDefinitionRestService extends AbstractCockpitPluginResource {
 
   public static final String PATH = "/process-definition";
 

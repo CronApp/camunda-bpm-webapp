@@ -61,12 +61,7 @@ var Controller = [
         type: 'processDefinition',
         label: definition.name || definition.key || definition.id,
         href: '#/process-definition/'+ definition.id +'/runtime',
-        processDefinition: definition,
-        choices: [{
-          active: true,
-          label: 'Runtime',
-          href: '#/process-definition/'+ definition.id +'/runtime'
-        }]
+        processDefinition: definition
       });
 
       var plugins = Views.getProviders({ component: 'cockpit.editProcessDefinition.view' });

@@ -15,24 +15,22 @@
  */
 package org.camunda.bpm.cockpit.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.camunda.bpm.cockpit.CockpitRuntimeDelegate;
 import org.camunda.bpm.cockpit.db.CommandExecutor;
 import org.camunda.bpm.cockpit.db.QueryService;
 import org.camunda.bpm.cockpit.impl.db.CommandExecutorImpl;
 import org.camunda.bpm.cockpit.impl.db.QueryServiceImpl;
-import org.camunda.bpm.cockpit.impl.plugin.DefaultPluginRegistry;
-import org.camunda.bpm.cockpit.plugin.PluginRegistry;
 import org.camunda.bpm.cockpit.plugin.spi.CockpitPlugin;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngineException;
 import org.camunda.bpm.engine.impl.ProcessEngineImpl;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.webapp.impl.AbstractAppRuntimeDelegate;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>This is the default {@link CockpitRuntimeDelegate} implementation that provides
@@ -48,7 +46,7 @@ public class DefaultCockpitRuntimeDelegate extends AbstractAppRuntimeDelegate<Co
 
   public DefaultCockpitRuntimeDelegate() {
     super(CockpitPlugin.class);
-    this.commandExecutors = new HashMap<String, CommandExecutor>();
+    this.commandExecutors = new HashMap<>();
   }
 
   @Override
@@ -70,14 +68,6 @@ public class DefaultCockpitRuntimeDelegate extends AbstractAppRuntimeDelegate<Co
   }
 
   /**
-   * Deprecated: use {@link #getAppPluginRegistry()}
-   */
-  @Deprecated
-  public PluginRegistry getPluginRegistry() {
-    return new DefaultPluginRegistry(pluginRegistry);
-  }
-
-  /**
    * Returns the list of mapping files that should be used to create the
    * session factory for this runtime.
    *
@@ -86,7 +76,7 @@ public class DefaultCockpitRuntimeDelegate extends AbstractAppRuntimeDelegate<Co
   protected List<String> getMappingFiles() {
     List<CockpitPlugin> cockpitPlugins = pluginRegistry.getPlugins();
 
-    List<String> mappingFiles = new ArrayList<String>();
+    List<String> mappingFiles = new ArrayList<>();
     for (CockpitPlugin plugin: cockpitPlugins) {
       mappingFiles.addAll(plugin.getMappingFiles());
     }

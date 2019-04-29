@@ -17,7 +17,6 @@ package org.camunda.bpm.cockpit;
 
 import org.camunda.bpm.cockpit.db.CommandExecutor;
 import org.camunda.bpm.cockpit.db.QueryService;
-import org.camunda.bpm.cockpit.plugin.PluginRegistry;
 import org.camunda.bpm.cockpit.plugin.spi.CockpitPlugin;
 import org.camunda.bpm.webapp.AppRuntimeDelegate;
 
@@ -35,7 +34,7 @@ public interface CockpitRuntimeDelegate extends AppRuntimeDelegate<CockpitPlugin
    * @param processEngineName
    * @return a {@link QueryService}
    */
-  public QueryService getQueryService(String processEngineName);
+  QueryService getQueryService(String processEngineName);
 
   /**
    * Returns a configured {@link CommandExecutor} to execute
@@ -43,15 +42,6 @@ public interface CockpitRuntimeDelegate extends AppRuntimeDelegate<CockpitPlugin
    * @param processEngineName
    * @return a {@link CommandExecutor}
    */
-  public CommandExecutor getCommandExecutor(String processEngineName);
-
-  /**
-   * A registry that provides access to the plugins registered
-   * in the application.
-   *
-   * @return
-   */
-  @Deprecated
-  public PluginRegistry getPluginRegistry();
+  CommandExecutor getCommandExecutor(String processEngineName);
 
 }
