@@ -62,16 +62,6 @@ module.exports = function(config, copyConf) {
           dest: '<%= pkg.gruntConfig.cockpitBuildTarget %>/styles/'
         },
 
-        // images, fonts & stuff
-        {
-          expand: true,
-          cwd: '<%= pkg.gruntConfig.cockpitSourceDir %>/',
-          src:  [
-            '{fonts,images}/**/*.*'
-          ],
-          dest: '<%= pkg.gruntConfig.cockpitBuildTarget %>/assets'
-        },
-
         // commons-ui images
         {
           expand: true,
@@ -80,6 +70,16 @@ module.exports = function(config, copyConf) {
             '*.*'
           ],
           dest: '<%= pkg.gruntConfig.cockpitBuildTarget %>/assets/images'
+        },
+
+        // images, fonts & stuff
+        {
+          expand: true,
+          cwd: '<%= pkg.gruntConfig.cockpitSourceDir %>/',
+          src:  [
+            '{fonts,images}/**/*.*'
+          ],
+          dest: '<%= pkg.gruntConfig.cockpitBuildTarget %>/assets'
         },
 
         // dojo & dojox

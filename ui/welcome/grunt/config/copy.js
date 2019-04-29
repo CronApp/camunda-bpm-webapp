@@ -62,16 +62,6 @@ module.exports = function(config, copyConf) {
           dest: '<%= pkg.gruntConfig.welcomeBuildTarget %>/styles/'
         },
 
-        // images, fonts & stuff
-        {
-          expand: true,
-          cwd: '<%= pkg.gruntConfig.welcomeSourceDir %>/',
-          src:  [
-            '{fonts,images}/**/*.*'
-          ],
-          dest: '<%= pkg.gruntConfig.welcomeBuildTarget %>/assets'
-        },
-
         // commons-ui images
         {
           expand: true,
@@ -80,6 +70,16 @@ module.exports = function(config, copyConf) {
             '*.*'
           ],
           dest: '<%= pkg.gruntConfig.welcomeBuildTarget %>/assets/images'
+        },
+
+        // images, fonts & stuff
+        {
+          expand: true,
+          cwd: '<%= pkg.gruntConfig.welcomeSourceDir %>/',
+          src:  [
+            '{fonts,images}/**/*.*'
+          ],
+          dest: '<%= pkg.gruntConfig.welcomeBuildTarget %>/assets'
         },
 
         // dojo & dojox

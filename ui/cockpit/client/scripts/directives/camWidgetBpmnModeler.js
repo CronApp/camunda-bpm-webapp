@@ -73,10 +73,10 @@ module.exports = ['$q', '$document', '$compile', '$location',
             console.log('commandStack.changed');
           });
 
-          // if(!modeler.cached) {
-          //   // attach diagram immediately to avoid having the bpmn logo for viewers that are not cached
-          //   attachDiagram();
-          // }
+          if(!modeler.cached) {
+            // attach diagram immediately to avoid having the bpmn logo for viewers that are not cached
+            attachDiagram();
+          }
 
           var diagramData = null;
 
