@@ -38,23 +38,23 @@ window.camTasklistConf = {
   'shortcuts': {
     'claimTask': {
       'key': 'ctrl+alt+c',
-      'description': 'claims the currently selected task'
+      'description': 'atribui-se a tarefa selecionada'
     },
     'focusFilter': {
       'key': 'ctrl+shift+f',
-      'description': 'set the focus to the first filter in the list'
+      'description': 'foca no primeiro filtro da lista'
     },
     'focusList': {
       'key': 'ctrl+alt+l',
-      'description': 'sets the focus to the first task in the list'
+      'description': 'foca na primeira task da lista'
     },
     'focusForm': {
       'key': 'ctrl+alt+f',
-      'description': 'sets the focus to the first input field in a task form'
+      'description': 'foca no primeiro input da lista'
     },
     'startProcess': {
       'key': 'ctrl+alt+p',
-      'description': 'opens the start process modal dialog'
+      'description': 'abre o inicializador de processos'
     }
   }
 };
