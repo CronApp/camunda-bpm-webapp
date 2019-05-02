@@ -32,14 +32,12 @@ public class AdminContainerBootstrap implements ServletContextListener {
 
   @Override
   public void contextInitialized(ServletContextEvent sce) {
-
     environment = createAdminEnvironment();
     environment.setup();
   }
 
   @Override
   public void contextDestroyed(ServletContextEvent sce) {
-
     environment.tearDown();
   }
 
@@ -55,10 +53,6 @@ public class AdminContainerBootstrap implements ServletContextListener {
 
     public void setup() {
       Admin.setAdminRuntimeDelegate(new DefaultAdminRuntimeDelegate());
-    }
-
-    protected RuntimeContainerDelegate getContainerRuntimeDelegate() {
-      return RuntimeContainerDelegate.INSTANCE.get();
     }
   }
 }

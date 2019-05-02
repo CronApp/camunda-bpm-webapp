@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
@@ -67,6 +68,8 @@ import org.camunda.bpm.engine.impl.util.IoUtil;
  */
 public class AbstractAppPluginRootResource<T extends AppPlugin> {
 
+  private final Logger LOGGER = Logger.getLogger(AbstractAppPluginRootResource.class.getName());
+
   public static final String MIME_TYPE_TEXT_PLAIN = "text/plain";
   public static final String MIME_TYPE_TEXT_HTML = "text/html";
   public static final String MIME_TYPE_TEXT_CSS = "text/css";
@@ -110,34 +113,21 @@ public class AbstractAppPluginRootResource<T extends AppPlugin> {
   @GET
   @Path("/static/{file:.*}")
   public Response getAsset(@PathParam("file") String file) {
+    LOGGER.info("AbstractAppPluginRootResource::getAsset");
+    LOGGER.info("pluginName=[" + pluginName + "]");
+    LOGGER.info("file=[" + file + "]");
 
     AppPlugin plugin = runtimeDelegate.getAppPluginRegistry().getPlugin(pluginName);
 
+    LOGGER.info("plugin found? [" + (plugin != null) + "]");
+
     if (plugin != null) {
       InputStream assetStream = getPluginAssetAsStream(plugin, file);
-      final InputStream filteredStream = applyResourceOverrides(file, assetStream);
+      final InputStream filteredStream = applyResourceOverrides(assetStream);
 
       if (assetStream != null) {
         String contentType = getContentType(file);
-        return Response.ok(new StreamingOutput() {
-
-          @Override
-          public void write(OutputStream out) throws IOException, WebApplicationException {
-
-            try {
-              byte[] buff = new byte[16 * 1000];
-              int read = 0;
-              while((read = filteredStream.read(buff)) > 0) {
-                out.write(buff, 0, read);
-              }
-            }
-            finally {
-              IoUtil.closeSilently(filteredStream);
-              IoUtil.closeSilently(out);
-            }
-
-          }
-        }, contentType).build();
+        return Response.ok(new ResponseStreamingOutput(filteredStream), contentType).build();
       }
     }
 
@@ -146,12 +136,11 @@ public class AbstractAppPluginRootResource<T extends AppPlugin> {
   }
 
   /**
-   * @param file
    * @param assetStream
    */
-  protected InputStream applyResourceOverrides(String file, InputStream assetStream) {
+  protected InputStream applyResourceOverrides(InputStream assetStream) {
     // use a copy of the list cause it could be modified during iteration
-    List<PluginResourceOverride> resourceOverrides = new ArrayList<PluginResourceOverride>(runtimeDelegate.getResourceOverrides());
+    List<PluginResourceOverride> resourceOverrides = new ArrayList<>(runtimeDelegate.getResourceOverrides());
     for (PluginResourceOverride pluginResourceOverride : resourceOverrides) {
       assetStream = pluginResourceOverride.filterResource(assetStream, new RequestInfo(headers, servletContext, uriInfo));
     }
@@ -175,10 +164,12 @@ public class AbstractAppPluginRootResource<T extends AppPlugin> {
   /**
    * Returns an input stream for a given resource
    *
-   * @param resourceName
+   * @param plugin
+   * @param fileName
    * @return
    */
   protected InputStream getPluginAssetAsStream(AppPlugin plugin, String fileName) {
+    LOGGER.info("AbstractAppPluginRootResource::getPluginAssetAsStream");
 
     String assetDirectory = plugin.getAssetDirectory();
 
@@ -195,14 +186,41 @@ public class AbstractAppPluginRootResource<T extends AppPlugin> {
   }
 
   protected InputStream getWebResourceAsStream(String assetDirectory, String fileName) {
+    LOGGER.info("AbstractAppPluginRootResource::getWebResourceAsStream");
+
     String resourceName = String.format("/%s/%s", assetDirectory, fileName);
 
     return servletContext.getResourceAsStream(resourceName);
   }
 
   protected InputStream getClasspathResourceAsStream(AppPlugin plugin, String assetDirectory, String fileName) {
+    LOGGER.info("AbstractAppPluginRootResource::getClasspathResourceAsStream");
+
     String resourceName = String.format("%s/%s", assetDirectory, fileName);
     return plugin.getClass().getClassLoader().getResourceAsStream(resourceName);
+  }
+
+  private static class ResponseStreamingOutput implements StreamingOutput {
+
+    final InputStream filteredStream;
+
+    ResponseStreamingOutput(final InputStream filteredStream) {
+      this.filteredStream = filteredStream;
+    }
+
+    @Override
+    public void write(OutputStream out) throws IOException, WebApplicationException {
+      try {
+        byte[] buff = new byte[16 * 1000];
+        int read;
+        while((read = filteredStream.read(buff)) > 0) {
+          out.write(buff, 0, read);
+        }
+      } finally {
+        IoUtil.closeSilently(filteredStream);
+        IoUtil.closeSilently(out);
+      }
+    }
   }
 
 }
