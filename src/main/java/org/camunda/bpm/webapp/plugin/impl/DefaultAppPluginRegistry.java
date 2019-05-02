@@ -15,16 +15,10 @@
  */
 package org.camunda.bpm.webapp.plugin.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.ServiceLoader;
-import java.util.logging.Logger;
-
 import org.camunda.bpm.webapp.plugin.AppPluginRegistry;
 import org.camunda.bpm.webapp.plugin.spi.AppPlugin;
+
+import java.util.*;
 
 /**
  * Default implementation of {@link AppPluginRegistry} that loads Plugins
@@ -34,8 +28,6 @@ import org.camunda.bpm.webapp.plugin.spi.AppPlugin;
  * @author Daniel Meyer
  */
 public class DefaultAppPluginRegistry<T extends AppPlugin> implements AppPluginRegistry<T> {
-
-  private final Logger LOGGER = Logger.getLogger(DefaultAppPluginRegistry.class.getName());
 
   /** the interface type of plugins managed by this registry */
   protected final Class<T> pluginType;
@@ -47,9 +39,6 @@ public class DefaultAppPluginRegistry<T extends AppPlugin> implements AppPluginR
   }
 
   protected void loadPlugins() {
-    LOGGER.info("DefaultAppPluginRegistry::loadPlugins");
-    LOGGER.info("pluginType=[" + pluginType + "]");
-
     ServiceLoader<T> loader = ServiceLoader.load(pluginType);
 
     Iterator<T> iterator = loader.iterator();
@@ -61,29 +50,20 @@ public class DefaultAppPluginRegistry<T extends AppPlugin> implements AppPluginR
       map.put(plugin.getId(), plugin);
     }
 
-    LOGGER.info("loadPlugins::pluginsMap=[" + map + "]");
-
     this.pluginsMap = map;
   }
 
   @Override
   public List<T> getPlugins() {
-    LOGGER.info("DefaultAppPluginRegistry::getPlugins");
-
     if (pluginsMap == null) {
       loadPlugins();
     }
-
-    LOGGER.info("getPlugins::pluginsMap=[" + pluginsMap.values() + "]");
 
     return new ArrayList<>(pluginsMap.values());
   }
 
   @Override
   public T getPlugin(String id) {
-    LOGGER.info("DefaultAppPluginRegistry::getPlugin");
-    LOGGER.info("id=[" + id + "]");
-
     if (pluginsMap == null) {
       loadPlugins();
     }

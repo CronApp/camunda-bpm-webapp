@@ -15,29 +15,23 @@
  */
 package org.camunda.bpm.webapp.plugin.resource;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
+import org.camunda.bpm.engine.impl.util.IoUtil;
+import org.camunda.bpm.engine.rest.exception.RestException;
+import org.camunda.bpm.webapp.AppRuntimeDelegate;
+import org.camunda.bpm.webapp.plugin.spi.AppPlugin;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.StreamingOutput;
+import javax.ws.rs.core.*;
 import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.UriInfo;
-
-import org.camunda.bpm.engine.rest.exception.RestException;
-import org.camunda.bpm.webapp.AppRuntimeDelegate;
-import org.camunda.bpm.webapp.plugin.spi.AppPlugin;
-import org.camunda.bpm.engine.impl.util.IoUtil;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A resource class that provides a plugins restful API.
@@ -50,7 +44,7 @@ import org.camunda.bpm.engine.impl.util.IoUtil;
  * <p>
  *
  * Subresources must properly initialize the subresources via
- * {@link AbstractAppPluginRootResource#subResource(AbstractAppPluginResource, String) }.
+ * {@link #subResource(S) }.
  *
  * <pre>
  * @Path("myplugin")
@@ -68,8 +62,7 @@ import org.camunda.bpm.engine.impl.util.IoUtil;
  */
 public class AbstractAppPluginRootResource<T extends AppPlugin> {
 
-  private final Logger LOGGER = Logger.getLogger(AbstractAppPluginRootResource.class.getName());
-
+  public static final String META_INF_RESOURCES = "META-INF/resources";
   public static final String MIME_TYPE_TEXT_PLAIN = "text/plain";
   public static final String MIME_TYPE_TEXT_HTML = "text/html";
   public static final String MIME_TYPE_TEXT_CSS = "text/css";
@@ -94,13 +87,10 @@ public class AbstractAppPluginRootResource<T extends AppPlugin> {
   }
 
   /**
-   *
-   * @param <T>
    * @param subResource
-   * @param engineName
    * @return
    */
-  protected <S extends AbstractAppPluginResource<T>> S subResource(S subResource, String engineName) {
+  protected <S extends AbstractAppPluginResource<T>> S subResource(S subResource) {
     return subResource;
   }
 
@@ -113,13 +103,7 @@ public class AbstractAppPluginRootResource<T extends AppPlugin> {
   @GET
   @Path("/static/{file:.*}")
   public Response getAsset(@PathParam("file") String file) {
-    LOGGER.info("AbstractAppPluginRootResource::getAsset");
-    LOGGER.info("pluginName=[" + pluginName + "]");
-    LOGGER.info("file=[" + file + "]");
-
     AppPlugin plugin = runtimeDelegate.getAppPluginRegistry().getPlugin(pluginName);
-
-    LOGGER.info("plugin found? [" + (plugin != null) + "]");
 
     if (plugin != null) {
       InputStream assetStream = getPluginAssetAsStream(plugin, file);
@@ -169,8 +153,6 @@ public class AbstractAppPluginRootResource<T extends AppPlugin> {
    * @return
    */
   protected InputStream getPluginAssetAsStream(AppPlugin plugin, String fileName) {
-    LOGGER.info("AbstractAppPluginRootResource::getPluginAssetAsStream");
-
     String assetDirectory = plugin.getAssetDirectory();
 
     if (assetDirectory == null) {
@@ -186,18 +168,33 @@ public class AbstractAppPluginRootResource<T extends AppPlugin> {
   }
 
   protected InputStream getWebResourceAsStream(String assetDirectory, String fileName) {
-    LOGGER.info("AbstractAppPluginRootResource::getWebResourceAsStream");
-
     String resourceName = String.format("/%s/%s", assetDirectory, fileName);
 
-    return servletContext.getResourceAsStream(resourceName);
+    InputStream stream = servletContext.getResourceAsStream(resourceName);
+
+    if (stream == null) {
+      resourceName = String.format("/%s/%s/%s", META_INF_RESOURCES, assetDirectory, fileName);
+
+      stream = servletContext.getResourceAsStream(resourceName);
+    }
+
+    return stream;
   }
 
   protected InputStream getClasspathResourceAsStream(AppPlugin plugin, String assetDirectory, String fileName) {
-    LOGGER.info("AbstractAppPluginRootResource::getClasspathResourceAsStream");
+    ClassLoader classLoader = plugin.getClass().getClassLoader();
 
     String resourceName = String.format("%s/%s", assetDirectory, fileName);
-    return plugin.getClass().getClassLoader().getResourceAsStream(resourceName);
+
+    InputStream stream = classLoader.getResourceAsStream(resourceName);
+
+    if (stream == null) {
+      resourceName = String.format("%s/%s/%s", META_INF_RESOURCES, assetDirectory, fileName);
+
+      stream = classLoader.getResourceAsStream(resourceName);
+    }
+
+    return stream;
   }
 
   private static class ResponseStreamingOutput implements StreamingOutput {
