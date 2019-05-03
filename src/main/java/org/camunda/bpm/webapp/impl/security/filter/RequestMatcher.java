@@ -46,7 +46,7 @@ public class RequestMatcher {
     private final Map<String, String> parameters;
     private final RequestAuthorizer authorizer;
 
-    public Match(Map<String, String> parameters, RequestAuthorizer authorizer) {
+    Match(Map<String, String> parameters, RequestAuthorizer authorizer) {
       this.parameters = parameters;
       this.authorizer = authorizer;
     }

@@ -41,17 +41,17 @@ public class Authorization {
     return authentication;
   }
 
-  public boolean isGranted() {
+  boolean isGranted() {
     return granted;
   }
 
-  public Authorization forApplication(String application) {
+  Authorization forApplication(String application) {
     this.application = application;
 
     return this;
   }
 
-  public void attachHeaders(HttpServletResponse response) {
+  void attachHeaders(HttpServletResponse response) {
 
     if (authentication != null) {
       // header != null checks required for websphere compatibility
@@ -71,7 +71,7 @@ public class Authorization {
     // response.addHeader("X-Authorized", Boolean.toString(granted));
   }
 
-  public boolean isAuthenticated() {
+  boolean isAuthenticated() {
     return authentication != null && authentication != Authentication.ANONYMOUS;
   }
 
@@ -85,11 +85,11 @@ public class Authorization {
     return new Authorization(authentication, true);
   }
 
-  public static Authorization denied(Authentication authentication) {
+  static Authorization denied(Authentication authentication) {
     return new Authorization(authentication, false);
   }
 
-  public static Authorization grantedUnlessNull(Authentication authentication) {
+  static Authorization grantedUnlessNull(Authentication authentication) {
     return authentication != null ? granted(authentication) : denied(authentication);
   }
 

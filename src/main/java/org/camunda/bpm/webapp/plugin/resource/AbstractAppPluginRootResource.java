@@ -62,11 +62,11 @@ import java.util.List;
  */
 public class AbstractAppPluginRootResource<T extends AppPlugin> {
 
-  public static final String META_INF_RESOURCES = "META-INF/resources";
-  public static final String MIME_TYPE_TEXT_PLAIN = "text/plain";
-  public static final String MIME_TYPE_TEXT_HTML = "text/html";
-  public static final String MIME_TYPE_TEXT_CSS = "text/css";
-  public static final String MIME_TYPE_TEXT_JAVASCRIPT = "text/javascript";
+  private static final String META_INF_RESOURCES = "META-INF/resources";
+  private static final String MIME_TYPE_TEXT_PLAIN = "text/plain";
+  private static final String MIME_TYPE_TEXT_HTML = "text/html";
+  private static final String MIME_TYPE_TEXT_CSS = "text/css";
+  private static final String MIME_TYPE_TEXT_JAVASCRIPT = "text/javascript";
 
   @Context
   private ServletContext servletContext;
@@ -122,7 +122,7 @@ public class AbstractAppPluginRootResource<T extends AppPlugin> {
   /**
    * @param assetStream
    */
-  protected InputStream applyResourceOverrides(InputStream assetStream) {
+  private InputStream applyResourceOverrides(InputStream assetStream) {
     // use a copy of the list cause it could be modified during iteration
     List<PluginResourceOverride> resourceOverrides = new ArrayList<>(runtimeDelegate.getResourceOverrides());
     for (PluginResourceOverride pluginResourceOverride : resourceOverrides) {
@@ -131,7 +131,7 @@ public class AbstractAppPluginRootResource<T extends AppPlugin> {
     return assetStream;
   }
 
-  protected String getContentType(String file) {
+  private String getContentType(String file) {
     if (file.endsWith(".js")) {
       return MIME_TYPE_TEXT_JAVASCRIPT;
     } else
@@ -152,7 +152,7 @@ public class AbstractAppPluginRootResource<T extends AppPlugin> {
    * @param fileName
    * @return
    */
-  protected InputStream getPluginAssetAsStream(AppPlugin plugin, String fileName) {
+  private InputStream getPluginAssetAsStream(AppPlugin plugin, String fileName) {
     String assetDirectory = plugin.getAssetDirectory();
 
     if (assetDirectory == null) {
@@ -167,7 +167,7 @@ public class AbstractAppPluginRootResource<T extends AppPlugin> {
     return result;
   }
 
-  protected InputStream getWebResourceAsStream(String assetDirectory, String fileName) {
+  private InputStream getWebResourceAsStream(String assetDirectory, String fileName) {
     String resourceName = String.format("/%s/%s", assetDirectory, fileName);
 
     InputStream stream = servletContext.getResourceAsStream(resourceName);
@@ -181,7 +181,7 @@ public class AbstractAppPluginRootResource<T extends AppPlugin> {
     return stream;
   }
 
-  protected InputStream getClasspathResourceAsStream(AppPlugin plugin, String assetDirectory, String fileName) {
+  private InputStream getClasspathResourceAsStream(AppPlugin plugin, String assetDirectory, String fileName) {
     ClassLoader classLoader = plugin.getClass().getClassLoader();
 
     String resourceName = String.format("%s/%s", assetDirectory, fileName);

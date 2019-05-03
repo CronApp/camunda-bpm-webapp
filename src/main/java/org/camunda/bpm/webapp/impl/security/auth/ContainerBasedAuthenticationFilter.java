@@ -114,12 +114,12 @@ public class ContainerBasedAuthenticationFilter implements Filter {
 
   }
 
-  protected String getRequestUri(HttpServletRequest request) {
+  private String getRequestUri(HttpServletRequest request) {
     String contextPath = request.getContextPath();
     return request.getRequestURI().substring(contextPath.length());
   }
 
-  protected String extractEngineName(HttpServletRequest request) {
+  private String extractEngineName(HttpServletRequest request) {
     String requestUri = getRequestUri(request);
     String requestMethod = request.getMethod();
 
@@ -146,23 +146,23 @@ public class ContainerBasedAuthenticationFilter implements Filter {
     return null;
   }
 
-  protected ProcessEngine getAddressedEngine(String engineName) {
+  private ProcessEngine getAddressedEngine(String engineName) {
     return ProcessEngineUtil.lookupProcessEngine(engineName);
   }
 
-  protected boolean existisAuthentication(Authentications authentications, String engineName, String username) {
+  private boolean existisAuthentication(Authentications authentications, String engineName, String username) {
     // For each process engine, there can be at most one authentication active in a given session.
     Authentication authentication = authentications.getAuthenticationForProcessEngine(engineName);
     return authentication != null && isAuthenticated(authentication, engineName, username);
   }
 
-  protected boolean isAuthenticated(Authentication authentication, String engineName, String username) {
+  private boolean isAuthenticated(Authentication authentication, String engineName, String username) {
     String processEngineName = authentication.getProcessEngineName();
     String identityId = authentication.getIdentityId();
     return processEngineName.equals(engineName) && identityId.equals(username);
   }
 
-  protected Authentication createAuthentication(ProcessEngine processEngine, String username, List<String> groups, List<String> tenants) {
+  private Authentication createAuthentication(ProcessEngine processEngine, String username, List<String> groups, List<String> tenants) {
     return userAuthentications.createAuthenticate(processEngine, username, groups, tenants);
   }
 

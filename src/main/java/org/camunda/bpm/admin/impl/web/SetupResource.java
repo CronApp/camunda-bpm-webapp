@@ -108,13 +108,11 @@ public class SetupResource {
   }
 
   protected ObjectMapper getObjectMapper() {
-    if(providers != null) {
-      return ProvidersUtil
-        .resolveFromContext(providers, ObjectMapper.class, MediaType.APPLICATION_JSON_TYPE, this.getClass());
-    }
-    else {
+    if (providers == null) {
       return null;
     }
+    return ProvidersUtil
+      .resolveFromContext(providers, ObjectMapper.class, MediaType.APPLICATION_JSON_TYPE, this.getClass());
   }
 
   protected void ensureCamundaAdminGroupExists(ProcessEngine processEngine) {

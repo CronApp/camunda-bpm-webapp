@@ -55,7 +55,7 @@ public class RequestFilter {
     return matchRequestUri(requestUri);
   }
 
-  protected boolean isMethodMatched(String requestMethod) {
+  private boolean isMethodMatched(String requestMethod) {
     boolean isMethodMatched = false;
     if (methods.length != 0) {
       for (String method : methods) {
@@ -70,14 +70,14 @@ public class RequestFilter {
     return isMethodMatched;
   }
 
-  protected Map<String, String> matchRequestUri(String requestUri) {
+  private Map<String, String> matchRequestUri(String requestUri) {
     Matcher matcher = pattern.matcher(requestUri);
 
     if (!matcher.matches()) {
       return null;
     }
 
-    HashMap<String, String> attributes = new HashMap<String, String>();
+    HashMap<String, String> attributes = new HashMap<>();
 
     for (int i = 0; i < matcher.groupCount(); i++) {
       attributes.put(groups[i], matcher.group(i + 1));

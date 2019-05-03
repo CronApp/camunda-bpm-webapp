@@ -32,7 +32,7 @@ public class Cockpit {
    * initialized by bootstrapping camunda cockpit with an specific
    * instance
    */
-  protected static CockpitRuntimeDelegate COCKPIT_RUNTIME_DELEGATE;
+  private static CockpitRuntimeDelegate COCKPIT_RUNTIME_DELEGATE;
 
   /**
    * Returns a configured {@link QueryService} to execute custom

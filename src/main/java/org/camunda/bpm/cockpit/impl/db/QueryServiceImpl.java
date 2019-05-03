@@ -32,7 +32,7 @@ public class QueryServiceImpl implements QueryService {
     this.commandExecutor = commandExecutor;
   }
 
-  public <T> List<T> executeQuery(final String statement, final QueryParameters<T> parameter) {
+  public <T> List<T> executeQuery(final String statement, final QueryParameters parameter) {
     List<T> queryResult = commandExecutor.executeCommand(new Command<List<T>>() {
 
       @SuppressWarnings("unchecked")
@@ -40,18 +40,6 @@ public class QueryServiceImpl implements QueryService {
         commandContext.getAuthorizationManager()
           .enableQueryAuthCheck(parameter.getAuthCheck());
         return (List<T>) commandContext.getDbSqlSession().selectList(statement, parameter);
-      }
-
-    });
-    return queryResult;
-  }
-
-  public <T> T executeQuery(final String statement, final Object parameter, final Class<T> clazz) {
-      T queryResult = commandExecutor.executeCommand(new Command<T>() {
-
-      @SuppressWarnings("unchecked")
-      public T execute(CommandContext commandContext) {
-        return (T) commandContext.getDbSqlSession().selectOne(statement, parameter);
       }
 
     });

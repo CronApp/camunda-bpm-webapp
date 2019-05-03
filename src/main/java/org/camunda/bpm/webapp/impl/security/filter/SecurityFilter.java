@@ -30,7 +30,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.camunda.bpm.engine.impl.util.IoUtil;
-import org.camunda.bpm.webapp.impl.security.auth.Authentications;
 import org.camunda.bpm.webapp.impl.security.filter.util.FilterRules;
 
 
@@ -47,14 +46,14 @@ import org.camunda.bpm.webapp.impl.security.filter.util.FilterRules;
  */
 public class SecurityFilter implements Filter {
 
-  public List<SecurityFilterRule> filterRules = new ArrayList<SecurityFilterRule>();
+  private List<SecurityFilterRule> filterRules = new ArrayList<>();
 
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
     doFilterSecure((HttpServletRequest) request, (HttpServletResponse) response, chain);
   }
 
-  public void doFilterSecure(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+  private void doFilterSecure(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 
     String requestUri = getRequestUri(request);
 
@@ -73,12 +72,12 @@ public class SecurityFilter implements Filter {
       String application = authorization.getApplication();
 
       if (application != null) {
-        sendForbiddenApplicationAccess(application, request, response);
+        sendForbiddenApplicationAccess(application, response);
       } else {
-        sendForbidden(request, response);
+        sendForbidden(response);
       }
     } else {
-      sendUnauthorized(request, response);
+      sendUnauthorized(response);
     }
   }
 
@@ -96,16 +95,17 @@ public class SecurityFilter implements Filter {
    * Iterate over a number of filter rules and match them against
    * the specified request.
    *
-   * @param request
+   * @param requestMethod
+   * @param requestUri
    * @param filterRules
    *
-   * @return the joined {@link AuthorizationStatus} for this request matched against all filter rules
+   * @return the joined {@link Authorization} for this request matched against all filter rules
    */
   public static Authorization authorize(String requestMethod, String requestUri, List<SecurityFilterRule> filterRules) {
     return FilterRules.authorize(requestMethod, requestUri, filterRules);
   }
 
-  protected void loadFilterRules(FilterConfig filterConfig) throws ServletException {
+  private void loadFilterRules(FilterConfig filterConfig) throws ServletException {
     String configFileName = filterConfig.getInitParameter("configFile");
     InputStream configFileResource = filterConfig.getServletContext().getResourceAsStream(configFileName);
     if (configFileResource == null) {
@@ -121,23 +121,19 @@ public class SecurityFilter implements Filter {
     }
   }
 
-  protected void sendForbidden(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  private void sendForbidden(HttpServletResponse response) throws IOException {
     response.sendError(403);
   }
 
-  protected void sendUnauthorized(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  private void sendUnauthorized(HttpServletResponse response) throws IOException {
     response.sendError(401);
   }
 
-  protected void sendForbiddenApplicationAccess(String application, HttpServletRequest request, HttpServletResponse response) throws IOException {
+  private void sendForbiddenApplicationAccess(String application, HttpServletResponse response) throws IOException {
     response.sendError(403, "No access rights for " + application);
   }
 
-  protected boolean isAuthenticated(HttpServletRequest request) {
-    return Authentications.getCurrent() != null;
-  }
-
-  protected String getRequestUri(HttpServletRequest request) {
+  private String getRequestUri(HttpServletRequest request) {
     String contextPath = request.getContextPath();
     return request.getRequestURI().substring(contextPath.length());
   }

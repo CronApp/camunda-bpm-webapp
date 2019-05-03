@@ -91,7 +91,7 @@ public abstract class AbstractAppRuntimeDelegate<T extends AppPlugin> implements
 
   protected synchronized void initResourceOverrides() {
     if(resourceOverrides == null) { // double-checked sync, do not remove
-      resourceOverrides = new ArrayList<PluginResourceOverride>();
+      resourceOverrides = new ArrayList<>();
       List<T> plugins = pluginRegistry.getPlugins();
       for (T p : plugins) {
         resourceOverrides.addAll(p.getResourceOverrides());

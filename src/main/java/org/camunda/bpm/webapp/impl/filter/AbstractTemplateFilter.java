@@ -42,7 +42,7 @@ public abstract class AbstractTemplateFilter implements Filter {
   private FilterConfig filterConfig;
 
   @Override
-  public void init(FilterConfig filterConfig) throws ServletException {
+  public void init(FilterConfig filterConfig) {
     this.filterConfig = filterConfig;
   }
 
@@ -107,7 +107,7 @@ public abstract class AbstractTemplateFilter implements Filter {
       BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
       StringWriter writer = new StringWriter();
-      String line = null;
+      String line;
 
       while ((line = reader.readLine()) != null) {
         writer.write(line);

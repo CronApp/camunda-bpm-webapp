@@ -15,22 +15,6 @@
  */
 package org.camunda.bpm.cockpit.impl.plugin.base.sub.resources;
 
-import static org.camunda.bpm.engine.authorization.Permissions.READ;
-import static org.camunda.bpm.engine.authorization.Permissions.READ_INSTANCE;
-import static org.camunda.bpm.engine.authorization.Resources.PROCESS_DEFINITION;
-import static org.camunda.bpm.engine.authorization.Resources.PROCESS_INSTANCE;
-
-import java.util.List;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.UriInfo;
-
 import org.camunda.bpm.cockpit.impl.plugin.base.dto.ProcessDefinitionDto;
 import org.camunda.bpm.cockpit.impl.plugin.base.dto.query.ProcessDefinitionQueryDto;
 import org.camunda.bpm.cockpit.plugin.resource.AbstractCockpitPluginResource;
@@ -39,6 +23,17 @@ import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.impl.history.HistoryLevel;
 import org.camunda.bpm.engine.impl.interceptor.Command;
 import org.camunda.bpm.engine.impl.interceptor.CommandContext;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
+import java.util.List;
+
+import static org.camunda.bpm.engine.authorization.Permissions.READ;
+import static org.camunda.bpm.engine.authorization.Permissions.READ_INSTANCE;
+import static org.camunda.bpm.engine.authorization.Resources.PROCESS_DEFINITION;
+import static org.camunda.bpm.engine.authorization.Resources.PROCESS_INSTANCE;
 
 public class ProcessDefinitionResource extends AbstractCockpitPluginResource {
 
@@ -82,7 +77,7 @@ public class ProcessDefinitionResource extends AbstractCockpitPluginResource {
     parameter.initQueryVariableValues(processEngineConfiguration.getVariableSerializers());
   }
 
-  protected void configureExecutionQuery(ProcessDefinitionQueryDto query) {
+  private void configureExecutionQuery(ProcessDefinitionQueryDto query) {
     configureAuthorizationCheck(query);
     configureTenantCheck(query);
     addPermissionCheck(query, PROCESS_INSTANCE, "EXEC2.PROC_INST_ID_", READ);

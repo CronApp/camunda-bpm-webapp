@@ -106,31 +106,6 @@ public class UserAuthenticationResource {
     return Response.ok(AuthenticationDto.fromAuthentication(authentication)).build();
   }
 
-  protected List<String> getGroupsOfUser(ProcessEngine engine, String userId) {
-    List<Group> groups = engine.getIdentityService().createGroupQuery()
-      .groupMember(userId)
-      .list();
-
-    List<String> groupIds = new ArrayList<String>();
-    for (Group group : groups) {
-      groupIds.add(group.getId());
-    }
-    return groupIds;
-  }
-
-  protected List<String> getTenantsOfUser(ProcessEngine engine, String userId) {
-    List<Tenant> tenants = engine.getIdentityService().createTenantQuery()
-      .userMember(userId)
-      .includingGroupsOfUser(true)
-      .list();
-
-    List<String> tenantIds = new ArrayList<String>();
-    for(Tenant tenant : tenants) {
-      tenantIds.add(tenant.getId());
-    }
-    return tenantIds;
-  }
-
   @POST
   @Path("/{processEngineName}/logout")
   public Response doLogout(@PathParam("processEngineName") String engineName) {
@@ -142,15 +117,15 @@ public class UserAuthenticationResource {
     return Response.ok().build();
   }
 
-  protected Response unauthorized() {
+  private Response unauthorized() {
     return Response.status(Status.UNAUTHORIZED).build();
   }
 
-  protected Response forbidden() {
+  private Response forbidden() {
     return Response.status(Status.FORBIDDEN).build();
   }
 
-  protected Response notFound() {
+  private Response notFound() {
     return Response.status(Status.NOT_FOUND).build();
   }
 }

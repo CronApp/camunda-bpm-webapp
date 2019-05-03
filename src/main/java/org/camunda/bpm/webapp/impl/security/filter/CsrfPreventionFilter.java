@@ -99,7 +99,7 @@ public class CsrfPreventionFilter implements Filter {
 
   private int denyStatus = HttpServletResponse.SC_FORBIDDEN;
 
-  private final Set<String> entryPoints = new HashSet<String>();
+  private final Set<String> entryPoints = new HashSet<>();
 
 
   @Override
@@ -130,11 +130,7 @@ public class CsrfPreventionFilter implements Filter {
       }
     } catch (ClassNotFoundException e) {
       throw new ServletException("Cannot instantiate CSRF Prevention filter: Random class not found.", e);
-    } catch (InstantiationException e) {
-      throw new ServletException("Cannot instantiate CSRF Prevention filter: cannot instantiate provided Random class", e);
-    } catch (InvocationTargetException e) {
-      throw new ServletException("Cannot instantiate CSRF Prevention filter: cannot instantiate provided Random class", e);
-    } catch (NoSuchMethodException e) {
+    } catch (InstantiationException | NoSuchMethodException | InvocationTargetException e) {
       throw new ServletException("Cannot instantiate CSRF Prevention filter: cannot instantiate provided Random class", e);
     } catch (IllegalAccessException e) {
       throw new ServletException("Cannot instantiate CSRF Prevention filter: Random class constructor not accessible", e);
@@ -173,7 +169,7 @@ public class CsrfPreventionFilter implements Filter {
    * @return true if the token is valid
    * @throws IOException
    */
-  protected boolean doTokenValidation(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  private boolean doTokenValidation(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     HttpSession session = request.getSession();
     String tokenHeader = getCSRFTokenHeader(request);
@@ -202,7 +198,7 @@ public class CsrfPreventionFilter implements Filter {
    * @return true if the values match
    * @throws IOException
    */
-  protected boolean doSameOriginStandardHeadersVerification(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  private boolean doSameOriginStandardHeadersVerification(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // if target origin is not set, skip Same Origin with Standard Headers Verification
     if (getTargetOrigin() == null) {
       return true;
@@ -241,7 +237,7 @@ public class CsrfPreventionFilter implements Filter {
    * @param request
    * @return the token string for client side handling
    */
-  protected void setCSRFToken(HttpServletRequest request, HttpServletResponse response) {
+  private void setCSRFToken(HttpServletRequest request, HttpServletResponse response) {
     HttpSession session = request.getSession();
     Object sessionMutex = getSessionMutex(session);
 
@@ -264,7 +260,7 @@ public class CsrfPreventionFilter implements Filter {
     }
   }
 
-  public URL getTargetOrigin() {
+  private URL getTargetOrigin() {
     return targetOrigin;
   }
 
@@ -277,7 +273,7 @@ public class CsrfPreventionFilter implements Filter {
    *                     and port (ex. http://example.com:8080)
    * @throws MalformedURLException
    */
-  public void setTargetOrigin(String targetOrigin) throws MalformedURLException {
+  private void setTargetOrigin(String targetOrigin) throws MalformedURLException {
     this.targetOrigin = new URL(targetOrigin);
   }
 
@@ -292,14 +288,14 @@ public class CsrfPreventionFilter implements Filter {
    *            Comma separated list of URLs to be configured as
    *            entry points.
    */
-  public void setEntryPoints(String entryPoints) {
+  private void setEntryPoints(String entryPoints) {
     this.entryPoints.addAll(parseURLs(entryPoints));
   }
 
   /**
    * @return the response status code that is used to reject a denied request.
    */
-  public int getDenyStatus() {
+  private int getDenyStatus() {
     return denyStatus;
   }
 
@@ -310,7 +306,7 @@ public class CsrfPreventionFilter implements Filter {
    * @param denyStatus
    *            HTTP status code
    */
-  public void setDenyStatus(int denyStatus) {
+  private void setDenyStatus(int denyStatus) {
     this.denyStatus = denyStatus;
   }
 
@@ -326,7 +322,7 @@ public class CsrfPreventionFilter implements Filter {
    * @param randomClass
    *            The name of the class
    */
-  public void setRandomClass(String randomClass) {
+  private void setRandomClass(String randomClass) {
     this.randomClass = randomClass;
   }
 
@@ -341,7 +337,7 @@ public class CsrfPreventionFilter implements Filter {
    *
    * @return true if the request is a non-modifying request
    * */
-  protected boolean isNonModifyingRequest(HttpServletRequest request) {
+  private boolean isNonModifyingRequest(HttpServletRequest request) {
     return CsrfConstants.CSRF_NON_MODIFYING_METHODS_PATTERN.matcher(request.getMethod()).matches()
       || CsrfConstants.CSRF_DEFAULT_ENTRY_URL_PATTERN.matcher(getRequestedPath(request)).matches()
       || entryPoints.contains(getRequestedPath(request));
@@ -353,7 +349,7 @@ public class CsrfPreventionFilter implements Filter {
    *
    * @return the generated token
    */
-  protected String generateCSRFToken() {
+  private String generateCSRFToken() {
     byte random[] = new byte[16];
 
     // Render the result as a String of hexadecimal digits
@@ -361,9 +357,9 @@ public class CsrfPreventionFilter implements Filter {
 
     randomSource.nextBytes(random);
 
-    for (int j = 0; j < random.length; j++) {
-      byte b1 = (byte) ((random[j] & 0xf0) >> 4);
-      byte b2 = (byte) (random[j] & 0x0f);
+    for (byte aRandom : random) {
+      byte b1 = (byte) ((aRandom & 0xf0) >> 4);
+      byte b2 = (byte) (aRandom & 0x0f);
       if (b1 < 10) {
         buffer.append((char) ('0' + b1));
       } else {
@@ -428,7 +424,7 @@ public class CsrfPreventionFilter implements Filter {
   }
 
   private Set<String> parseURLs(String urlString) {
-    Set<String> urlSet = new HashSet<String>();
+    Set<String> urlSet = new HashSet<>();
 
     if (urlString != null && !urlString.isEmpty()) {
       String values[] = urlString.split(",");

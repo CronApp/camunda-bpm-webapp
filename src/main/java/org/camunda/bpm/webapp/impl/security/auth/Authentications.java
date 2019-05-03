@@ -47,7 +47,7 @@ public class Authentications implements Serializable {
   private static String CAM_AUTH_SESSION_KEY = "authenticatedUser";
 
   /** holds the current authentication */
-  private static ThreadLocal<Authentications> currentAuthentications = new ThreadLocal<Authentications>();
+  private static ThreadLocal<Authentications> currentAuthentications = new ThreadLocal<>();
 
   /**holds an entry for each processEngine->userId pair currently authenticated */
   protected Map<String, Authentication> authentications = new HashMap<String, Authentication>();
@@ -86,7 +86,7 @@ public class Authentications implements Serializable {
    *          the name of the process engine for which the authentication should
    *          be removed.
    */
-  public void removeAuthenticationForProcessEngine(String engineName) {
+  void removeAuthenticationForProcessEngine(String engineName) {
     authentications.remove(engineName);
   }
 
@@ -94,17 +94,7 @@ public class Authentications implements Serializable {
    * @return all active {@link Authentication Authentications}.
    */
   public List<Authentication> getAuthentications() {
-    return new ArrayList<Authentication>(authentications.values());
-  }
-
-  /**
-   * Allows checking whether a user is currently authenticated for a given process engine name.
-   *
-   * @param engineName the name of the process engine for which we want to check for authentication.
-   * @return true if a user is authenticated for the provided process engine name.
-   */
-  public boolean hasAuthenticationForProcessEngine(String engineName) {
-    return getAuthenticationForProcessEngine(engineName) != null;
+    return new ArrayList<>(authentications.values());
   }
 
   // thread-local //////////////////////////////////////////////////////////
@@ -143,7 +133,7 @@ public class Authentications implements Serializable {
    *          {@link Authentications}.
    * @return
    */
-  public static Authentications getFromSession(HttpSession session) {
+  static Authentications getFromSession(HttpSession session) {
     Authentications authentications = (Authentications) session.getAttribute(CAM_AUTH_SESSION_KEY);
     if(authentications == null) {
       authentications = new Authentications();
@@ -164,7 +154,7 @@ public class Authentications implements Serializable {
    *          the new {@link Authentication} instance that is created
    *          through user login. It is added to the existing authentications.
    */
-  public static void revalidateSession(HttpServletRequest request, Authentication authentication) {
+  static void revalidateSession(HttpServletRequest request, Authentication authentication) {
     HttpSession session = request.getSession();
     Authentications authentications = getFromSession(session);
 
@@ -178,7 +168,7 @@ public class Authentications implements Serializable {
     }
   }
 
-  public static void updateSession(HttpSession session, Authentications authentications) {
+  static void updateSession(HttpSession session, Authentications authentications) {
     session.setAttribute(CAM_AUTH_SESSION_KEY, authentications);
   }
 

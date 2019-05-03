@@ -15,44 +15,26 @@
  */
 package org.camunda.bpm.webapp.impl.security.auth;
 
-import static org.camunda.bpm.engine.authorization.Permissions.ACCESS;
-import static org.camunda.bpm.engine.authorization.Resources.APPLICATION;
+import org.camunda.bpm.engine.AuthorizationService;
+import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.identity.Group;
+import org.camunda.bpm.engine.identity.Tenant;
+import org.camunda.bpm.engine.identity.User;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.ws.rs.core.Response.Status;
-
-import org.camunda.bpm.engine.AuthorizationService;
-import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.identity.Group;
-import org.camunda.bpm.engine.identity.Tenant;
-import org.camunda.bpm.engine.identity.User;
-import org.camunda.bpm.engine.rest.exception.InvalidRequestException;
-import org.camunda.bpm.webapp.impl.util.ProcessEngineUtil;
+import static org.camunda.bpm.engine.authorization.Permissions.ACCESS;
+import static org.camunda.bpm.engine.authorization.Resources.APPLICATION;
 
 public class AuthenticationService {
 
-  public static final String[] APPS = new String[] { "cockpit", "tasklist", "admin"};
-  public static final String APP_WELCOME = "welcome";
+  private static final String[] APPS = new String[] { "cockpit", "tasklist", "admin"};
+  private static final String APP_WELCOME = "welcome";
 
-  public Authentication createAuthenticate(String engineName, String username) {
-    return createAuthenticate(engineName, username, null, null);
-  }
-
-  public Authentication createAuthenticate(String engineName, String username, List<String> groupIds, List<String> tenantIds) {
-    ProcessEngine processEngine = ProcessEngineUtil.lookupProcessEngine(engineName);
-
-    if(processEngine == null) {
-      throw new InvalidRequestException(Status.BAD_REQUEST, "Process engine with name "+engineName+" does not exist");
-    }
-
-    return createAuthenticate(processEngine, username, groupIds, tenantIds);
-  }
-
-  public Authentication createAuthenticate(ProcessEngine processEngine, String username, List<String> groupIds, List<String> tenantIds) {
+  Authentication createAuthenticate(ProcessEngine processEngine, String username, List<String> groupIds, List<String> tenantIds) {
 
     User user = processEngine.getIdentityService().createUserQuery().userId(username).singleResult();
     String userId = user.getId();
@@ -70,7 +52,7 @@ public class AuthenticationService {
     // check user's app authorizations
     AuthorizationService authorizationService = processEngine.getAuthorizationService();
 
-    HashSet<String> authorizedApps = new HashSet<String>();
+    HashSet<String> authorizedApps = new HashSet<>();
     authorizedApps.add(APP_WELCOME);
 
     if (processEngine.getProcessEngineConfiguration().isAuthorizationEnabled()) {
@@ -93,32 +75,32 @@ public class AuthenticationService {
     return newAuthentication;
   }
 
-  public List<String> getTenantsOfUser(ProcessEngine engine, String userId) {
+  private List<String> getTenantsOfUser(ProcessEngine engine, String userId) {
     List<Tenant> tenants = engine.getIdentityService().createTenantQuery()
       .userMember(userId)
       .includingGroupsOfUser(true)
       .list();
 
-    List<String> tenantIds = new ArrayList<String>();
+    List<String> tenantIds = new ArrayList<>();
     for(Tenant tenant : tenants) {
       tenantIds.add(tenant.getId());
     }
     return tenantIds;
   }
 
-  public List<String> getGroupsOfUser(ProcessEngine engine, String userId) {
+  private List<String> getGroupsOfUser(ProcessEngine engine, String userId) {
     List<Group> groups = engine.getIdentityService().createGroupQuery()
       .groupMember(userId)
       .list();
 
-    List<String> groupIds = new ArrayList<String>();
+    List<String> groupIds = new ArrayList<>();
     for (Group group : groups) {
       groupIds.add(group.getId());
     }
     return groupIds;
   }
 
-  protected boolean isAuthorizedForApp(AuthorizationService authorizationService, String username, List<String> groupIds, String application) {
+  private boolean isAuthorizedForApp(AuthorizationService authorizationService, String username, List<String> groupIds, String application) {
     return authorizationService.isUserAuthorized(username, groupIds, ACCESS, APPLICATION, application);
   }
 

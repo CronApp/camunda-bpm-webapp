@@ -25,7 +25,7 @@ import org.camunda.bpm.engine.impl.db.ListQueryParameterObject;
  */
 public interface QueryService {
 
-  <T> List<T> executeQuery(final String statement, final QueryParameters<T> parameter);
+  <T> List<T> executeQuery(final String statement, final QueryParameters parameter);
 
   Long executeQueryRowCount(final String statement, final ListQueryParameterObject parameter);
 }

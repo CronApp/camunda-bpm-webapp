@@ -21,13 +21,12 @@ import org.camunda.bpm.engine.impl.db.ListQueryParameterObject;
  * Typed query parameters for usage in cockpit plugins
  *
  * @author Nico Rehwaldt
- * @param <T>
  */
-public class QueryParameters<T> extends ListQueryParameterObject {
+public class QueryParameters extends ListQueryParameterObject {
 
   private static final long serialVersionUID = 1L;
   
-  protected boolean historyEnabled = true;
+  private boolean historyEnabled = true;
 
   public QueryParameters() { }
 

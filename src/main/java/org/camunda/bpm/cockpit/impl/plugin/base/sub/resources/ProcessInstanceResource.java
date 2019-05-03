@@ -15,12 +15,9 @@
  */
 package org.camunda.bpm.cockpit.impl.plugin.base.sub.resources;
 
-import static org.camunda.bpm.engine.authorization.Permissions.READ;
-import static org.camunda.bpm.engine.authorization.Permissions.READ_INSTANCE;
-import static org.camunda.bpm.engine.authorization.Resources.PROCESS_DEFINITION;
-import static org.camunda.bpm.engine.authorization.Resources.PROCESS_INSTANCE;
-
-import java.util.List;
+import org.camunda.bpm.cockpit.impl.plugin.base.dto.CalledProcessInstanceDto;
+import org.camunda.bpm.cockpit.impl.plugin.base.dto.query.CalledProcessInstanceQueryDto;
+import org.camunda.bpm.cockpit.plugin.resource.AbstractCockpitPluginResource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -29,10 +26,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
+import java.util.List;
 
-import org.camunda.bpm.cockpit.impl.plugin.base.dto.CalledProcessInstanceDto;
-import org.camunda.bpm.cockpit.impl.plugin.base.dto.query.CalledProcessInstanceQueryDto;
-import org.camunda.bpm.cockpit.plugin.resource.AbstractCockpitPluginResource;
+import static org.camunda.bpm.engine.authorization.Permissions.READ;
+import static org.camunda.bpm.engine.authorization.Permissions.READ_INSTANCE;
+import static org.camunda.bpm.engine.authorization.Resources.PROCESS_DEFINITION;
+import static org.camunda.bpm.engine.authorization.Resources.PROCESS_INSTANCE;
 
 public class ProcessInstanceResource extends AbstractCockpitPluginResource {
 
@@ -60,7 +59,7 @@ public class ProcessInstanceResource extends AbstractCockpitPluginResource {
     return getQueryService().executeQuery("selectCalledProcessInstances", queryParameter);
   }
 
-  protected void configureExecutionQuery(CalledProcessInstanceQueryDto query) {
+  private void configureExecutionQuery(CalledProcessInstanceQueryDto query) {
     configureAuthorizationCheck(query);
     configureTenantCheck(query);
     addPermissionCheck(query, PROCESS_INSTANCE, "EXEC1.PROC_INST_ID_", READ);

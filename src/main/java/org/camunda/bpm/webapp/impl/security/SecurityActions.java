@@ -91,8 +91,8 @@ public class SecurityActions {
 
   }
 
-  public static interface SecurityAction<T> {
-    public T execute() throws IOException, ServletException;
+  public interface SecurityAction<T> {
+    T execute() throws IOException, ServletException;
   }
 
 }

@@ -37,7 +37,7 @@ public class TasklistApplication extends Application {
 
   @Override
   public Set<Class<?>> getClasses() {
-    Set<Class<?>> classes = new HashSet<Class<?>>();
+    Set<Class<?>> classes = new HashSet<>();
 
     classes.add(JacksonConfigurator.class);
     classes.add(JacksonJsonProvider.class);
@@ -50,7 +50,6 @@ public class TasklistApplication extends Application {
   }
 
   private void addPluginResourceClasses(Set<Class<?>> classes) {
-
     List<TasklistPlugin> plugins = getTasklistPlugins();
 
     for (TasklistPlugin plugin : plugins) {

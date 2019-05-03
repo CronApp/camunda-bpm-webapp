@@ -31,11 +31,11 @@ public class UserAuthentication extends Authentication {
 
   private static final long serialVersionUID = 1L;
 
-  protected List<String> groupIds;
+  private List<String> groupIds;
 
-  protected List<String> tenantIds;
+  private List<String> tenantIds;
 
-  protected Set<String> authorizedApps;
+  private Set<String> authorizedApps;
 
   public UserAuthentication(String userId, String processEngineName) {
     super(userId, processEngineName);
