@@ -34,14 +34,12 @@ public class CockpitContainerBootstrap implements ServletContextListener {
 
   @Override
   public void contextInitialized(ServletContextEvent sce) {
-
     environment = createCockpitEnvironment();
     environment.setup();
   }
 
   @Override
   public void contextDestroyed(ServletContextEvent sce) {
-
     environment.tearDown();
   }
 
@@ -57,10 +55,6 @@ public class CockpitContainerBootstrap implements ServletContextListener {
 
     public void setup() {
       Cockpit.setCockpitRuntimeDelegate(new DefaultCockpitRuntimeDelegate());
-    }
-
-    protected RuntimeContainerDelegate getContainerRuntimeDelegate() {
-      return RuntimeContainerDelegate.INSTANCE.get();
     }
   }
 }

@@ -15,16 +15,16 @@
  */
 package org.camunda.bpm.welcome.impl.plugin.resources;
 
-import javax.ws.rs.Path;
-
 import org.camunda.bpm.welcome.impl.plugin.WelcomePlugins;
-import org.camunda.bpm.welcome.resource.AbstractWelcomePluginResource;
+import org.camunda.bpm.welcome.resource.AbstractWelcomePluginRootResource;
+
+import javax.ws.rs.Path;
 
 /**
  * @author vale
  */
 @Path("plugin/" + WelcomePlugins.ID)
-public class WelcomePluginsRootResource extends AbstractWelcomePluginResource {
+public class WelcomePluginsRootResource extends AbstractWelcomePluginRootResource {
 
   public WelcomePluginsRootResource() {
     super(WelcomePlugins.ID);

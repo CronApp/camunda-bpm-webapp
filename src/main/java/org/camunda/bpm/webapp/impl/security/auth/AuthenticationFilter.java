@@ -42,7 +42,7 @@ import org.camunda.bpm.webapp.impl.security.SecurityActions.SecurityAction;
  */
 public class AuthenticationFilter implements Filter {
 
-  public void init(FilterConfig filterConfig) throws ServletException {
+  public void init(FilterConfig filterConfig) {
 
   }
 
@@ -67,15 +67,6 @@ public class AuthenticationFilter implements Filter {
       Authentications.updateSession(req.getSession(), authentications);
     }
 
-  }
-
-  protected void clearProcessEngineAuthentications(Authentications authentications) {
-    for (Authentication authentication : authentications.getAuthentications()) {
-      ProcessEngine processEngine = Cockpit.getProcessEngine(authentication.getProcessEngineName());
-      if(processEngine != null) {
-        processEngine.getIdentityService().clearAuthentication();
-      }
-    }
   }
 
   public void destroy() {

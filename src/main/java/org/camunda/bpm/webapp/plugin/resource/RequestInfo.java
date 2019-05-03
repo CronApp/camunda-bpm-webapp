@@ -25,11 +25,11 @@ import javax.ws.rs.core.UriInfo;
  */
 public class RequestInfo {
 
-  protected HttpHeaders headers;
-  protected ServletContext servletContext;
-  protected UriInfo uriInfo;
+  private HttpHeaders headers;
+  private ServletContext servletContext;
+  private UriInfo uriInfo;
 
-  public RequestInfo(HttpHeaders headers, ServletContext servletContext, UriInfo uriInfo) {
+  RequestInfo(HttpHeaders headers, ServletContext servletContext, UriInfo uriInfo) {
     this.headers = headers;
     this.servletContext = servletContext;
     this.uriInfo = uriInfo;

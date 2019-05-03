@@ -32,14 +32,12 @@ public class TasklistContainerBootstrap implements ServletContextListener {
 
   @Override
   public void contextInitialized(ServletContextEvent sce) {
-
     environment = createTasklistEnvironment();
     environment.setup();
   }
 
   @Override
   public void contextDestroyed(ServletContextEvent sce) {
-
     environment.tearDown();
   }
 
@@ -55,10 +53,6 @@ public class TasklistContainerBootstrap implements ServletContextListener {
 
     public void setup() {
       Tasklist.setTasklistRuntimeDelegate(new DefaultTasklistRuntimeDelegate());
-    }
-
-    protected RuntimeContainerDelegate getContainerRuntimeDelegate() {
-      return RuntimeContainerDelegate.INSTANCE.get();
     }
   }
 

@@ -15,9 +15,9 @@
  */
 package org.camunda.bpm.webapp.impl.security.filter;
 
-import java.util.Map;
-
 import org.camunda.bpm.webapp.impl.security.auth.Authentication;
+
+import java.util.Map;
 
 /**
  * The interface for request authorizers.
@@ -26,7 +26,7 @@ import org.camunda.bpm.webapp.impl.security.auth.Authentication;
  */
 public interface RequestAuthorizer {
 
-  public static final RequestAuthorizer AUTHORIZE_ANNONYMOUS = new AnnonymousAuthorizer();
+  RequestAuthorizer AUTHORIZE_ANNONYMOUS = new AnnonymousAuthorizer();
 
   /**
    * Authorize a request with the given parameters by returning a valid {@link Authentication}.
@@ -36,9 +36,9 @@ public interface RequestAuthorizer {
    * @return a valid {@link Authentication} or <code>null</code> if authorization to this request
    *         has not been granted
    */
-  public Authorization authorize(Map<String, String> parameters);
+  Authorization authorize(Map<String, String> parameters);
 
-  public static class AnnonymousAuthorizer implements RequestAuthorizer {
+  class AnnonymousAuthorizer implements RequestAuthorizer {
 
     @Override
     public Authorization authorize(Map<String, String> parameters) {

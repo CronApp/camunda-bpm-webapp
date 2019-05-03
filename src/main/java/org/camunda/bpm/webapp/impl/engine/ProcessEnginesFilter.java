@@ -155,12 +155,12 @@ public class ProcessEnginesFilter extends AbstractTemplateFilter {
         } else {
           // serve the index page as a setup page
           // setup will be handled by app
-          serveIndexPage(appName, engineName, contextPath, request, response);
+          serveIndexPage(appName, engineName, contextPath, response);
         }
       } else {
         if (!setupPage) {
           // correctly serving index page
-          serveIndexPage(appName, engineName, contextPath, request, response);
+          serveIndexPage(appName, engineName, contextPath, response);
         } else {
           response.sendRedirect(String.format("%s/app/%s/%s/", contextPath, appName, engineName));
         }
@@ -229,10 +229,10 @@ public class ProcessEnginesFilter extends AbstractTemplateFilter {
 
   }
 
-  protected void serveIndexPage(String appName, String engineName, String contextPath, HttpServletRequest request, HttpServletResponse response) throws IOException {
+  protected void serveIndexPage(String appName, String engineName, String contextPath, HttpServletResponse response) throws IOException {
     String data = getWebResourceContents("/app/" + appName + "/index.html");
 
-    data = replacePlaceholder(data, appName, engineName, contextPath, request, response);
+    data = replacePlaceholder(data, appName, engineName, contextPath);
 
     response.setContentLength(data.getBytes("UTF-8").length);
     response.setContentType("text/html");
@@ -240,7 +240,7 @@ public class ProcessEnginesFilter extends AbstractTemplateFilter {
     response.getWriter().append(data);
   }
 
-  protected String replacePlaceholder(String data, String appName, String engineName, String contextPath, HttpServletRequest request, HttpServletResponse response) {
+  protected String replacePlaceholder(String data, String appName, String engineName, String contextPath) {
     return data.replace(APP_ROOT_PLACEHOLDER, contextPath)
                .replace(BASE_PLACEHOLDER, String.format("%s/app/%s/%s/", contextPath, appName, engineName))
                .replace(PLUGIN_PACKAGES_PLACEHOLDER, createPluginPackagesStr(appName, contextPath))

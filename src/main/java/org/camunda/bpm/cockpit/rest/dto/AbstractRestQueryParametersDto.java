@@ -18,7 +18,6 @@ package org.camunda.bpm.cockpit.rest.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.camunda.bpm.cockpit.db.QueryParameters;
-import org.camunda.bpm.engine.impl.db.sql.MybatisJoinHelper;
 import org.camunda.bpm.engine.rest.dto.CamundaQueryParam;
 import org.camunda.bpm.engine.rest.dto.converter.StringToTypeConverter;
 import org.camunda.bpm.engine.rest.exception.InvalidRequestException;
@@ -38,7 +37,7 @@ import java.util.Map.Entry;
 /**
  * @author roman.smirnov
  */
-public abstract class AbstractRestQueryParametersDto<T> extends QueryParameters<T> {
+public abstract class AbstractRestQueryParametersDto<T> extends QueryParameters {
   protected static final String DEFAULT_ORDER = "RES.ID_ asc";
 
   private static final long serialVersionUID = 1L;

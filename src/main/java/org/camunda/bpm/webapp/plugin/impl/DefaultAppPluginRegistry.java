@@ -15,15 +15,10 @@
  */
 package org.camunda.bpm.webapp.plugin.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.ServiceLoader;
-
 import org.camunda.bpm.webapp.plugin.AppPluginRegistry;
 import org.camunda.bpm.webapp.plugin.spi.AppPlugin;
+
+import java.util.*;
 
 /**
  * Default implementation of {@link AppPluginRegistry} that loads Plugins
@@ -44,12 +39,11 @@ public class DefaultAppPluginRegistry<T extends AppPlugin> implements AppPluginR
   }
 
   protected void loadPlugins() {
-
     ServiceLoader<T> loader = ServiceLoader.load(pluginType);
 
     Iterator<T> iterator = loader.iterator();
 
-    Map<String, T> map = new HashMap<String, T>();
+    Map<String, T> map = new HashMap<>();
 
     while (iterator.hasNext()) {
       T plugin = iterator.next();
@@ -65,12 +59,11 @@ public class DefaultAppPluginRegistry<T extends AppPlugin> implements AppPluginR
       loadPlugins();
     }
 
-    return new ArrayList<T>(pluginsMap.values());
+    return new ArrayList<>(pluginsMap.values());
   }
 
   @Override
   public T getPlugin(String id) {
-
     if (pluginsMap == null) {
       loadPlugins();
     }

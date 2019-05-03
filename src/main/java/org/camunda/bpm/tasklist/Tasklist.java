@@ -28,7 +28,7 @@ public class Tasklist {
    * initialized by bootstrapping camunda admin with an specific
    * instance
    */
-  protected static TasklistRuntimeDelegate TASKLIST_RUNTIME_DELEGATE;
+  private static TasklistRuntimeDelegate TASKLIST_RUNTIME_DELEGATE;
   /**
    * Returns an instance of {@link TasklistRuntimeDelegate}
    *

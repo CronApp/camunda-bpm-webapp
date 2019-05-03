@@ -23,9 +23,9 @@ import org.camunda.bpm.cockpit.plugin.resource.AbstractCockpitPluginResource;
 
 public class ProcessDefinitionRestService extends AbstractCockpitPluginResource {
 
-  public static final String PATH = "/process-definition";
+  static final String PATH = "/process-definition";
 
-  public ProcessDefinitionRestService(String engineName) {
+  ProcessDefinitionRestService(String engineName) {
     super(engineName);
   }
 

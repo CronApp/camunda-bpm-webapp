@@ -32,14 +32,12 @@ public class WelcomeContainerBootstrap implements ServletContextListener {
 
   @Override
   public void contextInitialized(ServletContextEvent sce) {
-
     environment = createWelcomeEnvironment();
     environment.setup();
   }
 
   @Override
   public void contextDestroyed(ServletContextEvent sce) {
-
     environment.tearDown();
   }
 
@@ -55,10 +53,6 @@ public class WelcomeContainerBootstrap implements ServletContextListener {
 
     public void setup() {
       Welcome.setRuntimeDelegate(new DefaultWelcomeRuntimeDelegate());
-    }
-
-    protected RuntimeContainerDelegate getContainerRuntimeDelegate() {
-      return RuntimeContainerDelegate.INSTANCE.get();
     }
   }
 }

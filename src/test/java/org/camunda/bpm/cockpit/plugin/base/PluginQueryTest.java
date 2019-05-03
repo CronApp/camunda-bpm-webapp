@@ -33,7 +33,7 @@ public class PluginQueryTest extends AbstractCockpitPluginTest {
   @Test
   public void testCustomQuery() {
 
-    List<Execution> result = getQueryService().executeQuery("cockpit.base.selectProcessDefinitionWithFailedJobs", new QueryParameters<Execution>());
+    List<Execution> result = getQueryService().executeQuery("cockpit.base.selectProcessDefinitionWithFailedJobs", new QueryParameters());
 
     assertThat(result).hasSize(0);
   }

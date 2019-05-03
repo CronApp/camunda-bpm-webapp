@@ -47,8 +47,8 @@ import org.camunda.bpm.engine.rest.dto.CountResultDto;
 
 public class ProcessInstanceRestService extends AbstractCockpitPluginResource {
 
-  public static final String PATH = "/process-instance";
-  protected ObjectMapper objectMapper;
+  static final String PATH = "/process-instance";
+  private ObjectMapper objectMapper;
 
   public ProcessInstanceRestService(String engineName) {
     super(engineName);
@@ -131,18 +131,18 @@ public class ProcessInstanceRestService extends AbstractCockpitPluginResource {
     parameter.initQueryVariableValues(processEngineConfiguration.getVariableSerializers());
   }
 
-  protected void configureExecutionQuery(ProcessInstanceQueryDto query) {
+  private void configureExecutionQuery(ProcessInstanceQueryDto query) {
     configureAuthorizationCheck(query);
     configureTenantCheck(query);
     addPermissionCheck(query, PROCESS_INSTANCE, "RES.PROC_INST_ID_", READ);
     addPermissionCheck(query, PROCESS_DEFINITION, "P.KEY_", READ_INSTANCE);
   }
 
-  protected void injectObjectMapper(ProcessInstanceQueryDto queryParameter) {
+  private void injectObjectMapper(ProcessInstanceQueryDto queryParameter) {
     queryParameter.setObjectMapper(objectMapper);
   }
 
-  public void setObjectMapper(ObjectMapper objectMapper) {
+  void setObjectMapper(ObjectMapper objectMapper) {
     this.objectMapper = objectMapper;
   }
 

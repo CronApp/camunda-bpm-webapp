@@ -42,8 +42,8 @@ public class SecurityFilterConfig {
 
   public static class PathFilterConfig {
 
-    protected List<PathMatcherConfig> deniedPaths = new ArrayList<PathMatcherConfig>();
-    protected List<PathMatcherConfig> allowedPaths = new ArrayList<PathMatcherConfig>();
+    List<PathMatcherConfig> deniedPaths = new ArrayList<>();
+    List<PathMatcherConfig> allowedPaths = new ArrayList<>();
 
     public List<PathMatcherConfig> getDeniedPaths() {
       return deniedPaths;

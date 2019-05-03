@@ -31,7 +31,7 @@ public interface AppPluginRegistry<T extends AppPlugin> {
    *
    * @return
    */
-  public List<T> getPlugins();
+  List<T> getPlugins();
 
   /**
    * Returns the registered plugin with the given name or
@@ -40,5 +40,5 @@ public interface AppPluginRegistry<T extends AppPlugin> {
    * @param id
    * @return
    */
-  public T getPlugin(String id);
+  T getPlugin(String id);
 }

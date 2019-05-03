@@ -32,7 +32,7 @@ import org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration;
  */
 public class QuerySessionFactory extends StandaloneProcessEngineConfiguration {
 
-  protected static final String[] DEFAULT_MAPPING_FILES = {
+  private static final String[] DEFAULT_MAPPING_FILES = {
     // necessary to perform authorization checks
     "org/camunda/bpm/engine/impl/mapping/entity/Commons.xml",
     "org/camunda/bpm/engine/impl/mapping/entity/Authorization.xml",
@@ -54,7 +54,7 @@ public class QuerySessionFactory extends StandaloneProcessEngineConfiguration {
    * just using the database settings and initialize the database / MyBatis
    * stuff.
    */
-  public void initFromProcessEngineConfiguration(ProcessEngineConfigurationImpl processEngineConfiguration, List<String> mappings) {
+  void initFromProcessEngineConfiguration(ProcessEngineConfigurationImpl processEngineConfiguration, List<String> mappings) {
     this.wrappedConfiguration = processEngineConfiguration;
     this.mappingFiles = mappings;
     setDatabaseType(processEngineConfiguration.getDatabaseType());
@@ -92,9 +92,9 @@ public class QuerySessionFactory extends StandaloneProcessEngineConfiguration {
     return new ByteArrayInputStream(str.getBytes());
   }
 
-  protected String buildMappings(List<String> mappingFiles) {
+  private String buildMappings(List<String> mappingFiles) {
 
-    List<String> mappings = new ArrayList<String>(mappingFiles);
+    List<String> mappings = new ArrayList<>(mappingFiles);
     mappings.addAll(Arrays.asList(DEFAULT_MAPPING_FILES));
 
     StringBuilder builder = new StringBuilder();
