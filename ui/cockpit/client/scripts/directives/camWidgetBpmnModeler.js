@@ -65,7 +65,7 @@ module.exports = ['$q', '$document', '$compile', '$location',
               bindTo: window
             },
             moddleExtensions: {
-              camundaModdle
+              camunda: camundaModdle
             }
           });
 

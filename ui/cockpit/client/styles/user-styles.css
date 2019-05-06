@@ -54,6 +54,19 @@
   font-size: 14px;
 }
 
+[cam-widget-bpmn-modeler] .djs-minimap {
+  right: 270px;
+}
+
+[cam-widget-bpmn-modeler] .navigation.zoom {
+  right: 270px;
+}
+
+[cam-widget-bpmn-modeler] .navigation.reset {
+  right: 270px;
+}
+
+
 /* fonte dos links do header, comum para todas as telas */
 [cam-widget-header] a {
   color: #f8f8f8;
