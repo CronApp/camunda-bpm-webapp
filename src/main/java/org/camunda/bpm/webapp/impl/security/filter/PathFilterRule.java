@@ -30,8 +30,8 @@ import org.springframework.util.PathMatcher;
  */
 public class PathFilterRule implements SecurityFilterRule {
 
-  protected List<RequestMatcher> allowedPaths = new ArrayList<>();
-  protected List<RequestMatcher> deniedPaths = new ArrayList<>();
+  private List<RequestMatcher> allowedPaths = new ArrayList<>();
+  private List<RequestMatcher> deniedPaths = new ArrayList<>();
 
   @Override
   public Authorization authorize(String requestMethod, String requestUri) {

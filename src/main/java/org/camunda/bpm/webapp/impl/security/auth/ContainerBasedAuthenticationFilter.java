@@ -39,13 +39,13 @@ import org.camunda.bpm.webapp.impl.util.ProcessEngineUtil;
 
 public class ContainerBasedAuthenticationFilter implements Filter {
 
-  public static Pattern APP_PATTERN = Pattern.compile("/app/(cockpit|admin|tasklist|welcome)/([^/]+)/");
-  public static Pattern API_ENGINE_PATTERN = Pattern.compile("/api/engine/engine/([^/]+)/.*");
-  public static Pattern API_STATIC_PLUGIN_PATTERN = Pattern.compile("/api/(cockpit|admin|tasklist|welcome)/plugin/[^/]+/static/.*");
-  public static Pattern API_PLUGIN_PATTERN = Pattern.compile("/api/(cockpit|admin|tasklist|welcome)/plugin/[^/]+/([^/]+)/.*");
+  private static Pattern APP_PATTERN = Pattern.compile("/app/(cockpit|admin|tasklist|welcome)/([^/]+)/");
+  private static Pattern API_ENGINE_PATTERN = Pattern.compile("/api/engine/engine/([^/]+)/.*");
+  private static Pattern API_STATIC_PLUGIN_PATTERN = Pattern.compile("/api/(cockpit|admin|tasklist|welcome)/plugin/[^/]+/static/.*");
+  private static Pattern API_PLUGIN_PATTERN = Pattern.compile("/api/(cockpit|admin|tasklist|welcome)/plugin/[^/]+/([^/]+)/.*");
 
-  protected AuthenticationProvider authenticationProvider;
-  protected AuthenticationService userAuthentications;
+  private AuthenticationProvider authenticationProvider;
+  private AuthenticationService userAuthentications;
 
   public void init(FilterConfig filterConfig) throws ServletException {
     userAuthentications = new AuthenticationService();
@@ -97,7 +97,7 @@ public class ContainerBasedAuthenticationFilter implements Filter {
       Authentications authentications = Authentications.getFromSession(req.getSession());
       String authenticatedUser = authenticationResult.getAuthenticatedUser();
 
-      if (!existisAuthentication(authentications, engineName, authenticatedUser)) {
+      if (!existsAuthentication(authentications, engineName, authenticatedUser)) {
         List<String> groups = authenticationResult.getGroups();
         List<String> tenants = authenticationResult.getTenants();
 
@@ -150,7 +150,7 @@ public class ContainerBasedAuthenticationFilter implements Filter {
     return ProcessEngineUtil.lookupProcessEngine(engineName);
   }
 
-  private boolean existisAuthentication(Authentications authentications, String engineName, String username) {
+  private boolean existsAuthentication(Authentications authentications, String engineName, String username) {
     // For each process engine, there can be at most one authentication active in a given session.
     Authentication authentication = authentications.getAuthenticationForProcessEngine(engineName);
     return authentication != null && isAuthenticated(authentication, engineName, username);

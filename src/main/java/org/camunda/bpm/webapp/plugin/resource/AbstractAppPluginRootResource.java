@@ -79,7 +79,7 @@ public class AbstractAppPluginRootResource<T extends AppPlugin> {
 
   private final String pluginName;
 
-  protected AppRuntimeDelegate<T> runtimeDelegate;
+  private AppRuntimeDelegate<T> runtimeDelegate;
 
   public AbstractAppPluginRootResource(String pluginName, AppRuntimeDelegate<T> runtimeDelegate) {
     this.pluginName = pluginName;

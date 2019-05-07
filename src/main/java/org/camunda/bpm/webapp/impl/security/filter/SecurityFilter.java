@@ -15,28 +15,20 @@
  */
 package org.camunda.bpm.webapp.impl.security.filter;
 
+import org.camunda.bpm.engine.impl.util.IoUtil;
+import org.camunda.bpm.webapp.impl.security.filter.util.FilterRules;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.camunda.bpm.engine.impl.util.IoUtil;
-import org.camunda.bpm.webapp.impl.security.filter.util.FilterRules;
-
-
 /**
  * <p>Simple filter implementation which delegates to a list of {@link SecurityFilterRule FilterRules},
- * evaluating their {@link SecurityFilterRule#setAuthorized(org.camunda.bpm.webapp.impl.security.filter.AppRequest)} condition
- * for the given request.</p>
+ * evaluating their condition for the given request.</p>
  *
  * <p>This filter must be configured using a init-param in the web.xml file. The parameter must be named
  * "configFile" and point to the configuration file located in the servlet context.</p>
@@ -54,21 +46,17 @@ public class SecurityFilter implements Filter {
   }
 
   private void doFilterSecure(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-
     String requestUri = getRequestUri(request);
 
     Authorization authorization = authorize(request.getMethod(), requestUri, filterRules);
 
-    // attach authorization headers
-    // to response
+    // attach authorization headers to response
     authorization.attachHeaders(response);
 
     if (authorization.isGranted()) {
-
       // if request is authorized
       chain.doFilter(request, response);
-    } else
-    if (authorization.isAuthenticated()) {
+    } else if (authorization.isAuthenticated()) {
       String application = authorization.getApplication();
 
       if (application != null) {
@@ -88,7 +76,6 @@ public class SecurityFilter implements Filter {
 
   @Override
   public void destroy() {
-
   }
 
   /**
@@ -107,17 +94,19 @@ public class SecurityFilter implements Filter {
 
   private void loadFilterRules(FilterConfig filterConfig) throws ServletException {
     String configFileName = filterConfig.getInitParameter("configFile");
+
     InputStream configFileResource = filterConfig.getServletContext().getResourceAsStream(configFileName);
+
     if (configFileResource == null) {
-      throw new ServletException("Could not read security filter config file '"+configFileName+"': no such resource in servlet context.");
-    } else {
-      try {
-        filterRules = FilterRules.load(configFileResource);
-      } catch (Exception e) {
-        throw new RuntimeException("Exception while parsing '" + configFileName + "'", e);
-      } finally {
-        IoUtil.closeSilently(configFileResource);
-      }
+      throw new ServletException("Could not read security filter config file '" + configFileName + "': no such resource in servlet context.");
+    }
+
+    try {
+      filterRules = FilterRules.load(configFileResource);
+    } catch (Exception e) {
+      throw new RuntimeException("Exception while parsing '" + configFileName + "'", e);
+    } finally {
+      IoUtil.closeSilently(configFileResource);
     }
   }
 
