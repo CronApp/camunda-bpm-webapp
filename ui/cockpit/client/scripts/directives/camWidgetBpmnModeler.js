@@ -5,9 +5,7 @@ var Modeler = require('./util/modeler'),
 
     propertiesPanel = require('bpmn-js-properties-panel'),
     propertiesProvider = require('bpmn-js-properties-panel/lib/provider/bpmn'),
-    camundaPropertiesProvider = require('bpmn-js-properties-panel/lib/provider/camunda'),
     minimap = require('diagram-js-minimap'),
-    camundaModdle = require('camunda-bpmn-moddle/resources/camunda'),
 
     template = fs.readFileSync(__dirname + '/camWidgetBpmnModeler.html', 'utf8');
 
@@ -54,7 +52,6 @@ module.exports = ['$q', '$document', '$compile', '$location',
             additionalModules: [
               propertiesPanel,
               propertiesProvider,
-              camundaPropertiesProvider,
               minimap
             ],
             canvas: {
@@ -63,9 +60,6 @@ module.exports = ['$q', '$document', '$compile', '$location',
             key: $scope.key,
             keyboard: {
               bindTo: window
-            },
-            moddleExtensions: {
-              camunda: camundaModdle
             }
           });
 
