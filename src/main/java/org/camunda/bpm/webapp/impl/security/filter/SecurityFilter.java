@@ -70,7 +70,7 @@ public class SecurityFilter implements Filter {
   }
 
   @Override
-  public void init(FilterConfig filterConfig) throws ServletException {
+  public void init(FilterConfig filterConfig) {
     loadFilterRules(filterConfig);
   }
 
@@ -92,13 +92,14 @@ public class SecurityFilter implements Filter {
     return FilterRules.authorize(requestMethod, requestUri, filterRules);
   }
 
-  private void loadFilterRules(FilterConfig filterConfig) throws ServletException {
+  // TODO corrigir carregamento de securityFilterRules.json
+  private void loadFilterRules(FilterConfig filterConfig) {
     String configFileName = filterConfig.getInitParameter("configFile");
 
     InputStream configFileResource = filterConfig.getServletContext().getResourceAsStream(configFileName);
 
     if (configFileResource == null) {
-      throw new ServletException("Could not read security filter config file '" + configFileName + "': no such resource in servlet context.");
+      return;
     }
 
     try {
