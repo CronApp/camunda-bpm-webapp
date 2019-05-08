@@ -99,10 +99,7 @@ public abstract class AbstractTemplateFilter implements Filter {
    */
   protected String getWebResourceContents(String name) throws IOException {
 
-    InputStream is = null;
-
-    try {
-      is = filterConfig.getServletContext().getResourceAsStream(name);
+    try (InputStream is = filterConfig.getServletContext().getResourceAsStream(name)) {
 
       BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
@@ -115,10 +112,6 @@ public abstract class AbstractTemplateFilter implements Filter {
       }
 
       return writer.toString();
-    } finally {
-      if (is != null) {
-        try { is.close(); } catch (IOException e) { }
-      }
     }
   }
 }

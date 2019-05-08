@@ -16,6 +16,7 @@
 package org.camunda.bpm.webapp.impl.engine;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -53,34 +54,34 @@ import org.camunda.bpm.welcome.WelcomeRuntimeDelegate;
  */
 public class ProcessEnginesFilter extends AbstractTemplateFilter {
 
-  protected static final String COCKPIT_APP_NAME = "cockpit";
-  protected static final String ADMIN_APP_NAME = "admin";
-  protected static final String TASKLIST_APP_NAME = "tasklist";
-  protected static final String WELCOME_APP_NAME = "welcome";
+  private static final String COCKPIT_APP_NAME = "cockpit";
+  private static final String ADMIN_APP_NAME = "admin";
+  private static final String TASKLIST_APP_NAME = "tasklist";
+  private static final String WELCOME_APP_NAME = "welcome";
 
-  protected static final String DEFAULT_APP = WELCOME_APP_NAME;
-  protected static final String INDEX_PAGE = "index.html";
+  private static final String DEFAULT_APP = WELCOME_APP_NAME;
+  private static final String INDEX_PAGE = "index.html";
 
-  protected static final String SETUP_PAGE = "setup/";
+  private static final String SETUP_PAGE = "setup/";
 
-  public static final String APP_ROOT_PLACEHOLDER = "$APP_ROOT";
-  public static final String BASE_PLACEHOLDER = "$BASE";
+  private static final String APP_ROOT_PLACEHOLDER = "$APP_ROOT";
+  private static final String BASE_PLACEHOLDER = "$BASE";
 
-  public static final String PLUGIN_DEPENDENCIES_PLACEHOLDER = "$PLUGIN_DEPENDENCIES";
-  public static final String PLUGIN_PACKAGES_PLACEHOLDER = "$PLUGIN_PACKAGES";
+  private static final String PLUGIN_DEPENDENCIES_PLACEHOLDER = "$PLUGIN_DEPENDENCIES";
+  private static final String PLUGIN_PACKAGES_PLACEHOLDER = "$PLUGIN_PACKAGES";
 
-  public static Pattern APP_PREFIX_PATTERN = Pattern.compile("/app/(?:([\\w-]+?)/(?:(index\\.html|[\\w-]+)?/?([^?]*)?)?)?");
+  static Pattern APP_PREFIX_PATTERN = Pattern.compile("/app/(?:([\\w-]+?)/(?:(index\\.html|[\\w-]+)?/?([^?]*)?)?)?");
 
-  protected final CockpitRuntimeDelegate cockpitRuntimeDelegate;
-  protected final AdminRuntimeDelegate adminRuntimeDelegate;
-  protected final TasklistRuntimeDelegate tasklistRuntimeDelegate;
-  protected final WelcomeRuntimeDelegate welcomeRuntimeDelegate;
-
-  // accepts two times the plugin name
-  protected final String pluginPackageFormat;
+  private final CockpitRuntimeDelegate cockpitRuntimeDelegate;
+  private final AdminRuntimeDelegate adminRuntimeDelegate;
+  private final TasklistRuntimeDelegate tasklistRuntimeDelegate;
+  private final WelcomeRuntimeDelegate welcomeRuntimeDelegate;
 
   // accepts two times the plugin name
-  protected final String pluginDependencyFormat;
+  private final String pluginPackageFormat;
+
+  // accepts two times the plugin name
+  private final String pluginDependencyFormat;
 
   public ProcessEnginesFilter() {
     this.cockpitRuntimeDelegate = Cockpit.getRuntimeDelegate();
@@ -110,7 +111,7 @@ public class ProcessEnginesFilter extends AbstractTemplateFilter {
       }
 
       if (pageUri == null || pageUri.isEmpty() || SETUP_PAGE.equals(pageUri)) {
-        serveIndexPage(appName, engineName, pageUri, contextPath, request, response, chain);
+        serveIndexPage(appName, engineName, pageUri, contextPath, response);
         return;
       }
 
@@ -129,7 +130,7 @@ public class ProcessEnginesFilter extends AbstractTemplateFilter {
     chain.doFilter(request, response);
   }
 
-  protected void serveIndexPage(String appName, String engineName, String pageUri, String contextPath, HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+  private void serveIndexPage(String appName, String engineName, String pageUri, String contextPath, HttpServletResponse response) throws IOException, ServletException {
 
     // access to /
     if (appName == null) {
@@ -168,7 +169,7 @@ public class ProcessEnginesFilter extends AbstractTemplateFilter {
     }
   }
 
-  protected String getDefaultEngineName() {
+  String getDefaultEngineName() {
     CockpitRuntimeDelegate runtimeDelegate = Cockpit.getRuntimeDelegate();
 
     Set<String> processEngineNames = runtimeDelegate.getProcessEngineNames();
@@ -187,7 +188,7 @@ public class ProcessEnginesFilter extends AbstractTemplateFilter {
     }
   }
 
-  protected void serveTemplate(String requestUri, String appName, String pageUri, HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+  private void serveTemplate(String requestUri, String appName, String pageUri, HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 
     // check if resource exists
     if (hasWebResource(requestUri)) {
@@ -206,7 +207,7 @@ public class ProcessEnginesFilter extends AbstractTemplateFilter {
     }
   }
 
-  protected boolean needsInitialUser(String engineName) throws IOException, ServletException {
+  private boolean needsInitialUser(String engineName) throws IOException, ServletException {
     final ProcessEngine processEngine = Cockpit.getProcessEngine(engineName);
     if (processEngine == null) {
       return false;
@@ -229,25 +230,25 @@ public class ProcessEnginesFilter extends AbstractTemplateFilter {
 
   }
 
-  protected void serveIndexPage(String appName, String engineName, String contextPath, HttpServletResponse response) throws IOException {
+  private void serveIndexPage(String appName, String engineName, String contextPath, HttpServletResponse response) throws IOException {
     String data = getWebResourceContents("/app/" + appName + "/index.html");
 
     data = replacePlaceholder(data, appName, engineName, contextPath);
 
-    response.setContentLength(data.getBytes("UTF-8").length);
+    response.setContentLength(data.getBytes(StandardCharsets.UTF_8).length);
     response.setContentType("text/html");
 
     response.getWriter().append(data);
   }
 
-  protected String replacePlaceholder(String data, String appName, String engineName, String contextPath) {
+  private String replacePlaceholder(String data, String appName, String engineName, String contextPath) {
     return data.replace(APP_ROOT_PLACEHOLDER, contextPath)
                .replace(BASE_PLACEHOLDER, String.format("%s/app/%s/%s/", contextPath, appName, engineName))
                .replace(PLUGIN_PACKAGES_PLACEHOLDER, createPluginPackagesStr(appName, contextPath))
                .replace(PLUGIN_DEPENDENCIES_PLACEHOLDER, createPluginDependenciesStr(appName));
   }
 
-  protected <T extends AppPlugin> CharSequence createPluginPackagesStr(String appName, String contextPath) {
+  private <T extends AppPlugin> CharSequence createPluginPackagesStr(String appName, String contextPath) {
     final List<T> plugins = getPlugins(appName);
 
     StringBuilder builder = new StringBuilder();
@@ -266,7 +267,7 @@ public class ProcessEnginesFilter extends AbstractTemplateFilter {
     return "[" + builder.toString() + "]";
   }
 
-  protected <T extends AppPlugin> CharSequence createPluginDependenciesStr(String appName) {
+  private <T extends AppPlugin> CharSequence createPluginDependenciesStr(String appName) {
     final List<T> plugins = getPlugins(appName);
 
     StringBuilder builder = new StringBuilder();
@@ -286,7 +287,7 @@ public class ProcessEnginesFilter extends AbstractTemplateFilter {
   }
 
   @SuppressWarnings("unchecked")
-  protected <T extends AppPlugin> List<T> getPlugins(String appName) {
+  private <T extends AppPlugin> List<T> getPlugins(String appName) {
     if (COCKPIT_APP_NAME.equals(appName)) {
       return (List<T>) cockpitRuntimeDelegate.getAppPluginRegistry().getPlugins();
 
