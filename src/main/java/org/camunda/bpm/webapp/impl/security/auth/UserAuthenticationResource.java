@@ -44,7 +44,7 @@ import org.camunda.bpm.webapp.impl.util.ProcessEngineUtil;
 @Path(UserAuthenticationResource.PATH)
 public class UserAuthenticationResource {
 
-  public static final String PATH = "/auth/user";
+  static final String PATH = "/auth/user";
 
   @Context
   protected HttpServletRequest request;
@@ -62,9 +62,9 @@ public class UserAuthenticationResource {
 
     if (engineAuth == null) {
       return notFound();
-    } else {
-      return Response.ok(AuthenticationDto.fromAuthentication(engineAuth)).build();
     }
+
+    return Response.ok(AuthenticationDto.fromAuthentication(engineAuth)).build();
   }
 
   @POST
@@ -76,8 +76,9 @@ public class UserAuthenticationResource {
       @FormParam("password") String password) {
 
     final ProcessEngine processEngine = ProcessEngineUtil.lookupProcessEngine(engineName);
-    if(processEngine == null) {
-      throw new InvalidRequestException(Status.BAD_REQUEST, "Process engine with name "+engineName+" does not exist");
+
+    if (processEngine == null) {
+      throw new InvalidRequestException(Status.BAD_REQUEST, "Process engine with name " + engineName + " does not exist");
     }
 
     // make sure authentication is executed without authentication :)

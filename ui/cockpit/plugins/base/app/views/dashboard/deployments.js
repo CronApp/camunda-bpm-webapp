@@ -7,7 +7,6 @@ module.exports = [ 'ViewsProvider', function(ViewsProvider) {
     pagePath: '#/repository',
     template: '<!-- nothing to show, but needed -->',
     controller: function() {},
-
-    priority: -5
+    priority: 10
   });
 }];

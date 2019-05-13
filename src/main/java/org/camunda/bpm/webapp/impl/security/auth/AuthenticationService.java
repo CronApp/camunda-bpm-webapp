@@ -39,8 +39,8 @@ class AuthenticationService {
   private static final String APP_WELCOME = "welcome";
 
   Authentication createAuthenticate(ProcessEngine processEngine, String username, List<String> groupIds, List<String> tenantIds) {
-
     User user = processEngine.getIdentityService().createUserQuery().userId(username).singleResult();
+
     String userId = user.getId();
     // make sure authentication is executed without authentication :)
     processEngine.getIdentityService().clearAuthentication();
@@ -59,7 +59,9 @@ class AuthenticationService {
     HashSet<String> authorizedApps = new HashSet<>();
     authorizedApps.add(APP_WELCOME);
 
-    if (processEngine.getProcessEngineConfiguration().isAuthorizationEnabled()) {
+    ProcessEngineConfiguration processEngineConfiguration = processEngine.getProcessEngineConfiguration();
+
+    if (processEngineConfiguration.isAuthorizationEnabled()) {
       for (String application: APPS) {
         if (isAuthorizedForApp(authorizationService, userId, groupIds, application)) {
           authorizedApps.add(application);

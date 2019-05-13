@@ -1599,7 +1599,7 @@
     "PLGN_SKE_HISTORY_DEFINITION_VIEW": "Exibição do hitórico de Definições",
     "PLGN_SKE_HISTORY": "História",
     "PLGN_SKE_PROCESSES": "Processos",
-    "PLGN_SKE_CAMUNDA_COCKPIT": "Cockpit de Camunda",
+    "PLGN_SKE_CAMUNDA_COCKPIT": "Cockpit do Cronapp",
     "PLGN_SKE_HISTORY_INSTANCE_VIEW": "Ver histórico das Instância",
     "PLGN_EXT_TASK_ID": "ID da tarefa externa",
     "PLGN_EXT_STATE": "Estado",
@@ -2145,5 +2145,8 @@
     "PLUGIN_DIAGRAM_HEATMAP_TOOLTIP": "Toggle do Mapa de calor",
     "PLUGIN_DIAGRAM_HEATMAP_ON": "ativado",
     "PLUGIN_DIAGRAM_HEATMAP_OFF": "desativado",
-    "PLUGIN_DIAGRAM_HEATMAP_LOADING": "Carregando..."
+    "PLUGIN_DIAGRAM_HEATMAP_LOADING": "Carregando...",
+    "CREATE_PROCESS_DEFINITION" : "Nova Definição de Processo",
+    "NEW_PROCESS_DEFINITION_NAME" : "Nome",
+    "PROCESS_DEFINITION_SAVE_ERROR": "Algo deu errado ao salvar a definição de processo"
   }

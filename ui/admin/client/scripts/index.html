@@ -4,16 +4,16 @@
     <meta http-equiv="X-UA-Compatible"
           content="IE=edge" />
 
-    <title>Camunda Admin</title>
+    <title>Cronapp Admin</title>
 
     <meta charset="utf-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0" />
 
     <meta name="description"
-          content="camunda Admin" />
+          content="cronapp Admin" />
     <meta name="author"
-          content="camunda services GmbH" />
+          content="Cronapp Inc." />
 
     <!-- settings the base path for relative links -->
     <base href="$BASE"
@@ -21,11 +21,6 @@
           engine-api="$APP_ROOT/api/engine/"
           app-root="$APP_ROOT"
           cam-exclude-plugins="admin.dashboard.section:tenants" />
-
-    <!-- an example of plugin/feature exclusion -->
-          
-
-
 
     <!-- styles -->
     <link href="$APP_ROOT/app/admin/styles/styles.css?bust=$GRUNT_CACHE_BUST"
@@ -53,7 +48,7 @@
          authentication="authentication"
          user-name="userFullName"
          current-app="admin"
-         brand-name="Camunda Admin"
+         brand-name="Cronapp Admin"
          ng-cloak>
       <ul cam-if-logged-in
           ng-controller="NavigationController">
@@ -65,10 +60,6 @@
         <li ng-class="activeClass('#/group')">
           <a href="#/groups">{{ 'GROUPS_GROUPS' | translate }}</a>
         </li>
-
-        <!-- <li ng-class="activeClass('#/tenant')">
-          <a href="#/tenants">{{ 'TENANTS_TENANTS' | translate }}</a>
-        </li> -->
 
         <li ng-class="activeClass('#/authorization')"
             show-if-authorized
@@ -110,10 +101,6 @@
         </div>
       </div>
     </div>
-
-    <!-- footer -->
-    <!-- <footer cam-widget-footer
-            version="v${project.version}"></footer> -->
 
     <script type="application/javascript">
       var adminConf = window.camAdminConf = {};

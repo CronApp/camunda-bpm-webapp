@@ -4,16 +4,16 @@
     <meta http-equiv="X-UA-Compatible"
           content="IE=edge" />
 
-    <title>Camunda Cockpit</title>
+    <title>Cronapp Cockpit</title>
 
     <meta charset="utf-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0" />
 
     <meta name="description"
-          content="Camunda Cockpit" />
+          content="cronapp Cockpit" />
     <meta name="author"
-          content="camunda services GmbH" />
+          content="Cronapp Inc." />
 
     <!-- settings the base path for relative links -->
     <base href="$BASE"
@@ -22,16 +22,6 @@
           engine-api="$APP_ROOT/api/engine/"
           app-root="$APP_ROOT"
           cam-exclude-plugins="cockpit.navigation:decisions, cockpit.decisions.dashboard, cockpit.navigation:batch" />
-
-    <!-- an example of plugin/feature exclusion -->
-    <!--
-    <base href="$BASE"
-          cockpit-api="$APP_ROOT/api/cockpit/"
-          engine-api="$APP_ROOT/api/engine/"
-          app-root="$APP_ROOT"
-          cam-exclude-plugins="cockpit.dashboard:process-definition-tiles" />
-    -->
-
 
     <!-- styles -->
     <link href="$APP_ROOT/app/cockpit/styles/styles.css?bust=$GRUNT_CACHE_BUST"
@@ -64,7 +54,7 @@
          ng-cloak
          sign-out="{{ 'SIGN_OUT_ACTION' | translate }}"
          my-profile="{{ 'MY_PROFILE' | translate }}"
-         brand-name="Camunda Cockpit">
+         brand-name="Cronapp Cockpit">
       <ul cam-if-logged-in
           ng-controller="camHeaderViewsCtrl">
         <li ng-repeat="actionProvider in menuActions"
@@ -73,17 +63,12 @@
           <a ng-href="{{ actionProvider.pagePath }}">{{ actionProvider.label | translate}}</a>
         </li>
 
-        <li class="dropdown"
-            ng-if="dropdownActions.length">
-          <a class="dropdown-toggle"
-             href>{{ 'COCKPIT_MORE' | translate}} <i class="caret"></i></a>
-          <ul class="dropdown-menu">
-            <li ng-repeat="actionProvider in dropdownActions"
-                ng-if="actionProvider.pagePath && actionProvider.accessible"
-                ng-class="activeClass(actionProvider)">
-              <a ng-href="{{ actionProvider.pagePath }}">{{ actionProvider.label | translate}}</a>
-            </li>
-          </ul>
+        <li ng-repeat="actionProvider in navbarActions"
+            ng-class="actionProvider.id">
+          <view ng-cloak
+                provider="actionProvider"
+                vars="navbarVars">
+          </view>
         </li>
       </ul>
     </div>
@@ -114,10 +99,6 @@
         </div>
       </div>
     </div>
-
-    <!-- footer -->
-    <!-- <footer cam-widget-footer
-            version="v${project.version}"></footer> -->
 
     <script type="application/javascript">
       var cockpitConf = window.camCockpitConf = {};

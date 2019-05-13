@@ -54,9 +54,7 @@ public class AdminApplication extends Application {
     return classes;
   }
 
-
   private void addPluginResourceClasses(Set<Class<?>> classes) {
-
     List<AdminPlugin> plugins = getPlugins();
 
     for (AdminPlugin plugin : plugins) {
@@ -67,5 +65,4 @@ public class AdminApplication extends Application {
   private List<AdminPlugin> getPlugins() {
     return Admin.getRuntimeDelegate().getAppPluginRegistry().getPlugins();
   }
-
 }

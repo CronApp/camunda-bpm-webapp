@@ -110,12 +110,6 @@
       <artifactId>camunda-engine-rest-core</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>io.cronapp</groupId>
-      <artifactId>cronapp-bpm-identity-plugin</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-
     <!-- tests -->
     <dependency>
       <groupId>junit</groupId>
