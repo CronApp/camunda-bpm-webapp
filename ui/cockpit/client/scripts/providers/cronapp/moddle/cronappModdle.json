@@ -1,0 +1,24 @@
+{
+  "name": "Cronapp",
+  "prefix": "cronapp",
+  "uri": "http://cronapp",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "associations": [],
+  "types": [
+    {
+      "name": "CronappStartEvent",
+      "extends": [
+        "bpmn:StartEvent"
+      ],
+      "properties": [
+        {
+          "name": "cronapp",
+          "isAttr": true,
+          "type": "String"
+        },
+      ]
+    },
+  ]
+}

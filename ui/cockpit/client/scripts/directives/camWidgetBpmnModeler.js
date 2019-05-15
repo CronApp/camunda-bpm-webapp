@@ -5,8 +5,11 @@ var Modeler = require('./util/modeler'),
 
     propertiesPanel = require('bpmn-js-properties-panel'),
     propertiesProvider = require('bpmn-js-properties-panel/lib/provider/bpmn'),
+    camundaPropertiesProvider = require('bpmn-js-properties-panel/lib/provider/camunda'),
     minimap = require('diagram-js-minimap'),
-
+    translations = require('../locales/customTranslate'),
+    camundaModdleDescriptor = require('camunda-bpmn-moddle/resources/camunda'),
+    cronModdle = require('../providers/cronapp/moddle/cronappModdle'),
     template = fs.readFileSync(__dirname + '/camWidgetBpmnModeler.html', 'utf8');
 
 module.exports = ['$q', '$document', '$compile', '$location',
@@ -24,12 +27,15 @@ module.exports = ['$q', '$document', '$compile', '$location',
 
       link: function($scope, $element) {
 
-        console.log('minimap=' + JSON.stringify(minimap));
+        // console.log('minimap=' + JSON.stringify(minimap));
 
         var modeler = null;
         var canvas = null;
         var definitions;
         var diagramContainer = $element[0].querySelector('.diagram-holder');
+        var customTranslateModule = {
+          translate: ['value', translations]
+        };
 
         function attachDiagram() {
           diagramContainer.appendChild(modeler._container);
@@ -52,8 +58,14 @@ module.exports = ['$q', '$document', '$compile', '$location',
             additionalModules: [
               propertiesPanel,
               propertiesProvider,
-              minimap
+              camundaPropertiesProvider,
+              minimap,
+              customTranslateModule
             ],
+            moddleExtensions: {
+              camunda: camundaModdleDescriptor,
+              cronapp: cronModdle
+            },
             canvas: {
               deferUpdate: false
             },
