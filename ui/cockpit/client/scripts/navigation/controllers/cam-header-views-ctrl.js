@@ -15,7 +15,6 @@ module.exports = [
     $scope.navbarVars = { read: [] };
 
     $scope.menuActions = [];
-    $scope.navbarActions = Views.getProviders({ component: 'cockpit.navbar.action' });
 
     Views.getProviders({ component: 'cockpit.navigation' }).forEach(function(plugin) {
       if (angular.isArray(plugin.access)) {

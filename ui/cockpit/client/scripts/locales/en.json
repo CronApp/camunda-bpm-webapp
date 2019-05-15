@@ -126,6 +126,7 @@
   "COCKPIT_DEPLOYMENTS":"Deployments",
   "COCKPIT_BATCHES":"Batches",
   "COCKPIT_REPORTS":"Reports",
+  "COCKPIT_PROCESS_DEFINITION": "New process definition",
 
   "BATCHES_BREAD_BATCHES" : "Batches",
   "BATCHES_TITLE_BATCHES" : "Batches",
@@ -813,6 +814,7 @@
   "PIE_CHART_NO_DATA" : "No Data",
 
   "CREATE_PROCESS_DEFINITION" : "Create process definition",
-  "NEW_PROCESS_DEFINITION_NAME" : "Name",
+  "NEW_PROCESS_DEFINITION_ID" : "ID of new process definition",
+  "NEW_PROCESS_DEFINITION_NAME" : "Name of new process definition",
   "PROCESS_DEFINITION_SAVE_ERROR": "Something went wrong while saving the process definition"
 }

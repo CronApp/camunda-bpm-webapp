@@ -68,8 +68,8 @@ public class ProcessDefinitionResource extends AbstractCockpitPluginResource {
   }
 
   private void injectEngineConfig(ProcessDefinitionQueryDto parameter) {
+    ProcessEngineConfigurationImpl processEngineConfiguration = getProcessEngineConfiguration();
 
-    ProcessEngineConfigurationImpl processEngineConfiguration = ((ProcessEngineImpl) getProcessEngine()).getProcessEngineConfiguration();
     if (processEngineConfiguration.getHistoryLevel().equals(HistoryLevel.HISTORY_LEVEL_NONE)) {
       parameter.setHistoryEnabled(false);
     }
@@ -84,4 +84,7 @@ public class ProcessDefinitionResource extends AbstractCockpitPluginResource {
     addPermissionCheck(query, PROCESS_DEFINITION, "PROCDEF.KEY_", READ_INSTANCE);
   }
 
+  private ProcessEngineConfigurationImpl getProcessEngineConfiguration() {
+    return ((ProcessEngineImpl) getProcessEngine()).getProcessEngineConfiguration();
+  }
 }

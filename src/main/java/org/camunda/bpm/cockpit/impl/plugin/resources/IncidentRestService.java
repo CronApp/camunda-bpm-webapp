@@ -43,7 +43,7 @@ import org.camunda.bpm.engine.rest.dto.CountResultDto;
 @Produces(MediaType.APPLICATION_JSON)
 public class IncidentRestService extends AbstractCockpitPluginResource {
 
-  public final static String PATH = "/incident";
+  final static String PATH = "/incident";
 
   public IncidentRestService(String engineName) {
     super(engineName);
@@ -103,7 +103,7 @@ public class IncidentRestService extends AbstractCockpitPluginResource {
     return result;
   }
 
-  protected void configureExecutionQuery(IncidentQueryDto query) {
+  private void configureExecutionQuery(IncidentQueryDto query) {
     configureAuthorizationCheck(query);
     configureTenantCheck(query);
     addPermissionCheck(query, PROCESS_INSTANCE, "RES.PROC_INST_ID_", READ);

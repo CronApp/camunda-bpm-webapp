@@ -243,6 +243,7 @@
     "COCKPIT_DEPLOYMENTS": "Implementações",
     "COCKPIT_BATCHES": "Lotes",
     "COCKPIT_REPORTS": "Relatórios",
+    "COCKPIT_PROCESS_DEFINITION": "Nova definição de processo",
     "BATCHES_BREAD_BATCHES": "Lotes",
     "BATCHES_TITLE_BATCHES": "Lotes",
     "BATCHES_PROGRESS_IN": "Lotes em andamento",
@@ -2146,7 +2147,8 @@
     "PLUGIN_DIAGRAM_HEATMAP_ON": "ativado",
     "PLUGIN_DIAGRAM_HEATMAP_OFF": "desativado",
     "PLUGIN_DIAGRAM_HEATMAP_LOADING": "Carregando...",
-    "CREATE_PROCESS_DEFINITION" : "Nova Definição de Processo",
-    "NEW_PROCESS_DEFINITION_NAME" : "Nome",
+    "CREATE_PROCESS_DEFINITION" : "Nova definição de processo",
+    "NEW_PROCESS_DEFINITION_ID" : "ID da nova definição de processo",
+    "NEW_PROCESS_DEFINITION_NAME" : "Nome da nova definição de processo",
     "PROCESS_DEFINITION_SAVE_ERROR": "Algo deu errado ao salvar a definição de processo"
   }
