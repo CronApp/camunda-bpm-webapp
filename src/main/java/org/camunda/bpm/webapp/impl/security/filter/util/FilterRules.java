@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.camunda.bpm.engine.impl.util.ReflectUtil;
@@ -49,14 +50,14 @@ public class FilterRules {
     return createFilterRules(config);
   }
 
-  public static List<SecurityFilterRule> createFilterRules(SecurityFilterConfig config) {
+  private static List<SecurityFilterRule> createFilterRules(SecurityFilterConfig config) {
     PathFilterConfig pathFilter = config.getPathFilter();
     PathFilterRule rule = createPathFilterRule(pathFilter);
 
-    return new ArrayList<SecurityFilterRule>(Arrays.asList(rule));
+    return new ArrayList<SecurityFilterRule>(Collections.singletonList(rule));
   }
 
-  protected static PathFilterRule createPathFilterRule(PathFilterConfig pathFilter) {
+  private static PathFilterRule createPathFilterRule(PathFilterConfig pathFilter) {
     PathFilterRule pathFilterRule = new PathFilterRule();
 
     for (PathMatcherConfig pathMatcherConfig : pathFilter.getDeniedPaths()) {
@@ -70,7 +71,7 @@ public class FilterRules {
     return pathFilterRule;
   }
 
-  protected static RequestMatcher transformPathMatcher(PathMatcherConfig pathMatcherConfig) {
+  private static RequestMatcher transformPathMatcher(PathMatcherConfig pathMatcherConfig) {
     RequestFilter requestMatcher = new RequestFilter(
         pathMatcherConfig.getPath(),
         pathMatcherConfig.getParsedMethods());

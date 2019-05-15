@@ -17,6 +17,7 @@ package org.camunda.bpm.webapp.impl.security.auth;
 
 import org.camunda.bpm.engine.AuthorizationService;
 import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.ProcessEngineConfiguration;
 import org.camunda.bpm.engine.identity.Group;
 import org.camunda.bpm.engine.identity.Tenant;
 import org.camunda.bpm.engine.identity.User;
@@ -25,18 +26,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.logging.Logger;
 
 import static org.camunda.bpm.engine.authorization.Permissions.ACCESS;
 import static org.camunda.bpm.engine.authorization.Resources.APPLICATION;
 
-public class AuthenticationService {
+class AuthenticationService {
+
+  private final static Logger LOGGER = Logger.getLogger(AuthenticationService.class.getName());
 
   private static final String[] APPS = new String[] { "cockpit", "tasklist", "admin"};
   private static final String APP_WELCOME = "welcome";
 
   Authentication createAuthenticate(ProcessEngine processEngine, String username, List<String> groupIds, List<String> tenantIds) {
-
     User user = processEngine.getIdentityService().createUserQuery().userId(username).singleResult();
+
     String userId = user.getId();
     // make sure authentication is executed without authentication :)
     processEngine.getIdentityService().clearAuthentication();
@@ -55,13 +59,14 @@ public class AuthenticationService {
     HashSet<String> authorizedApps = new HashSet<>();
     authorizedApps.add(APP_WELCOME);
 
-    if (processEngine.getProcessEngineConfiguration().isAuthorizationEnabled()) {
+    ProcessEngineConfiguration processEngineConfiguration = processEngine.getProcessEngineConfiguration();
+
+    if (processEngineConfiguration.isAuthorizationEnabled()) {
       for (String application: APPS) {
         if (isAuthorizedForApp(authorizationService, userId, groupIds, application)) {
           authorizedApps.add(application);
         }
       }
-
     } else {
       Collections.addAll(authorizedApps, APPS);
     }

@@ -23,12 +23,12 @@ module.exports = [
   ) {
 
     var page = {
-      title: 'Camunda',
+      title: 'Cronapp',
       breadcrumbs: []
     };
 
     var headTitle = angular.element(document.querySelector('head title'));
-    var originalTitle = headTitle[0].textContent || 'Camunda Cockpit';
+    var originalTitle = headTitle[0].textContent || 'Cronapp Cockpit';
 
     // add a listener to the $rootScope to propagate the changes in the page title
     // sure... we could put that in the titleSet() function

@@ -41,7 +41,7 @@ Page.prototype.navigateToWebapp = function(appName) {
   browser.get('camunda/app/' + appName.toLowerCase() + '/');
   browser.driver.manage().window().maximize();
 
-  expect(this.navbarBrand().getText()).to.eventually.eql('Camunda ' + appName);
+  expect(this.navbarBrand().getText()).to.eventually.eql('Cronapp ' + appName);
 };
 
 Page.prototype.navbarBrand = function() {

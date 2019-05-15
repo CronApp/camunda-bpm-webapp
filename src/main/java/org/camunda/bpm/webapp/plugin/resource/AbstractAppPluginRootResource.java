@@ -32,6 +32,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * A resource class that provides a plugins restful API.
@@ -79,7 +80,7 @@ public class AbstractAppPluginRootResource<T extends AppPlugin> {
 
   private final String pluginName;
 
-  protected AppRuntimeDelegate<T> runtimeDelegate;
+  private AppRuntimeDelegate<T> runtimeDelegate;
 
   public AbstractAppPluginRootResource(String pluginName, AppRuntimeDelegate<T> runtimeDelegate) {
     this.pluginName = pluginName;

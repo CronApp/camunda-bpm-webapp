@@ -15,7 +15,7 @@ module.exports = [
     $scope.navbarVars = { read: [] };
 
     $scope.menuActions = [];
-    $scope.dropdownActions = [];
+    $scope.navbarActions = Views.getProviders({ component: 'cockpit.navbar.action' });
 
     Views.getProviders({ component: 'cockpit.navigation' }).forEach(function(plugin) {
       if (angular.isArray(plugin.access)) {
@@ -27,13 +27,12 @@ module.exports = [
           plugin.accessible = access;
         });
       }
-
       // accessible by default in case there's no callback
       else {
         plugin.accessible = true;
       }
 
-      (plugin.priority >= 0 ? $scope.menuActions : $scope.dropdownActions).push(plugin);
+      ($scope.menuActions).push(plugin);
     });
 
     $scope.activeClass = function(plugin) {
