@@ -37,14 +37,27 @@ module.exports = ['ProcessDefinitionResource', 'debounce', function(ProcessDefin
         });
       }
 
+      function setElementId(id) {
+        if (id) {
+          var elementId = 'processDiagram_' + id.replace(/[.|:]/g, '_');
+          element.attr('id', elementId);
+        }
+      }
+
       scope.$watch(attrs.processDefinitionId, function(processDefinitionId) {
         if (processDefinitionId) {
-          var elementId = 'processDiagram_' + processDefinitionId.replace(/[.|:]/g, '_');
-          element.attr('id', elementId);
+          setElementId(processDefinitionId);
 
           ProcessDefinitionResource.getBpmn20Xml({ id : processDefinitionId }).$promise.then(function(response) {
             loadDiagram(response.bpmn20Xml, element);
           });
+        }
+      });
+
+      scope.$watch(attrs.processDefinition, function(processDefinition) {
+        if (processDefinition) {
+          setElementId(processDefinition.id);
+          loadDiagram(processDefinition.bpmn20Xml, element);
         }
       });
     }

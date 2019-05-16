@@ -33,11 +33,12 @@ public class ContainerManagedProcessEngineProvider implements ProcessEngineProvi
   @Override
   public ProcessEngine getDefaultProcessEngine() {
     ProcessEngine defaultProcessEngine = BpmPlatform.getDefaultProcessEngine();
-    if(defaultProcessEngine != null) {
-      return defaultProcessEngine;
-    } else {
-      return ProcessEngines.getDefaultProcessEngine(false);
+
+    if (defaultProcessEngine == null) {
+      defaultProcessEngine = ProcessEngines.getDefaultProcessEngine(false);
     }
+
+    return defaultProcessEngine;
   }
 
   @Override

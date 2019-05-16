@@ -20,6 +20,7 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
+import org.camunda.bpm.cockpit.impl.plugin.resources.ExtendedNamedProcessEngineRestServiceImpl;
 import org.camunda.bpm.engine.rest.impl.CamundaRestResources;
 import org.camunda.bpm.engine.rest.impl.NamedProcessEngineRestServiceImpl;
 
@@ -35,7 +36,7 @@ public class EngineRestApplication extends Application {
     Set<Class<?>> classes = new HashSet<>();
 
     // only provide named process engine access.
-    classes.add(NamedProcessEngineRestServiceImpl.class);
+    classes.add(ExtendedNamedProcessEngineRestServiceImpl.class);
 
     // mandatory
     classes.addAll(CamundaRestResources.getConfigurationClasses());

@@ -10,39 +10,29 @@ var camCommons = require('camunda-commons-ui/lib');
 var ngModule = angular.module('cam.cockpit.pages.createProcessDefinition', ['dataDepend', camCommons.name]);
 
 var Controller = [
-  '$scope',
-  '$location',
-  '$timeout',
-  'Views',
-  'Data',
-  'dataDepend',
-  'page',
-  '$translate',
-  function(
-    $scope,
-    $location,
-    $timeout,
-    Views,
-    Data,
-    dataDepend,
-    page,
-    $translate
-  ) {
-    var $rootScope = $scope.$root;
+  '$scope', '$http', '$rootScope', 'Uri', 'dataDepend', 'page', '$translate',
+  function($scope,   $http,   $rootScope,   Uri,   dataDepend,   page, $translate) {
 
-    console.log('create process definition controller');
+    /*var processData = $scope.processData = dataDepend.create($scope);
+    $scope.createProcessDefinitionVars = { read: [ ] };
+    $scope.createProcessDefinitionActions = Views.getProviders({ component: 'cockpit.processes.dashboard'});*/
 
-    // var processData = $scope.processData = dataDepend.create($scope);
+    $http.get(Uri.appUri('engine://engine/:engine/create-process-definition'))
+      .success(function(processDefinition) {
+        $scope.processDefinition = processDefinition;
 
-    // $scope.createProcessDefinitionVars = { read: [ ] };
-    // $scope.createProcessDefinitionActions = Views.getProviders({ component: 'cockpit.processes.dashboard'});
+        console.log(processDefinition);
+      })
+      .error(function(response) {
+        console.warn(response);
+      });
 
     $rootScope.showBreadcrumbs = true;
 
     page.breadcrumbsClear();
 
     page.breadcrumbsAdd({
-      label: $translate.instant('PROCESS_PROCESSES')
+      label: $translate.instant('CREATE_PROCESS_DEFINITION')
     });
 
     page.titleSet($translate.instant('CREATE_PROCESS_DEFINITION'));
