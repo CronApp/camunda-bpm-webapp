@@ -89,7 +89,7 @@ var Controller = [
     $scope.processDefinition = processDefinition;
 
     $scope.editProcessDefinitionVars = { read: [ 'processDefinition', 'processData' ] };
-    $scope.editProcessDefinitionActions = Views.getProviders({ component: 'cockpit.editProcessDefinition.edit.action' });
+    $scope.editProcessDefinitionActions = Views.getProviders({ component: 'cockpit.processDefinition.modeler.action' });
   }];
 
 var RouteConfig = [ '$routeProvider', function($routeProvider) {

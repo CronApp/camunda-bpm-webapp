@@ -10,22 +10,11 @@ var camCommons = require('camunda-commons-ui/lib');
 var ngModule = angular.module('cam.cockpit.pages.createProcessDefinition', ['dataDepend', camCommons.name]);
 
 var Controller = [
-  '$scope', '$http', '$rootScope', 'Uri', 'dataDepend', 'page', '$translate',
-  function($scope,   $http,   $rootScope,   Uri,   dataDepend,   page, $translate) {
+  '$scope', '$rootScope', 'Views', 'dataDepend', 'processDefinition', 'page', '$translate',
+  function($scope,   $rootScope,   Views,   dataDepend,   processDefinition,   page, $translate) {
+    var processData = $scope.processData = dataDepend.create($scope);
 
-    /*var processData = $scope.processData = dataDepend.create($scope);
-    $scope.createProcessDefinitionVars = { read: [ ] };
-    $scope.createProcessDefinitionActions = Views.getProviders({ component: 'cockpit.processes.dashboard'});*/
-
-    $http.get(Uri.appUri('engine://engine/:engine/create-process-definition'))
-      .success(function(processDefinition) {
-        $scope.processDefinition = processDefinition;
-
-        console.log(processDefinition);
-      })
-      .error(function(response) {
-        console.warn(response);
-      });
+    processData.provide('processDefinition', processDefinition);
 
     $rootScope.showBreadcrumbs = true;
 
@@ -36,15 +25,41 @@ var Controller = [
     });
 
     page.titleSet($translate.instant('CREATE_PROCESS_DEFINITION'));
+
+    $scope.processDefinition = processDefinition;
+
+    $scope.createProcessDefinitionVars = { read: [ 'processDefinition', 'processData' ] };
+    $scope.createProcessDefinitionActions = Views.getProviders({ component: 'cockpit.processDefinition.modeler.action' });
   }];
 
 var RouteConfig = [ '$routeProvider', function($routeProvider) {
-  $routeProvider.when('/create-process-definition', {
-    template: template,
-    controller: Controller,
-    authentication: 'required',
-    reloadOnSearch: false
-  });
+  $routeProvider
+    .when('/create-process-definition', {
+      template: template,
+      controller: Controller,
+      authentication: 'required',
+      resolve: {
+        processDefinition : ['ResourceResolver', '$http', 'Uri', '$q',
+          function(ResourceResolver, $http, Uri, $q) {
+            return ResourceResolver.getByRouteParam('id', {
+              name: 'create process definition',
+              resolve: function() {
+                var deferred = $q.defer();
+
+                $http.get(Uri.appUri('engine://engine/:engine/create-process-definition')).success(function(data) {
+                  deferred.resolve(data);
+                })
+                .error(function(err) {
+                  deferred.reject(err);
+                });
+
+                return deferred.promise;
+              }
+            });
+          }]
+      },
+      reloadOnSearch: false
+    });
 }];
 
 ngModule

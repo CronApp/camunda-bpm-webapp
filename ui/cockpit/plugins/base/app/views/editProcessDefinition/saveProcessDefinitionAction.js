@@ -6,7 +6,7 @@ var actionTemplate = fs.readFileSync(__dirname + '/save-process-definition-actio
 // var angular = require('angular');
 
 module.exports = ['ViewsProvider', function(ViewsProvider) {
-  ViewsProvider.registerDefaultView('cockpit.editProcessDefinition.edit.action', {
+  ViewsProvider.registerDefaultView('cockpit.processDefinition.modeler.action', {
     id: 'save-process-definition-action',
     label: 'PLUGIN_UPDATE_SUSPENSION_STATE',
     template: actionTemplate,

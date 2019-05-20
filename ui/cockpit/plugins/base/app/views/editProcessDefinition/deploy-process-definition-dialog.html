@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h3>{{'PLGN_DPLY_DEPLOY' | translate}}</h3>
+</div>
+
+<div class="deployment-modal modal-body">
+  <div notifications-panel></div>
+
+  <form class="form-horizontal"
+        name="deployForm"
+        novalidate
+        ng-submit="deploy()"
+        request-aware>
+    <fieldset>
+      <div class="form-group deployment-name">
+        <label class="control-label col-xs-4"
+               for="deploymentName">{{ 'PLGN_DPLY_MODAL_DEPLOYMENT_NAME' | translate }}</label>
+        <div class="col-xs-8">
+          <input id="deploymentName"
+                 name="deploymentName"
+                 class="form-control"
+                 type="text"
+                 ng-model="deployment.deploymentName"
+                 autofocus
+                 required/>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-link"
+          ng-click="close()">{{'PLGN_MOD_DIALOG_CANCLE' | translate}}
+  </button>
+  <button class="btn btn-primary"
+          ng-click="deploy()"
+          ng-disabled="!isValid()">{{'PLGN_DPLY_MODAL_DEPLOY' | translate}}
+  </button>
+</div>
