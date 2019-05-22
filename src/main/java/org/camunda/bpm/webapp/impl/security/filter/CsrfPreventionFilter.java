@@ -105,7 +105,6 @@ public class CsrfPreventionFilter implements Filter {
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
     try {
-
       String newRandomClass = filterConfig.getInitParameter("randomClass");
       if (!isBlank(newRandomClass)) {
         setRandomClass(newRandomClass);
@@ -141,7 +140,6 @@ public class CsrfPreventionFilter implements Filter {
 
   @Override
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-
     HttpServletRequest request = (HttpServletRequest) servletRequest;
     HttpServletResponse response = (HttpServletResponse) servletResponse;
 
@@ -260,7 +258,7 @@ public class CsrfPreventionFilter implements Filter {
     }
   }
 
-  private URL getTargetOrigin() {
+  public URL getTargetOrigin() {
     return targetOrigin;
   }
 
@@ -273,7 +271,7 @@ public class CsrfPreventionFilter implements Filter {
    *                     and port (ex. http://example.com:8080)
    * @throws MalformedURLException
    */
-  private void setTargetOrigin(String targetOrigin) throws MalformedURLException {
+  public void setTargetOrigin(String targetOrigin) throws MalformedURLException {
     this.targetOrigin = new URL(targetOrigin);
   }
 
@@ -288,14 +286,14 @@ public class CsrfPreventionFilter implements Filter {
    *            Comma separated list of URLs to be configured as
    *            entry points.
    */
-  private void setEntryPoints(String entryPoints) {
+  public void setEntryPoints(String entryPoints) {
     this.entryPoints.addAll(parseURLs(entryPoints));
   }
 
   /**
    * @return the response status code that is used to reject a denied request.
    */
-  private int getDenyStatus() {
+  public int getDenyStatus() {
     return denyStatus;
   }
 
@@ -306,7 +304,7 @@ public class CsrfPreventionFilter implements Filter {
    * @param denyStatus
    *            HTTP status code
    */
-  private void setDenyStatus(int denyStatus) {
+  public void setDenyStatus(int denyStatus) {
     this.denyStatus = denyStatus;
   }
 
@@ -322,7 +320,7 @@ public class CsrfPreventionFilter implements Filter {
    * @param randomClass
    *            The name of the class
    */
-  private void setRandomClass(String randomClass) {
+  public void setRandomClass(String randomClass) {
     this.randomClass = randomClass;
   }
 
