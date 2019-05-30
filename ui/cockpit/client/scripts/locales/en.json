@@ -290,8 +290,8 @@
   "PLUGIN_SUSPENSION_SUSPEND":"Suspend",
   "PLUGIN_SUSPENSION_OK":" OK",
 
-  "PLUGIN_PROCESS_DEF_PROCESS_DEFINITION_DEPLOYED" : "process definition deployed",
-  "PLUGIN_PROCESS_DEF_PROCESS_DEFINITIONS_DEPLOYED" : "process definitions deployed",
+  "PLUGIN_PROCESS_DEF_PROCESS_DEFINITION_DEPLOYED" : "Process definition deployed",
+  "PLUGIN_PROCESS_DEF_PROCESS_DEFINITIONS_DEPLOYED" : "Process definitions deployed",
 
   "PLUGIN_PROCESS_DEF_LIST":"List",
   "PLUGIN_PROCESS_DEF_PREVIEWS":"Previews",
@@ -816,5 +816,23 @@
   "CREATE_PROCESS_DEFINITION" : "Create process definition",
   "NEW_PROCESS_DEFINITION_ID" : "ID of new process definition",
   "NEW_PROCESS_DEFINITION_NAME" : "Name of new process definition",
-  "PROCESS_DEFINITION_SAVE_ERROR": "Something went wrong while saving the process definition"
+  "PROCESS_DEFINITION_SAVE_ERROR": "Something went wrong while saving the process definition",
+
+  "PLGN_DPLY_DEPLOY": " Deploy",
+  "PLGN_DPLY_DEPLOYMENT_SUCCESSFUL": "Deployment successful",
+  "PLGN_DPLY_RESOURCE_UPDATED": "The resource was successfully updated. ",
+  "PLGN_DPLY_SEE_DEPLOYMENT": "Click to see the new deployment",
+  "PLGN_DPLY_DEPLOYMENT_FAILED": "Deployment failed",
+  "PLGN_DPLY_RESOURCE_NOT_UPDATED": "The resource could not be updated.",
+  "PLGN_DPLY_MODAL_DEPLOY": "Deploy",
+  "PLGN_DPLY_MODAL_UPLOAD_FILES": "Upload Files:",
+  "PLGN_DPLY_MODAL_PLAYING_WITH": "You are playing with ",
+  "PLGN_DPLY_MODAL_NEW_DEPLOYMENT": "By clicking the Deploy button, a new deployment will be created, containing the files shown below!",
+  "PLGN_DPLY_MODAL_DEPLOYMENT_NAME": "Name of new Deployment:",
+  "PLGN_DPLY_MODAL_TENANT_ID": "Tenant ID:",
+  "PLGN_DPLY_MODAL_CANCEL": "Cancel",
+  "PLGN_DPLY_DEPLOYMENT_SUCCESSFUL_1": "The process definition was deployed successfully.",
+  "PLGN_DPLY_DEPLOYMENT_SUCCESSFUL_2": "After closing this dialog you will be redirected to the corresponding deployment overview.",
+  "PLGN_DPLY_DEPLOYMENT_FAILED_1": "The process definition could not be deployed successfully.",
+  "PLGN_DPLY_DEPLOYMENT_FAILED_2": "Review the process definition and try again."
 }

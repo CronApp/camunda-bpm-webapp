@@ -9,8 +9,9 @@ var Controller = ['$scope', '$modal', function($scope, $modal) {
   $scope.openDialog = function() {
     $modal.open({
       resolve: {
-        processData: function() { return $scope.processData; },
-        processDefinition: function() { return $scope.processDefinition; }
+        processDefinition: function() {
+          return $scope.processDefinition;
+        }
       },
       size: 'lg',
       controller: 'DeployProcessDefinitionController',

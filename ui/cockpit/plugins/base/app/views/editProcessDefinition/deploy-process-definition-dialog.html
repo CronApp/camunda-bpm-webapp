@@ -5,35 +5,67 @@
 <div class="deployment-modal modal-body">
   <div notifications-panel></div>
 
-  <form class="form-horizontal"
-        name="deployForm"
-        novalidate
-        ng-submit="deploy()"
-        request-aware>
-    <fieldset>
-      <div class="form-group deployment-name">
-        <label class="control-label col-xs-4"
-               for="deploymentName">{{ 'PLGN_DPLY_MODAL_DEPLOYMENT_NAME' | translate }}</label>
-        <div class="col-xs-8">
-          <input id="deploymentName"
-                 name="deploymentName"
-                 class="form-control"
-                 type="text"
-                 ng-model="deployment.deploymentName"
-                 autofocus
-                 required/>
+  <div ng-hide="status === 'deploymentSuccess' || status === 'deploymentFailed' || status === 'beforeDeployment' || status === 'loadingFailed'">
+    <span class="glyphicon glyphicon-loading"></span>
+    {{ 'REPOSITORY_DEPLOYMENTS_LOADING' | translate }}
+  </div>
+
+  <p ng-show="status === 'loadingFailed'">
+    {{ 'REPOSITORY_DEPLOYMENTS_FAILURE' | translate }}
+  </p>
+
+  <div ng-show="status === 'beforeDeployment'">
+    <form class="form-horizontal"
+          name="deployForm"
+          novalidate
+          request-aware>
+      <fieldset>
+        <div class="form-group deployment-name">
+          <label class="control-label col-xs-3"
+                 for="deploymentName">{{ 'PLGN_DPLY_MODAL_DEPLOYMENT_NAME' | translate }}</label>
+          <div class="col-xs-8">
+            <input id="deploymentName"
+                   name="deploymentName"
+                   class="form-control"
+                   type="text"
+                   ng-model="deployment.deploymentName"
+                   autofocus
+                   required/>
+          </div>
         </div>
-      </div>
-    </fieldset>
-  </form>
+      </fieldset>
+    </form>
+  </div>
+
+  <div ng-show="status === 'deploymentSuccess'">
+    <p>{{ 'PLGN_DPLY_DEPLOYMENT_SUCCESSFUL_1' | translate }}</p>
+    <p>{{ 'PLGN_DPLY_DEPLOYMENT_SUCCESSFUL_2' | translate }}</p>
+  </div>
+
+  <div ng-show="status === 'deploymentFailed'">
+    <p>{{ 'PLGN_DPLY_DEPLOYMENT_FAILED_1' | translate }}</p>
+    <p>{{ 'PLGN_DPLY_DEPLOYMENT_FAILED_2' | translate }}</p>
+  </div>
 </div>
 
 <div class="modal-footer">
-  <button class="btn btn-link"
-          ng-click="close()">{{'PLGN_MOD_DIALOG_CANCLE' | translate}}
+  <button class="btn btn-default"
+          ng-click="close(status)"
+          ng-disabled="status === 'performDeployment'"
+          ng-hide="status === 'deploymentSuccess' || status === 'deploymentFailed' || status === 'loadingFailed'">
+    {{ 'PLUGIN_CANCEL_PROCESS_CLOSE' | translate }}
   </button>
+
+  <button class="btn btn-primary"
+          ng-click="close(status)"
+          ng-show="status === 'deploymentSuccess' || status === 'deploymentFailed' || status === 'loadingFailed'">
+    {{ 'PLUGIN_CANCEL_PROCESS_OK' | translate }}
+  </button>
+
   <button class="btn btn-primary"
           ng-click="deploy()"
-          ng-disabled="!isValid()">{{'PLGN_DPLY_MODAL_DEPLOY' | translate}}
+          ng-disabled="!isValid() || status !== 'beforeDeployment'"
+          ng-hide="status === 'deploymentSuccess' || status === 'deploymentFailed' || status === 'loadingFailed'">
+    {{ 'PLGN_DPLY_MODAL_DEPLOY' | translate }}
   </button>
 </div>
