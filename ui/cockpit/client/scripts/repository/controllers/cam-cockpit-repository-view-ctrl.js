@@ -190,10 +190,6 @@ module.exports = [
       return deferred.promise;
     }]);
 
-    $scope.onDeployed = function() {
-      $rootScope.$broadcast('cam-common:cam-searchable:query-force-change');
-    };
-
     $scope.$on('$routeChanged', function() {
       var oldDeploymentsSortBy = deploymentsSortBy;
       var oldDeploymentsSortOrder = deploymentsSortOrder;

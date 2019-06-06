@@ -1,20 +1,15 @@
 <div class="ctn-fixed-view">
   <div class="ctn-content-container">
-
     <div class="ctn-toolbar">
       <span ng-repeat="actionProvider in editProcessDefinitionActions">
-        <view provider="actionProvider"
-              vars="editProcessDefinitionVars" />
+        <view provider="actionProvider" vars="editProcessDefinitionVars" />
       </span>
     </div>
 
     <div class="ctn-column ctn-content" style="left: 0px;">
-
       <div class="ctn-row ctn-content-top">
         <div process-diagram-modeler process-definition-id="processDefinition.id"></div>
       </div>
-
     </div>
   </div>
-
 </div>

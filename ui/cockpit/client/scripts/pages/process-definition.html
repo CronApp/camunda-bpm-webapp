@@ -75,17 +75,6 @@
           <span time-to-live="processDefinition" resource="process-definition"></span>
         </dd>
 
-        <dt ng-if="processDefinition.tenantId"
-            cam-widget-clipboard="processDefinition.tenantId"
-            cam-hoverable-title="tenant-id">{{ 'PROCESS_DEFINITION_TENANT_ID' | translate }}</dt>
-        <dd class="tenant-id"
-            ng-if="processDefinition.tenantId" cam-hover-trigger="tenant-id">
-            {{ processDefinition.tenantId }}
-        </dd>
-        <dt ng-if="!processDefinition.tenantId">{{ 'PROCESS_DEFINITION_TENANT_ID' | translate }}</dt>
-        <dd class="tenant-id"
-            ng-if="!processDefinition.tenantId"><span class="null-value">{{ 'PROCESS_DEFINITION_NULL' | translate }}</span></dd>
-
         <dt cam-widget-clipboard="processDefinition.deploymentId"
             cam-hoverable-title="deployment-id">{{ 'PROCESS_DEFINITION_DEPLOYMENT_ID' | translate }}</dt>
         <dd class="deployment-id" cam-hover-trigger="deployment-id">

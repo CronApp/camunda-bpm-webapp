@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{ 'PLGN_REDE_REDEPLOY' | translate:{deployment: (deployment.name || deployment.id)} }}</h3>
+</div>
+
+<div class="modal-body form-horizontal">
+  <div notifications-panel></div>
+
+  <p>{{ 'PLGN_REDE_INFO' | translate }}</p>
+
+  <p>{{ 'PLGN_REDE_INFO_SURE' | translate }}</p>
+</div>
+
+<div class="modal-footer">
+
+  <button class="btn btn-link"
+          ng-click="$dismiss()"
+          ng-disabled="status === 'LOADING'">{{ 'PLGN_REDE_INFO_CANCEL' | translate }}
+  </button>
+
+  <button type="submit"
+          class="btn btn-primary"
+          ng-click="redeploy(deployment)"
+          ng-disabled="status === 'LOADING'">{{ 'PLGN_REDE_INFO_REDEPLOY' | translate }}
+    <span ng-if="status === 'LOADING'" class="glyphicon glyphicon-refresh animate-spin"></span>
+  </button>
+</div>

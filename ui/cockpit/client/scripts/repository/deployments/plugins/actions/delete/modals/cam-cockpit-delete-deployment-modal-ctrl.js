@@ -37,7 +37,6 @@ module.exports = [
     $scope.hideSkipCustomListeners = SKIP_CUSTOM_LISTENERS.hidden;
 
     $scope.deployment = deployment;
-    $scope.status;
 
     $scope.$on('$routeChangeStart', function() {
       $scope.$dismiss();
@@ -109,7 +108,7 @@ module.exports = [
     };
 
     $scope.canDeleteDeployment = function() {
-      return !options.cascade && hasInstances() ? false : true;
+      return !(!options.cascade && hasInstances());
     };
 
     $scope.getInfoSnippet = function() {

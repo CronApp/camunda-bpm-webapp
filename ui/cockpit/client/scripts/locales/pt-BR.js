@@ -110,7 +110,7 @@ var translations = {
   'Specify more than one group as a comma separated list.': 'Especifique mais de um grupo separando-os com vírgula',
   'Specify more than one user as a comma separated list.': 'Especifique mais de um usuário separando-os com vírgula',
   'History Configuration': 'Configuração de historico',
-  'History Time To Live': 'Histórico Time to Live',
+  'History Time To Live': 'Tempo de Vida do Histórico',
   'Tasklist Configuration': 'Configuração de lista de tarefas',
   'Startable': 'Inicializável',
   'Listeners': 'Listeners',

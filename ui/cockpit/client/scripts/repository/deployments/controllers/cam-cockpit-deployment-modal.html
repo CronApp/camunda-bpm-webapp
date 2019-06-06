@@ -1,0 +1,44 @@
+<div class="modal-header row">
+  <div class="col-xs-4">
+    <h3 class="modal-title">{{ 'PLGN_DPLY_MODAL_DEPLOY' | translate }}</h3>
+  </div>
+  <div class="col-xs-8 text-right">
+    <div class="form-control-static">
+      {{ 'PLGN_DPLY_MODAL_UPLOAD_FILES' | translate }}
+      <input type="file" multiple
+             cam-file="onFileInputChange(files)"
+             accept=".bpmn20.xml,.bpmn"
+             style="display: inline"/>
+    </div>
+  </div>
+</div>
+<div class="deployment-modal modal-body">
+  <div class="help-block">
+    {{ 'PLGN_DPLY_MODAL_NEW_DEPLOYMENT' | translate }}
+  </div>
+  <div class="deployment-name">
+    <label for="new-deployment-name">{{ 'PLGN_DPLY_MODAL_DEPLOYMENT_NAME' | translate }}</label>
+    <div>
+      <input type="text" id="new-deployment-name" ng-model="deploymentName" class="form-control"/>
+    </div>
+  </div>
+  <ul class="list-unstyled" ng-if="files && files.length > 0">
+    <li class="deployment-file" ng-repeat="entry in files">
+      <h4>{{entry.file.name}}</h4>
+      <a href
+         ng-click="removeFile(entry)"
+         class="glyphicon glyphicon-remove"
+         title="{{ 'PLGN_DPLY_MODAL_REMOVE_FILE' | translate }}"></a>
+    </li>
+  </ul>
+</div>
+<div class="modal-footer row">
+  <div class="col-xs-12 text-right">
+    <button class="btn btn-link" ng-click="cancel()">
+      {{ 'PLGN_DPLY_MODAL_CANCEL' | translate }}
+    </button>
+    <button class="btn btn-primary" ng-disabled="!canDeploy()" ng-click="deploy()">
+      {{ 'PLGN_DPLY_MODAL_DEPLOY' | translate }}
+    </button>
+  </div>
+</div>

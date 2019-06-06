@@ -1,7 +1,7 @@
 <div class="actions">
   <view ng-repeat="deploymentPlugin in deploymentPlugins"
         provider="deploymentPlugin"
-        vars="deploymentVars" />
+        vars="deploymentVars"/>
 </div>
 
 <h4 class="name">{{ deployment.name || deployment.id }}</h4>
@@ -12,8 +12,9 @@
 
   <dt>{{ 'REPOSITORY_DEPLOYMENTS_SOURCE' | translate }}</dt>
   <dd class="source"
-      ng-if="deployment.source">{{ deployment.source }}</dd>
+      ng-if="deployment.source">{{ deployment.source }}
+  </dd>
   <dd class="source undefined"
       ng-if="!deployment.source"><span class="null-value">{{ 'REPOSITORY_DEPLOYMENTS_NULL' | translate }}</span>
-
+  </dd>
 </dl>

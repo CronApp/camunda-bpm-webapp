@@ -13,7 +13,11 @@ var angular = require('camunda-commons-ui/vendor/angular'),
 
   /* plugins */
     camCockpitDefinitionsPlugin = require('./plugins/details/definitions/cam-cockpit-definitions-plugin'),
-    camCockpitResourceDownloadPlugin = require('./plugins/actions/download/cam-cockpit-resource-action-download-plugin');
+    camCockpitResourceDownloadPlugin = require('./plugins/actions/download/cam-cockpit-resource-action-download-plugin'),
+    camCockpitResourceRedeployPlugin = require('./plugins/actions/redeploy/cam-cockpit-resource-action-redeploy-plugin'),
+
+  /* modals */
+    camCockpitResourceRedeployModalCtrl = require('./plugins/actions/redeploy/modals/cam-cockpit-redeploy-resource-modal-ctrl');
 
 var resourceModule = angular.module('cam.cockpit.repository.resource', []);
 
@@ -29,5 +33,9 @@ resourceModule.directive('camSource', camCockpitSource);
   /* plugins */
 resourceModule.config(camCockpitDefinitionsPlugin);
 resourceModule.config(camCockpitResourceDownloadPlugin);
+resourceModule.config(camCockpitResourceRedeployPlugin);
+
+  /* modals */
+resourceModule.controller('camResourceRedeployModalCtrl', camCockpitResourceRedeployModalCtrl);
 
 module.exports = resourceModule;

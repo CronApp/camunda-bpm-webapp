@@ -34,7 +34,6 @@ module.exports = [ 'ViewsProvider', function(ViewsProvider) {
           { class: 'incidents',request: 'incidentCount', sortable: true,  content: $translate.instant('PLUGIN_PROCESS_DEF_INCIDENTS')},
           { class: 'instances',request: 'instances'    , sortable: true, content: $translate.instant('PLUGIN_PROCESS_DEF_RUNNING_INSTANCES')},
           { class: 'name',     request: 'label' , sortable: true, content: $translate.instant('PLUGIN_PROCESS_DEF_NAME')},
-          { class: 'tenantID', request: 'tenantId'     , sortable: true, content: $translate.instant('PLUGIN_PROCESS_DEF_TENANT_ID')},
           { class: 'history',  request: '', sortable: false, content: $translate.instant('PLUGIN_PROCESS_DEF_HISTORY_VIEW'), condition: $scope.hasReportPlugin},
           { class: 'report',   request: '', sortable: false, content: $translate.instant('PLUGIN_PROCESS_DEF_REPORT'), condition: $scope.hasReportPlugin},
           { class: 'action',   request: '', sortable: false, content: $translate.instant('PLUGIN_PROCESS_DEF_ACTION'), condition: $scope.hasActionPlugin}
@@ -42,8 +41,6 @@ module.exports = [ 'ViewsProvider', function(ViewsProvider) {
 
         // Default sorting
         var defaultValue = { sortBy: 'label', sortOrder: 'asc', sortReverse: false};
-
-
 
         $scope.sortObj   = loadLocal(defaultValue);
 
@@ -67,7 +64,6 @@ module.exports = [ 'ViewsProvider', function(ViewsProvider) {
 
         $scope.loadingState = 'LOADING';
 
-
         // only get count of process definitions
         var countProcessDefinitions =  function() {
           processDefinitionService.count({
@@ -85,7 +81,6 @@ module.exports = [ 'ViewsProvider', function(ViewsProvider) {
           processDefinitionService.list({
             latest: true
           }, function(err, data) {
-
             // Add label for sorting
             data.items.forEach(function(item) {
               item.label = item.name || item.key;
@@ -119,7 +114,6 @@ module.exports = [ 'ViewsProvider', function(ViewsProvider) {
         $scope.definitionVars = { read: [ 'pd' ] };
 
         var removeActionDeleteListener = $scope.$on('processes.action.delete', function(event, definitionId) {
-
           var definitions = $scope.processDefinitionData;
 
           for (var i = 0; i < definitions.length; i++) {
@@ -140,7 +134,6 @@ module.exports = [ 'ViewsProvider', function(ViewsProvider) {
           '%22eq%22,%22value%22:%22open%22,%22name%22:%22%22%7D,%7B%22type%22:%22PIprocessDefinitionKey%22,' +
           '%22operator%22:%22eq%22,%22value%22:%22PD_KEY%22,%22name%22:%22%22%7D%5D#search-section';
 
-
         $scope.activeTab = 'list';
 
         $scope.selectTab = function(tab) {
@@ -159,14 +152,12 @@ module.exports = [ 'ViewsProvider', function(ViewsProvider) {
 
         function saveLocal(sortObj) {
           localConf.set('sortProcessDefTab', sortObj);
-
         }
+
         function loadLocal(defaultValue) {
           return localConf.get('sortProcessDefTab', defaultValue);
         }
-
       }],
-
     priority: 0
   });
 }];

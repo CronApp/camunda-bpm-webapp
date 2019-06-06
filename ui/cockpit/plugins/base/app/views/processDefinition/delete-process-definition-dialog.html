@@ -1,0 +1,92 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{ 'PLGN_PDEF_DELETE_ID' | translate:{id: processDefinition.id} }}</h3>
+</div>
+
+<div class="modal-body delete-process-definition-dialog">
+  <div notifications-panel
+       class="notifications-panel"></div>
+
+  <div ng-if="status !== 'SUCCESS'">
+    {{ 'PLGN_PDEF_DELETE_STATUS' | translate }}
+
+    <div class="alert alert-info"
+         ng-if="instancesCount > 0 && !options.cascade">
+      {{ instancesCount === 1 ?
+      ('PLGN_PDEF_MODAL_INFO_SINGULAR' | translate) :
+      ('PLGN_PDEF_MODAL_INFO_PLURAL' | translate:{instancesCount: instancesCount}) }}
+    </div>
+
+    <form class="form-horizontal"
+          name="deleteProcessDefinitionForm"
+          novalidate
+          request-aware>
+
+      <div class="form-group cascade">
+
+        <label class="control-label col-xs-5"
+               for="cascade">
+          {{ 'PLGN_PDEF_MODAL_CASCADE' | translate }}
+          <span class="glyphicon glyphicon-question-sign"
+                tooltip="{{ 'PLGN_PDEF_MODAL_CASCADE_TOOLTIP' | translate }}"
+                tooltip-placement="right">
+            </span>
+        </label>
+
+        <div class="col-xs-7">
+          <label class="checkbox">
+            <input id="cascade"
+                   type="checkbox"
+                   ng-model="options.cascade">
+          </label>
+        </div>
+
+      </div>
+
+      <div ng-hide="hideSkipCustomListeners"
+           class="form-group skip-custom-listener">
+
+        <label class="control-label col-xs-5"
+               for="skipCustomListeners">
+          {{ 'PLGN_PDEF_MODAL_SKIP_CUSTOM_LISTENERS' | translate }}
+          <span class="glyphicon glyphicon-question-sign"
+                tooltip="{{ 'PLGN_PDEF_MODAL_SKIP_CUSTOM_LISTENERS_TOOLTIP' | translate }}"
+                tooltip-placement="right">
+          </span>
+        </label>
+
+        <div class="col-xs-7">
+          <label class="checkbox">
+            <input id="skipCustomListeners"
+                   type="checkbox"
+                   ng-model="options.skipCustomListeners">
+          </label>
+        </div>
+
+      </div>
+
+    </form>
+    {{ 'PLGN_PDEF_MODAL_SURE' | translate }}
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button ng-if="status !== 'SUCCESS'"
+          class="btn btn-link"
+          ng-click="$dismiss()"
+          ng-disabled="status === 'PERFORM'">{{ 'PLGN_PDEF_MODAL_CLOSE' | translate }}
+  </button>
+
+  <button ng-if="status !== 'SUCCESS'"
+          type="submit"
+          class="btn btn-primary"
+          ng-click="deleteProcessDefinition()"
+          ng-disabled="status === 'PERFORM' || (!options.cascade && instancesCount > 0)">{{ 'PLGN_PDEF_MODAL_DELETE' |
+    translate }}
+  </button>
+
+  <button ng-if="status === 'SUCCESS'"
+          type="submit"
+          class="btn btn-primary"
+          ng-click="redirectToProcessDefinition()">{{ 'PLGN_PDEF_MODAL_OK' | translate }}
+  </button>
+</div>

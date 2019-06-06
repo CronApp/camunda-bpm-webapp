@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{ 'PLGN_REDE_REDEPLOY_RESOURCE' | translate:{resource: (resource.name || resource.id)} }}</h3>
+</div>
+
+<div class="modal-body form-horizontal">
+  <div notifications-panel></div>
+
+  <p>{{ 'PLGN_REDE_INFO_REDEPLOY_RES' | translate:{definitionType: (control.isBpmnResource(resource) ? 'process' : control.isCmmnResource(resource) ? 'case' : 'decision')} }}</p>
+
+  <p>{{ 'PLGN_REDE_INFO_REDEPLOY_RES_SURE' | translate }}</p>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-link"
+          ng-click="$dismiss()"
+          ng-disabled="status === 'LOADING'">{{ 'PLGN_REDE_INFO_REDEPLOY_RES_CANCEL' | translate }}
+  </button>
+
+  <button type="submit"
+          class="btn btn-primary"
+          ng-click="redeploy(deployment, resource)"
+          ng-disabled="status === 'LOADING'">{{ 'PLGN_REDE_INFO_REDEPLOY_RES_REDEPLOY' | translate }}
+    <span ng-if="status === 'LOADING'" class="glyphicon glyphicon-refresh animate-spin"></span>
+  </button>
+</div>

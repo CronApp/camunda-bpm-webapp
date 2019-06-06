@@ -834,5 +834,13 @@
   "PLGN_DPLY_DEPLOYMENT_SUCCESSFUL_1": "The process definition was deployed successfully.",
   "PLGN_DPLY_DEPLOYMENT_SUCCESSFUL_2": "After closing this dialog you will be redirected to the corresponding deployment overview.",
   "PLGN_DPLY_DEPLOYMENT_FAILED_1": "The process definition could not be deployed successfully.",
-  "PLGN_DPLY_DEPLOYMENT_FAILED_2": "Review the process definition and try again."
+  "PLGN_DPLY_DEPLOYMENT_FAILED_2": "Review the process definition and try again.",
+  "PLGN_DPLY_MODAL_REMOVE_FILE": "Remove file",
+
+  "PLGN_PDEF_NOTIFICATION_FINISHED": "Finished",
+  "PLGN_PDEF_NOTIFICATION_MSG_FINISHED": "The process definition \"{{id}}\" was successfully deleted.",
+  "PLGN_PDEF_NOTIFICATION_ERROR": "Error",
+  "PLGN_PDEF_DELETE_ACTION": "Delete Process Definition Action",
+  "PLUGIN_PROCESS_INSTANCE_DELETE_RUNNING": "Delete Running Process Instances Action",
+  "PLUGIN_JOBDEFINITION_ACTION_DIALOG_ERR_NO_JOB": "This process definition has no associated task definitions. Task priority can not be overridden."
 }

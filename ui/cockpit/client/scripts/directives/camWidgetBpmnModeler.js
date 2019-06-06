@@ -2,7 +2,6 @@
 var fs = require('fs');
 
 var Modeler = require('./util/modeler'),
-
     propertiesPanel = require('bpmn-js-properties-panel'),
     propertiesProvider = require('bpmn-js-properties-panel/lib/provider/bpmn'),
     camundaPropertiesProvider = require('bpmn-js-properties-panel/lib/provider/camunda'),
@@ -12,23 +11,18 @@ var Modeler = require('./util/modeler'),
     cronModdle = require('../providers/cronapp/moddle/cronappModdle'),
     template = fs.readFileSync(__dirname + '/camWidgetBpmnModeler.html', 'utf8');
 
-module.exports = ['$q', '$document', '$compile', '$location',
-  function($q, $document, $compile,   $location) {
-
+module.exports = ['$q', '$document', '$compile', '$location', 'debounce',
+  function($q, $document, $compile, $location, debounce) {
     return {
       scope: {
+        processDefinition: '=',
         diagramData: '=',
         key: '@',
         control: '=?',
         onLoad: '&'
       },
-
       template: template,
-
       link: function($scope, $element) {
-
-        // console.log('minimap=' + JSON.stringify(minimap));
-
         var modeler = null;
         var canvas = null;
         var definitions;
@@ -75,9 +69,21 @@ module.exports = ['$q', '$document', '$compile', '$location',
             }
           });
 
-          modeler.on('commandStack.changed', function() {
-            console.log('commandStack.changed');
-          });
+          function saveDiagram() {
+            modeler.saveXML({ format: true }, function(err, xml) {
+              if (err) {
+                console.error(err);
+              } else {
+                $scope.processDefinition.bpmn20Xml = xml;
+              }
+            });
+          }
+
+          var saveArtifact = debounce(function() {
+            saveDiagram();
+          }, 500);
+
+          modeler.on('commandStack.changed', saveArtifact);
 
           if(!modeler.cached) {
             // attach diagram immediately to avoid having the bpmn logo for viewers that are not cached

@@ -49,6 +49,8 @@ module.exports = ['ProcessDefinitionResource', 'debounce', function(ProcessDefin
           setElementId(processDefinitionId);
 
           ProcessDefinitionResource.getBpmn20Xml({ id : processDefinitionId }).$promise.then(function(response) {
+            scope.processDefinition = response;
+
             loadDiagram(response.bpmn20Xml, element);
           });
         }

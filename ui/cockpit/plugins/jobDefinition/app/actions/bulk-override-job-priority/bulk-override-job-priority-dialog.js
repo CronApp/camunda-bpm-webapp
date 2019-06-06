@@ -11,14 +11,13 @@ module.exports = [
       $modalInstance.opened.then(
         $timeout(function() {
           Notifications.addError({
-            status: 'Error',
-            message: 'This process definition has no job definitions associated with. The job priority cannot be overridden.',
+            status: $translate.instant('PLUGIN_JOBS_ERROR'),
+            message: $translate.instant('PLUGIN_JOBDEFINITION_ACTION_DIALOG_ERR_NO_JOB'),
             exclusive: true
           });
         }, 0));
     }
 
-    $scope.status;
     var FINISHED = 'FINISHED',
         PERFORM = 'PERFORMING',
         SUCCESS = 'SUCCESS',
