@@ -25,6 +25,7 @@ var angular = require('angular'),
     updateSuspensionStateAction = require('./processDefinition/updateSuspensionStateAction'),
     updateSuspensionStateDialog = require('./processDefinition/updateSuspensionStateDialog'),
     editProcessDefinitionAction = require('./processDefinition/editProcessDefinitionAction'),
+    editProcessDefinitionDialog = require('./processDefinition/editProcessDefinitionDialog'),
     pdIncidentsTab = require('./processDefinition/pdIncidentsTab'),
     deleteProcessDefinitionAction = require('./processDefinition/deleteProcessDefinitionAction'),
     deleteProcessDefinitionDialog = require('./processDefinition/deleteProcessDefinitionDialog'),
@@ -72,6 +73,7 @@ ngModule.config(calledProcessDefinitionTable);
 ngModule.config(updateSuspensionStateAction);
 ngModule.config(editProcessDefinitionAction);
 ngModule.controller('UpdateProcessDefinitionSuspensionStateController', updateSuspensionStateDialog);
+ngModule.controller('EditProcessDefinitionController', editProcessDefinitionDialog);
 ngModule.config(pdIncidentsTab);
 ngModule.config(saveProcessDefinitionAction);
 ngModule.config(deployProcessDefinitionAction);

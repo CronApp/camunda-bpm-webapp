@@ -1,6 +1,16 @@
 <a class="btn btn-default btn-toolbar"
+   ng-href
+   ng-click="openDialog()"
+   tooltip="{{'PLGN_ADJ_EDIT' | translate}}"
+   tooltip-placement="left"
+   ng-hide="processDefinition.suspended">
+  <span class="glyphicon glyphicon-edit"></span>
+</a>
+
+<a class="btn btn-default btn-toolbar"
    ng-href="#/process-definition/{{ processDefinition.id }}/edit"
-   tooltip="Editar"
-   tooltip-placement="left">
+   tooltip="{{'PLGN_ADJ_EDIT' | translate}}"
+   tooltip-placement="left"
+   ng-show="processDefinition.suspended">
   <span class="glyphicon glyphicon-edit"></span>
 </a>

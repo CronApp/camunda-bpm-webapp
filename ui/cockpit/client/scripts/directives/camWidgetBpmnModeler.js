@@ -1,5 +1,8 @@
 'use strict';
+
 var fs = require('fs');
+
+var angular = require('angular');
 
 var Modeler = require('./util/modeler'),
     propertiesPanel = require('bpmn-js-properties-panel'),
@@ -103,6 +106,7 @@ module.exports = ['$q', '$document', '$compile', '$location', 'debounce',
             canvas = modeler.get('canvas');
             definitions = modeler._definitions;
             zoom();
+            disableIsExecutableFlag();
             $scope.loaded = true;
           }
 
@@ -147,6 +151,13 @@ module.exports = ['$q', '$document', '$compile', '$location', 'debounce',
               else {
                 canvas.zoom('fit-viewport', 'auto');
               }
+            }
+          }
+
+          function disableIsExecutableFlag() {
+            var isExecutable = angular.element(document.querySelector('#camunda-process-is-executable'));
+            if (isExecutable) {
+              isExecutable.prop('disabled', true);
             }
           }
 

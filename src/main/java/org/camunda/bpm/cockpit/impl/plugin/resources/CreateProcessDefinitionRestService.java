@@ -22,7 +22,7 @@ public class CreateProcessDefinitionRestService extends AbstractCockpitPluginRes
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public ProcessDefinitionDiagramDto getEmptyProcessDefinitionBpmn20Xml() {
-    BpmnModelInstance modelInstance = Bpmn.createProcess().done();
+    BpmnModelInstance modelInstance = Bpmn.createExecutableProcess().done();
 
     String id = getProcessId(modelInstance);
     String bpmn20Xml = Bpmn.convertToString(modelInstance);

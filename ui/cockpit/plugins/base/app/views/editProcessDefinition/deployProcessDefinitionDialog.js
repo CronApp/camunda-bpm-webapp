@@ -50,9 +50,9 @@ module.exports = [
         content: processDefinition.bpmn20Xml
       }];
 
-      upload(Uri.appUri('engine://engine/:engine/deployment/create'), files, fields).then(function(data) {
+      upload(Uri.appUri('engine://engine/:engine/deployment/create'), files, fields).then(function(deployment) {
         $scope.status = DEPLOY_SUCCESS;
-        deploymentResult = data;
+        deploymentResult = deployment;
         Notifications.addMessage({
           'status': $translate.instant('PLGN_DPLY_DEPLOYMENT_SUCCESSFUL'),
           'message': $translate.instant('PLGN_DPLY_RESOURCE_UPDATED')

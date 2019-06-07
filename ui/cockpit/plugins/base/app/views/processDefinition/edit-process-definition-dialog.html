@@ -1,0 +1,68 @@
+<div class="modal-header">
+  <h3>{{ 'PLUGIN_EDIT_PROC_DEF_EDIT_PROCESS' | translate }}</h3>
+</div>
+
+<div class="process-definition update-suspension-state modal-body">
+  <div notifications-panel></div>
+
+  <div ng-hide="status === 'FAIL'">
+    <p>{{'PLUGIN_EDIT_PROC_DEF_MESSAGE_2' | translate}}</p>
+
+    <form class="form-horizontal"
+          name="editProcessDefinitionForm"
+          novalidate
+          request-aware
+          ng-submit="proceedToEditPage()">
+      <fieldset>
+        <div class="form-group">
+          <label class="control-label col-xs-4">
+            {{'PLUGIN_EDIT_PROC_DEF_INCLUDE_INSTANCES' | translate}}
+            <!-- suspension -->
+            <span tooltip="{{'PLUGIN_EDIT_PROC_DEF_INCLUDING_MESSAGE_2' | translate}}"
+                  tooltip-placement="right">
+              <span class="glyphicon glyphicon-question-sign"></span>
+            </span>
+          </label>
+
+          <div class="col-xs-8">
+            <label class="checkbox">
+              <input id="includeInstancesValueId"
+                     name="includeInstancesValue"
+                     type="checkbox"
+                     ng-model="data.includeInstances">
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
+    <p>{{ 'PLUGIN_EDIT_PROC_DEF_WANT_TO_EDIT' | translate }}</p>
+  </div>
+
+  <div ng-show="status === 'FAIL'">
+    <p>{{'PLUGIN_EDIT_PROC_DEF_STATE_NOT_SUSPENDED_FOR_EDIT' | translate}}</p>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-link"
+          ng-click="close(status)"
+          ng-disabled="status === 'PERFORM_UDPATE'"
+          ng-hide="status === 'FAIL'">
+    {{'PLUGIN_EDIT_PROC_DEF_CLOSE' | translate}}
+  </button>
+
+  <button type="submit"
+          class="btn btn-primary"
+          ng-click="proceedToEditPage()"
+          ng-hide="status === 'FAIL'"
+          ng-disabled="!isValid() || status === 'PERFORM_UDPATE'">
+    {{ 'PLUGIN_EDIT_PROC_DEF_SUSPEND_AND_EDIT' | translate }}
+  </button>
+
+  <button class="btn btn-primary"
+          ng-click="close(status)"
+          ng-show="status === 'FAIL'">
+    {{'PLUGIN_EDIT_PROC_DEF_OK' | translate}}
+  </button>
+</div>

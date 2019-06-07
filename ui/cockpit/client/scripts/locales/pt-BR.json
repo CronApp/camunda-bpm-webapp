@@ -1627,7 +1627,7 @@
     "PLGN_DPLY_RESOURCE_NOT_UPDATED": "O recurso não pôde ser atualizado.",
     "PLGN_DPLY_MODAL_DEPLOY": "Implantar",
     "PLGN_DPLY_MODAL_UPLOAD_FILES": "Fazer upload de arquivos",
-    "PLGN_DPLY_MODAL_PLAYING_WITH": "Você está rodando com",
+    "PLGN_DPLY_MODAL_PLAYING_WITH": "Você está brincando com",
     "PLGN_DPLY_MODAL_NEW_DEPLOYMENT": "Ao clicar no botão Implantar, uma nova implantação será criada, contendo os arquivos mostrados abaixo!",
     "PLGN_DPLY_MODAL_DEPLOYMENT_NAME": "Nome da nova implantação ",
     "PLGN_DPLY_MODAL_TENANT_ID": "ID do Inquilino",
@@ -2157,5 +2157,17 @@
     "CREATE_PROCESS_DEFINITION" : "Nova definição de processo",
     "NEW_PROCESS_DEFINITION_ID" : "ID da nova definição de processo",
     "NEW_PROCESS_DEFINITION_NAME" : "Nome da nova definição de processo",
-    "PROCESS_DEFINITION_SAVE_ERROR": "Algo deu errado ao salvar a definição de processo"
+    "PROCESS_DEFINITION_SAVE_ERROR": "Algo deu errado ao salvar a definição de processo",
+
+    "PLUGIN_EDIT_PROC_DEF_EDIT_PROCESS": "Editar definição de processo",
+    "PLUGIN_EDIT_PROC_DEF_MESSAGE_2": "Esta definição de processo será suspensa para edição, assim não será possível iniciar novas instâncias de processo com base nesta definição de processo até que a mesma seja publicada novamente.",
+    "PLUGIN_EDIT_PROC_DEF_INCLUDE_INSTANCES": "Incluir instâncias",
+    "PLUGIN_EDIT_PROC_DEF_INCLUDING_MESSAGE_2": "Incluir as instâncias de processo significa que todas as instâncias de processo existentes desta definição do processo serão suspensas também, se o valor for definido como verdadeiro.",
+    "PLUGIN_EDIT_PROC_DEF_WANT_TO_EDIT": "Você realmente deseja suspender esta definição processo para edição?",
+    "PLUGIN_EDIT_PROC_DEF_STATE_NOT_SUSPENDED_FOR_EDIT": "O estado de suspensão da definição do processo não pode ser atualizado para 'suspenso'.",
+    "PLUGIN_EDIT_PROC_DEF_CLOSE": "Fechar",
+    "PLUGIN_EDIT_PROC_DEF_SUSPEND_AND_EDIT": "Suspender e Editar",
+    "PLUGIN_EDIT_PROC_DEF_OK": "OK",
+    "PLUGIN_EDIT_PROC_DEF_MESSAGE_3": "Não foi possível atualizar o estado de suspensão da definição do processo: {{message}}",
+    "PLUGIN_EDIT_PROC_DEF_STATUS_FINISHED": "Finalizado"
   }

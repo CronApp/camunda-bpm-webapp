@@ -842,5 +842,17 @@
   "PLGN_PDEF_NOTIFICATION_ERROR": "Error",
   "PLGN_PDEF_DELETE_ACTION": "Delete Process Definition Action",
   "PLUGIN_PROCESS_INSTANCE_DELETE_RUNNING": "Delete Running Process Instances Action",
-  "PLUGIN_JOBDEFINITION_ACTION_DIALOG_ERR_NO_JOB": "This process definition has no associated task definitions. Task priority can not be overridden."
+  "PLUGIN_JOBDEFINITION_ACTION_DIALOG_ERR_NO_JOB": "This process definition has no associated task definitions. Task priority can not be overridden.",
+
+  "PLUGIN_EDIT_PROC_DEF_EDIT_PROCESS": "Edit Process Definition",
+  "PLUGIN_EDIT_PROC_DEF_MESSAGE_2": "This process definition will be suspended for edition, so that it will not be possible to start new process instances based on this process definition until it is deployed again.",
+  "PLUGIN_EDIT_PROC_DEF_INCLUDE_INSTANCES": "Include Instances",
+  "PLUGIN_EDIT_PROC_DEF_INCLUDING_MESSAGE_2": "Including the process instances means that all existing process instances of this process definition will be suspended too, if the value is set to true.",
+  "PLUGIN_EDIT_PROC_DEF_WANT_TO_EDIT": "Do you really want to suspend this process definition for edition?",
+  "PLUGIN_EDIT_PROC_DEF_STATE_NOT_SUSPENDED_FOR_EDIT": "The suspension state of the process definition could not be updated to 'suspended' successfully.",
+  "PLUGIN_EDIT_PROC_DEF_CLOSE": "Close",
+  "PLUGIN_EDIT_PROC_DEF_SUSPEND_AND_EDIT": "Suspend and Edit",
+  "PLUGIN_EDIT_PROC_DEF_OK": "OK",
+  "PLUGIN_EDIT_PROC_DEF_MESSAGE_3": "Could not update the suspension state of the process definition: {{message}}",
+  "PLUGIN_EDIT_PROC_DEF_STATUS_FINISHED": "Finish"
 }
