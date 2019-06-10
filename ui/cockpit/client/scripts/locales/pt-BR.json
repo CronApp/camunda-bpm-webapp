@@ -2169,5 +2169,11 @@
     "PLUGIN_EDIT_PROC_DEF_SUSPEND_AND_EDIT": "Suspender e Editar",
     "PLUGIN_EDIT_PROC_DEF_OK": "OK",
     "PLUGIN_EDIT_PROC_DEF_MESSAGE_3": "Não foi possível atualizar o estado de suspensão da definição do processo: {{message}}",
-    "PLUGIN_EDIT_PROC_DEF_STATUS_FINISHED": "Finalizado"
+    "PLUGIN_EDIT_PROC_DEF_STATUS_FINISHED": "Finalizado",
+
+    "OVERLAY_ACTION_ON": "ligado",
+    "OVERLAY_ACTION_OFF": "desligado",
+    "OVERLAY_ACTION_LOADING": "carregando...",
+    "OVERLAY_ACTION_TOOLTIP": "Alternar Estatísticas de Atividade da Instância",
+    "OVERLAY_ACTION_TEXT": "Estatísticas de Atividade da Instância:"
   }

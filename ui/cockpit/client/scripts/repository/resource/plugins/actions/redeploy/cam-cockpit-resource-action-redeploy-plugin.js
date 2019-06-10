@@ -14,17 +14,12 @@ var Controller = [
     $modal,
     $rootScope
   ) {
-    var redeployResourceData = $scope.resourceDetailsData.newChild($scope);
-
     $scope.openRedeployDialog = function(deployment, resource) {
       $modal.open({
         controller: 'camResourceRedeployModalCtrl',
         template: modalTemplate,
         windowClass: 'redeploy-resource-modal',
         resolve: {
-          'redeployResourceData': function() {
-            return redeployResourceData;
-          },
           'resource': function() {
             return resource;
           },

@@ -147,8 +147,7 @@ module.exports = ['$q', '$document', '$compile', '$location', 'debounce',
 
               if (viewbox) {
                 canvas.viewbox(viewbox);
-              }
-              else {
+              } else {
                 canvas.zoom('fit-viewport', 'auto');
               }
             }

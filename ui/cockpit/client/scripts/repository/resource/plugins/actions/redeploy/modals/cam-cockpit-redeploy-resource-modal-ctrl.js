@@ -8,7 +8,6 @@ module.exports = [
   'camAPI',
   'Notifications',
   'routeUtil',
-  'redeployResourceData',
   'resource',
   'deployment',
   'control',
@@ -21,7 +20,6 @@ module.exports = [
     camAPI,
     Notifications,
     routeUtil,
-    redeployResourceData,
     resource,
     deployment,
     control,
@@ -107,7 +105,6 @@ module.exports = [
 
       var options = {
         id: deployment.id,
-        tenantId: deployment.tenantId,
         source: 'cockpit',
         resourceIds: [resource.id]
       };

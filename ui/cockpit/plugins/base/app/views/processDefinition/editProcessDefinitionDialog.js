@@ -56,7 +56,7 @@ module.exports = [
           $timeout(function() {
             $location.path('/process-definition/' + processDefinition.id + '/edit');
             $location.replace();
-          });
+          }, 500);
         }).error(function(response) {
           $scope.status = UPDATE_FAILED;
 

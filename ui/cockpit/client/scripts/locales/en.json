@@ -854,5 +854,11 @@
   "PLUGIN_EDIT_PROC_DEF_SUSPEND_AND_EDIT": "Suspend and Edit",
   "PLUGIN_EDIT_PROC_DEF_OK": "OK",
   "PLUGIN_EDIT_PROC_DEF_MESSAGE_3": "Could not update the suspension state of the process definition: {{message}}",
-  "PLUGIN_EDIT_PROC_DEF_STATUS_FINISHED": "Finish"
+  "PLUGIN_EDIT_PROC_DEF_STATUS_FINISHED": "Finish",
+
+  "OVERLAY_ACTION_ON": "on",
+  "OVERLAY_ACTION_OFF": "off",
+  "OVERLAY_ACTION_LOADING": "loading...",
+  "OVERLAY_ACTION_TOOLTIP": "Toggle Activity Instance Statistics",
+  "OVERLAY_ACTION_TEXT": "Activity Instance Statistics:"
 }

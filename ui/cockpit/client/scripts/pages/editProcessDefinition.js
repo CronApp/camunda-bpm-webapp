@@ -11,85 +11,83 @@ var ngModule = angular.module('cam.cockpit.pages.editProcessDefinition', ['dataD
 
 var Controller = [
   '$location', '$scope', '$rootScope', 'search', 'ProcessDefinitionResource', 'Views', 'Data', 'Transform', 'dataDepend', 'processDefinition', 'page', '$translate',
-  function($location, $scope,   $rootScope,   search,   ProcessDefinitionResource,   Views,   Data,   Transform,   dataDepend,   processDefinition,   page, $translate) {
-    var processData = $scope.processData = dataDepend.create($scope);
+  function($location, $scope, $rootScope, search, ProcessDefinitionResource, Views, Data, Transform, dataDepend, processDefinition, page, $translate) {
+    if (!processDefinition.suspended) {
+      $location.path('/process-definition/' + processDefinition.id + '/runtime');
+      $location.search(search() || {});
+      $location.replace();
+    } else {
+      var processData = $scope.processData = dataDepend.create($scope);
 
-    function parseFilterFromUri() {
-      var params = search(),
-          filter;
-      filter = {
-        parentProcessDefinitionId: params.parentProcessDefinitionId
-      };
+      processData.provide('processDefinition', processDefinition);
 
-      return filter;
-    }
+      processData.provide('filter', function() { return { parentProcessDefinitionId: search().parentProcessDefinitionId }; });
 
-    processData.provide('processDefinition', processDefinition);
+      processData.provide('parentId', [ 'filter', function(filter) { return filter.parentProcessDefinitionId; } ]);
 
-    processData.provide('filter', parseFilterFromUri());
+      processData.provide('parent', [ 'parentId', function(parentId) {
+        if (!parentId) {
+          return null;
+        } else {
+          return ProcessDefinitionResource.get({ id : parentId }).$promise;
+        }
+      }]);
 
-    processData.provide('parentId', [ 'filter', function(filter) { return filter.parentProcessDefinitionId; } ]);
+      $rootScope.showBreadcrumbs = true;
 
-    processData.provide('parent', [ 'parentId', function(parentId) {
-      if (!parentId) {
-        return null;
-      } else {
-        return ProcessDefinitionResource.get({ id : parentId }).$promise;
-      }
-    }]);
+      $scope.breadcrumbData = processData.observe([ 'processDefinition', 'parent' ], function(definition, parent) {
+        page.breadcrumbsClear();
 
-    $rootScope.showBreadcrumbs = true;
+        page.breadcrumbsAdd({
+          label: $translate.instant('PROCESS_DEFINITION_PROCESSES'),
+          href: '#/processes/'
+        });
 
-    $scope.breadcrumbData = processData.observe([ 'processDefinition', 'parent' ], function(definition, parent) {
-      page.breadcrumbsClear();
+        if (parent) {
+          page.breadcrumbsAdd({
+            type: 'processDefinition',
+            label: parent.name || (parent.id.slice(0, 8) +'…'),
+            href: '#/process-definition/'+ parent.id +'/runtime',
+            processDefinition: parent
+          });
+        }
 
-      page.breadcrumbsAdd({
-        label: $translate.instant('PROCESS_DEFINITION_PROCESSES'),
-        href: '#/processes/'
-      });
-
-      if (parent) {
         page.breadcrumbsAdd({
           type: 'processDefinition',
-          label: parent.name || (parent.id.slice(0, 8) +'…'),
-          href: '#/process-definition/'+ parent.id +'/runtime',
-          processDefinition: parent
+          label: definition.name || definition.key || definition.id,
+          href: '#/process-definition/'+ definition.id +'/runtime',
+          processDefinition: definition
         });
-      }
 
-      page.breadcrumbsAdd({
-        type: 'processDefinition',
-        label: definition.name || definition.key || definition.id,
-        href: '#/process-definition/'+ definition.id +'/runtime',
-        processDefinition: definition
+        var plugins = Views.getProviders({ component: 'cockpit.editProcessDefinition.view' });
+
+        page.breadcrumbsAdd({
+          type: 'processDefinition',
+          label: definition.name || definition.key || definition.id,
+          href: '#/process-definition/'+ definition.id +'/edit',
+          processDefinition: definition,
+
+          choices: plugins.sort(function(a, b) {
+            return a.priority < b.priority ? -1 : (a.priority > b.priority ? 1 : 0);
+          }).map(function(plugin) {
+            return {
+              active: plugin.id === 'edit',
+              label: plugin.label,
+              href: '#/process-definition/' + definition.id + '/' + plugin.id
+            };
+          })
+        });
+
+        page.titleSet((definition.name || definition.key || definition.id).toString());
       });
 
-      var plugins = Views.getProviders({ component: 'cockpit.editProcessDefinition.view' });
+      $scope.processDefinition = processDefinition;
 
-      page.breadcrumbsAdd({
-        type: 'processDefinition',
-        label: definition.name || definition.key || definition.id,
-        href: '#/process-definition/'+ definition.id +'/edit',
-        processDefinition: definition,
+      $scope.showDeployButton = false;
 
-        choices: plugins.sort(function(a, b) {
-          return a.priority < b.priority ? -1 : (a.priority > b.priority ? 1 : 0);
-        }).map(function(plugin) {
-          return {
-            active: plugin.id === 'edit',
-            label: plugin.label,
-            href: '#/process-definition/' + definition.id + '/' + plugin.id
-          };
-        })
-      });
-
-      page.titleSet((definition.name || definition.key || definition.id).toString());
-    });
-
-    $scope.processDefinition = processDefinition;
-
-    $scope.editProcessDefinitionVars = { read: [ 'processDefinition', 'processData' ] };
-    $scope.editProcessDefinitionActions = Views.getProviders({ component: 'cockpit.processDefinition.modeler.action' });
+      $scope.editProcessDefinitionVars = { read: [ 'processDefinition', 'processData', 'showDeployButton' ] };
+      $scope.editProcessDefinitionActions = Views.getProviders({ component: 'cockpit.processDefinition.modeler.action' });
+    }
   }];
 
 var RouteConfig = [ '$routeProvider', function($routeProvider) {

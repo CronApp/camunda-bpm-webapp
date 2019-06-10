@@ -18,7 +18,6 @@ var Controller = ['$scope', function($scope) {
 module.exports = ['ViewsProvider', function(ViewsProvider) {
   ViewsProvider.registerDefaultView('cockpit.processDefinition.modeler.action', {
     id: 'save-process-definition-action',
-    label: 'PLUGIN_UPDATE_SUSPENSION_STATE',
     template: actionTemplate,
     controller: Controller,
     priority: 50

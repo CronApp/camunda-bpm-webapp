@@ -17,8 +17,8 @@
           "name": "cronapp",
           "isAttr": true,
           "type": "String"
-        },
+        }
       ]
-    },
+    }
   ]
 }

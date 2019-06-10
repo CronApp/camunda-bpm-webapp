@@ -11,7 +11,7 @@ var ngModule = angular.module('cam.cockpit.pages.createProcessDefinition', ['dat
 
 var Controller = [
   '$scope', '$rootScope', 'Views', 'dataDepend', 'processDefinition', 'page', '$translate',
-  function($scope,   $rootScope,   Views,   dataDepend,   processDefinition,   page, $translate) {
+  function($scope, $rootScope, Views, dataDepend, processDefinition, page, $translate) {
     var processData = $scope.processData = dataDepend.create($scope);
 
     processData.provide('processDefinition', processDefinition);
@@ -28,7 +28,9 @@ var Controller = [
 
     $scope.processDefinition = processDefinition;
 
-    $scope.createProcessDefinitionVars = { read: [ 'processDefinition', 'processData' ] };
+    $scope.showDeployButton = true;
+
+    $scope.createProcessDefinitionVars = { read: [ 'processDefinition', 'processData', 'showDeployButton' ] };
     $scope.createProcessDefinitionActions = Views.getProviders({ component: 'cockpit.processDefinition.modeler.action' });
   }];
 
