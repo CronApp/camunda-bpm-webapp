@@ -83,9 +83,7 @@ var Controller = [
 
       $scope.processDefinition = processDefinition;
 
-      $scope.showDeployButton = false;
-
-      $scope.editProcessDefinitionVars = { read: [ 'processDefinition', 'processData', 'showDeployButton' ] };
+      $scope.editProcessDefinitionVars = { read: [ 'processDefinition', 'processData' ] };
       $scope.editProcessDefinitionActions = Views.getProviders({ component: 'cockpit.processDefinition.modeler.action' });
     }
   }];

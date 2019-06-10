@@ -28,9 +28,7 @@ var Controller = [
 
     $scope.processDefinition = processDefinition;
 
-    $scope.showDeployButton = true;
-
-    $scope.createProcessDefinitionVars = { read: [ 'processDefinition', 'processData', 'showDeployButton' ] };
+    $scope.createProcessDefinitionVars = { read: [ 'processDefinition', 'processData' ] };
     $scope.createProcessDefinitionActions = Views.getProviders({ component: 'cockpit.processDefinition.modeler.action' });
   }];
 
