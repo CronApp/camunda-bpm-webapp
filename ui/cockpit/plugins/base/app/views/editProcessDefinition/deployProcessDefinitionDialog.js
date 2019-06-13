@@ -1,7 +1,5 @@
 'use strict';
 
-var angular = require('angular');
-
 module.exports = [
   '$scope', '$modalInstance', '$location', '$translate', 'upload', 'getDeploymentUrl', 'processDefinition', 'Notifications', 'Uri',
   function($scope, $modalInstance, $location, $translate, upload, getDeploymentUrl, processDefinition, Notifications, Uri) {
@@ -20,9 +18,12 @@ module.exports = [
       $modalInstance.close($scope.status);
     });
 
-    var isValid = $scope.isValid = function() {
-      var formScope = angular.element('[name="deployForm"]').scope();
-      return (formScope && formScope.deployForm) ? formScope.deployForm.$valid : false;
+    $scope.visibilityCondition = function() {
+      return $scope.status === DEPLOY_SUCCESS || $scope.status === DEPLOY_FAILED;
+    };
+
+    $scope.canDeploy = function() {
+      return $scope.deployment.deploymentName;
     };
 
     function getFilename(deploymentName) {
@@ -32,10 +33,6 @@ module.exports = [
     var deploymentResult;
 
     $scope.deploy = function() {
-      if (!isValid()) {
-        return;
-      }
-
       $scope.status = PERFORM_DEPLOY;
 
       var fields = {

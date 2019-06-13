@@ -5,12 +5,12 @@ module.exports = [
     ViewsProvider
   ) {
     ViewsProvider.registerDefaultView('cockpit.navigation', {
-      id: 'create-process-definition',
-      label: 'CREATE_PROCESS_DEFINITION',
+      id: 'new-process-definition',
+      label: 'NEW_PROCESS_DEFINITION',
       template: '<!-- nothing to show, but needed -->',
-      pagePath: '#/create-process-definition',
+      pagePath: '#/new-process-definition',
       checkActive: function(path) {
-        return path.indexOf('#/create-process-definition') > -1;
+        return path.indexOf('#/new-process-definition') > -1;
       },
       controller: function() {},
       priority: 5

@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{ 'PLGN_SAVE_PROCESS_DEFINITION' | translate }}</h3>
+</div>
+
+<div class="modal-body form-horizontal">
+  <div notifications-panel></div>
+
+  <p>{{ 'PLGN_SAVE_PROC_DEF' | translate }}</p>
+
+  <p>{{ 'PLGN_SAVE_PROC_DEF_SURE' | translate }}</p>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-link"
+          ng-click="$dismiss()"
+          ng-disabled="status === 'LOADING'">{{ 'CANCEL' | translate }}
+  </button>
+
+  <button type="submit"
+          class="btn btn-primary"
+          ng-click="save()"
+          ng-disabled="status === 'LOADING'">{{ 'SAVE' | translate }}
+    <span ng-if="status === 'LOADING'" class="glyphicon glyphicon-refresh animate-spin"></span>
+  </button>
+</div>

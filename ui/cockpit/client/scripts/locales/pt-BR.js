@@ -100,7 +100,7 @@ var translations = {
   'Timer Definition Type': 'Tipo da definição de tempo',
   'Timer Definition': 'Definição de tempo',
   'This maps to the process definition key.': 'Isso mapeia as chaves de definições de processos',
-  'Version Tag': 'Versão da tag',
+  'Version Tag': 'Tag de Versão',
   'External Task Configuration': 'Configuração de tarefa externa',
   'Task Priority': 'Prioridade da tarefa',
   'Job Configuration': 'Configuração do processo',

@@ -9,8 +9,7 @@
   <div ng-if="status !== 'SUCCESS'">
     {{ 'PLGN_PDEF_DELETE_STATUS' | translate }}
 
-    <div class="alert alert-info"
-         ng-if="instancesCount > 0 && !options.cascade">
+    <div class="alert alert-info" ng-if="instancesCount > 0 && !options.cascade">
       {{ instancesCount === 1 ?
       ('PLGN_PDEF_MODAL_INFO_SINGULAR' | translate) :
       ('PLGN_PDEF_MODAL_INFO_PLURAL' | translate:{instancesCount: instancesCount}) }}
@@ -23,8 +22,7 @@
 
       <div class="form-group cascade">
 
-        <label class="control-label col-xs-5"
-               for="cascade">
+        <label class="control-label col-xs-5" for="cascade">
           {{ 'PLGN_PDEF_MODAL_CASCADE' | translate }}
           <span class="glyphicon glyphicon-question-sign"
                 tooltip="{{ 'PLGN_PDEF_MODAL_CASCADE_TOOLTIP' | translate }}"
@@ -45,8 +43,7 @@
       <div ng-hide="hideSkipCustomListeners"
            class="form-group skip-custom-listener">
 
-        <label class="control-label col-xs-5"
-               for="skipCustomListeners">
+        <label class="control-label col-xs-5" for="skipCustomListeners">
           {{ 'PLGN_PDEF_MODAL_SKIP_CUSTOM_LISTENERS' | translate }}
           <span class="glyphicon glyphicon-question-sign"
                 tooltip="{{ 'PLGN_PDEF_MODAL_SKIP_CUSTOM_LISTENERS_TOOLTIP' | translate }}"
@@ -73,20 +70,22 @@
   <button ng-if="status !== 'SUCCESS'"
           class="btn btn-link"
           ng-click="$dismiss()"
-          ng-disabled="status === 'PERFORM'">{{ 'PLGN_PDEF_MODAL_CLOSE' | translate }}
+          ng-disabled="status === 'PERFORM'">
+          {{ 'PLGN_PDEF_MODAL_CLOSE' | translate }}
   </button>
 
   <button ng-if="status !== 'SUCCESS'"
           type="submit"
           class="btn btn-primary"
           ng-click="deleteProcessDefinition()"
-          ng-disabled="status === 'PERFORM' || (!options.cascade && instancesCount > 0)">{{ 'PLGN_PDEF_MODAL_DELETE' |
-    translate }}
+          ng-disabled="status === 'PERFORM' || (!options.cascade && instancesCount > 0)">
+          {{ 'PLGN_PDEF_MODAL_DELETE' | translate }}
   </button>
 
   <button ng-if="status === 'SUCCESS'"
           type="submit"
           class="btn btn-primary"
-          ng-click="redirectToProcessDefinition()">{{ 'PLGN_PDEF_MODAL_OK' | translate }}
+          ng-click="redirectToProcessDefinition()">
+          {{ 'PLGN_PDEF_MODAL_OK' | translate }}
   </button>
 </div>

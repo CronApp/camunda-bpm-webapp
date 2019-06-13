@@ -32,6 +32,7 @@ var angular = require('angular'),
 
     // edit process definition
     saveProcessDefinitionAction = require('./editProcessDefinition/saveProcessDefinitionAction'),
+    saveProcessDefinitionDialog = require('./editProcessDefinition/saveProcessDefinitionDialog'),
     deployProcessDefinitionAction = require('./editProcessDefinition/deployProcessDefinitionAction'),
     deployProcessDefinitionDialog = require('./editProcessDefinition/deployProcessDefinitionDialog'),
 
@@ -74,6 +75,7 @@ ngModule.config(calledProcessDefinitionTable);
 ngModule.config(editProcessDefinitionAction);
 // ngModule.controller('UpdateProcessDefinitionSuspensionStateController', updateSuspensionStateDialog);
 ngModule.controller('EditProcessDefinitionController', editProcessDefinitionDialog);
+ngModule.controller('SaveProcessDefinitionController', saveProcessDefinitionDialog);
 ngModule.config(pdIncidentsTab);
 ngModule.config(saveProcessDefinitionAction);
 ngModule.config(deployProcessDefinitionAction);

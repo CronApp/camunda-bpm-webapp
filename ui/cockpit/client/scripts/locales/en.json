@@ -813,7 +813,7 @@
 
   "PIE_CHART_NO_DATA" : "No Data",
 
-  "CREATE_PROCESS_DEFINITION" : "Create process definition",
+  "NEW_PROCESS_DEFINITION" : "New process definition",
   "NEW_PROCESS_DEFINITION_ID" : "ID of new process definition",
   "NEW_PROCESS_DEFINITION_NAME" : "Name of new process definition",
   "PROCESS_DEFINITION_SAVE_ERROR": "Something went wrong while saving the process definition",
@@ -836,6 +836,7 @@
   "PLGN_DPLY_DEPLOYMENT_FAILED_1": "The process definition could not be deployed successfully.",
   "PLGN_DPLY_DEPLOYMENT_FAILED_2": "Review the process definition and try again.",
   "PLGN_DPLY_MODAL_REMOVE_FILE": "Remove file",
+  "PLGN_DPLY_MODAL_DEPLOYMENT": "By clicking the Deploy button, a new deployment will be created, containing the process definition opened at this page!",
 
   "PLGN_PDEF_NOTIFICATION_FINISHED": "Finished",
   "PLGN_PDEF_NOTIFICATION_MSG_FINISHED": "The process definition \"{{id}}\" was successfully deleted.",
@@ -844,6 +845,7 @@
   "PLUGIN_PROCESS_INSTANCE_DELETE_RUNNING": "Delete Running Process Instances Action",
   "PLUGIN_JOBDEFINITION_ACTION_DIALOG_ERR_NO_JOB": "This process definition has no associated task definitions. Task priority can not be overridden.",
 
+  "PLUGIN_EDIT_PROC_DEF_EDIT_BTN": "Edit Process",
   "PLUGIN_EDIT_PROC_DEF_EDIT_PROCESS": "Edit Process Definition",
   "PLUGIN_EDIT_PROC_DEF_MESSAGE_2": "This process definition will be suspended for edition, so that it will not be possible to start new process instances based on this process definition until it is deployed again.",
   "PLUGIN_EDIT_PROC_DEF_INCLUDE_INSTANCES": "Include Instances",
@@ -860,5 +862,13 @@
   "OVERLAY_ACTION_OFF": "off",
   "OVERLAY_ACTION_LOADING": "loading...",
   "OVERLAY_ACTION_TOOLTIP": "Toggle Activity Instance Statistics",
-  "OVERLAY_ACTION_TEXT": "Activity Instance Statistics:"
+  "OVERLAY_ACTION_TEXT": "Activity Instance Statistics:",
+
+  "PLGN_SAVE_PROCESS_SUCCESS": "Success",
+  "PLGN_SAVE_PROCESS_FAILED": "Failed",
+  "PLGN_SAVE_PROCESS_DEFINITION": "Save Process Definition",
+  "PLGN_SAVE_PROC_DEF": "This resource will be saved. When saving, a deploy in suspended state containing this process definition will be generated and you will be redirected to the edit page.",
+  "PLGN_SAVE_PROC_DEF_SURE": "Are you sure to save this process definition?",
+  "PLGN_SAVE_PROC_DEF_SUCCESS": "Process Definition saved successfully",
+  "PLGN_SAVE_PROC_DEF_FAILED": "Could not save process definition."
 }

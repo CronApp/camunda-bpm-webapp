@@ -2,7 +2,7 @@
 
 var fs = require('fs');
 
-var template = fs.readFileSync(__dirname + '/create-process-definition.html', 'utf8');
+var template = fs.readFileSync(__dirname + '/new-process-definition.html', 'utf8');
 
 var angular = require('camunda-commons-ui/vendor/angular');
 var camCommons = require('camunda-commons-ui/lib');
@@ -21,10 +21,10 @@ var Controller = [
     page.breadcrumbsClear();
 
     page.breadcrumbsAdd({
-      label: $translate.instant('CREATE_PROCESS_DEFINITION')
+      label: $translate.instant('NEW_PROCESS_DEFINITION')
     });
 
-    page.titleSet($translate.instant('CREATE_PROCESS_DEFINITION'));
+    page.titleSet($translate.instant('NEW_PROCESS_DEFINITION'));
 
     $scope.processDefinition = processDefinition;
 
@@ -34,7 +34,7 @@ var Controller = [
 
 var RouteConfig = [ '$routeProvider', function($routeProvider) {
   $routeProvider
-    .when('/create-process-definition', {
+    .when('/new-process-definition', {
       template: template,
       controller: Controller,
       authentication: 'required',
@@ -46,7 +46,7 @@ var RouteConfig = [ '$routeProvider', function($routeProvider) {
               resolve: function() {
                 var deferred = $q.defer();
 
-                $http.get(Uri.appUri('engine://engine/:engine/create-process-definition')).success(function(data) {
+                $http.get(Uri.appUri('engine://engine/:engine/cron-process-definition/new')).success(function(data) {
                   deferred.resolve(data);
                 })
                 .error(function(err) {

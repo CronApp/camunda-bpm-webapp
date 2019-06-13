@@ -45,18 +45,21 @@ module.exports = [
             b = i;
             break;
           }
-
-          processDefinitions.splice(b, 1);
-          processDefinitions.length > 0 && ($scope.latestProcessDefinitionId = processDefinitions[0].id);
-
-          Notifications.addMessage({
-            status: $translate.instant('PLGN_PDEF_NOTIFICATION_FINISHED'),
-            message: $translate.instant('PLGN_PDEF_NOTIFICATION_MSG_FINISHED', {
-              id: processDefinition.id
-            }),
-            exclusive: true
-          });
         }
+
+        processDefinitions.splice(b, 1);
+
+        if (processDefinitions.length > 0) {
+          $scope.latestProcessDefinitionId = processDefinitions[0].id;
+        }
+
+        Notifications.addMessage({
+          status: $translate.instant('PLGN_PDEF_NOTIFICATION_FINISHED'),
+          message: $translate.instant('PLGN_PDEF_NOTIFICATION_MSG_FINISHED', {
+            id: processDefinition.id
+          }),
+          exclusive: true
+        });
       }).catch(function(err) {
         $scope.status = FAILED;
 

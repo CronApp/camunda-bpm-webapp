@@ -106,7 +106,7 @@ module.exports = ['$q', '$document', '$compile', '$location', 'debounce',
             canvas = modeler.get('canvas');
             definitions = modeler._definitions;
             zoom();
-            disableIsExecutableFlag();
+            disablePanelFields();
             $scope.loaded = true;
           }
 
@@ -153,10 +153,15 @@ module.exports = ['$q', '$document', '$compile', '$location', 'debounce',
             }
           }
 
-          function disableIsExecutableFlag() {
-            var isExecutable = angular.element(document.querySelector('#camunda-process-is-executable'));
-            if (isExecutable) {
-              isExecutable.prop('disabled', true);
+          function disablePanelFields() {
+            disableField('#camunda-id');
+            disableField('#camunda-process-is-executable');
+          }
+
+          function disableField(fieldId) {
+            var field = angular.element(document.querySelector(fieldId));
+            if (field) {
+              field.data('disable', 'disableRemove');
             }
           }
 
