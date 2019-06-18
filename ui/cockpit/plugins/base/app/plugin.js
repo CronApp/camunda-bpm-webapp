@@ -10,6 +10,9 @@
 var angular = require('angular'),
     viewsModule = require('./views/main'),
     resourcesModule = require('./resources/main'),
-    dataModule = require('./data/main');
+    dataModule = require('./data/main'),
+    servicesModule = require('./services/main');
 
-module.exports = angular.module('cockpit.plugin.base', [viewsModule.name, resourcesModule.name, dataModule.name]);
+module.exports = angular.module('cockpit.plugin.base', [
+  viewsModule.name, resourcesModule.name, dataModule.name, servicesModule.name
+]);

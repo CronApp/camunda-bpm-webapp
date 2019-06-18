@@ -1,5 +1,7 @@
 'use strict';
 
+var $ = window.jQuery = window.$ = require('jquery');
+
 module.exports = [
   '$scope', '$modalInstance', '$location', '$translate', 'upload', 'getDeploymentUrl', 'processDefinition', 'Notifications', 'Uri',
   function($scope, $modalInstance, $location, $translate, upload, getDeploymentUrl, processDefinition, Notifications, Uri) {
@@ -35,10 +37,20 @@ module.exports = [
     $scope.deploy = function() {
       $scope.status = PERFORM_DEPLOY;
 
+      var $xml = $(processDefinition.bpmn20Xml);
+      var $process = $xml.find('process');
+
+      var versionTag = $process.attr('camunda:versiontag');
+
       var fields = {
         'deployment-name': deployment.deploymentName,
+        'version-tag': versionTag,
         'deployment-source': 'cockpit'
       };
+
+      if (processDefinition.deploymentId) {
+        fields['deployment-id'] = processDefinition.deploymentId;
+      }
 
       var files = [{
         file: {
@@ -47,7 +59,7 @@ module.exports = [
         content: processDefinition.bpmn20Xml
       }];
 
-      upload(Uri.appUri('engine://engine/:engine/deployment/create'), files, fields).then(function(deployment) {
+      upload(Uri.appUri('engine://engine/:engine/cron-process-definition/deploy'), files, fields).then(function(deployment) {
         $scope.status = DEPLOY_SUCCESS;
         deploymentResult = deployment;
         Notifications.addMessage({

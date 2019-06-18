@@ -2,6 +2,16 @@
    href
    ng-click="openSaveDialog()"
    tooltip="{{'SAVE' | translate}}"
-   tooltip-placement="left">
+   tooltip-placement="left"
+   ng-hide="saveDirectly">
+  <span class="glyphicon glyphicon-save-file"></span>
+</a>
+
+<a class="btn btn-default btn-toolbar"
+   href
+   ng-click="saveEdition()"
+   tooltip="{{'SAVE' | translate}}"
+   tooltip-placement="left"
+   ng-show="saveDirectly">
   <span class="glyphicon glyphicon-save-file"></span>
 </a>

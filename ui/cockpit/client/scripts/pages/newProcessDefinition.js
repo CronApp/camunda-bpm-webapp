@@ -27,8 +27,9 @@ var Controller = [
     page.titleSet($translate.instant('NEW_PROCESS_DEFINITION'));
 
     $scope.processDefinition = processDefinition;
+    $scope.saveDirectly = false;
 
-    $scope.createProcessDefinitionVars = { read: [ 'processDefinition', 'processData' ] };
+    $scope.createProcessDefinitionVars = { read: [ 'processDefinition', 'processData', 'saveDirectly' ] };
     $scope.createProcessDefinitionActions = Views.getProviders({ component: 'cockpit.processDefinition.modeler.action' });
   }];
 

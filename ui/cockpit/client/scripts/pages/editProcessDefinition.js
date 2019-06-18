@@ -82,8 +82,9 @@ var Controller = [
       });
 
       $scope.processDefinition = processDefinition;
+      $scope.saveDirectly = true;
 
-      $scope.editProcessDefinitionVars = { read: [ 'processDefinition', 'processData' ] };
+      $scope.editProcessDefinitionVars = { read: [ 'processDefinition', 'processData', 'saveDirectly' ] };
       $scope.editProcessDefinitionActions = Views.getProviders({ component: 'cockpit.processDefinition.modeler.action' });
     }
   }];

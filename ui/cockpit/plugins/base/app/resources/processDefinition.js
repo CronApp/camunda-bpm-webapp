@@ -8,13 +8,6 @@ module.exports = ['$resource', 'Uri', function($resource, Uri) {
       params: {
         action: 'called-process-definitions'
       }
-    },
-    createNewProcessDefinition: {
-      method: 'POST',
-      isArray: false,
-      params: {
-        action: 'create-new-process-definition'
-      }
     }
   });
 }];
