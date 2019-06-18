@@ -32,6 +32,25 @@ module.exports = [
       return deploymentName.indexOf('.bpmn') === -1 ? deploymentName + '.bpmn' : deploymentName;
     }
 
+    function updateVersionTagToRelease(bpmn20Xml) {
+      return bpmn20Xml.replace('camunda:versionTag="snapshot"', 'camunda:versionTag="release"');
+    }
+
+    function successNotification() {
+      Notifications.addMessage({
+        status: $translate.instant('PLGN_DPLY_DEPLOYMENT_SUCCESSFUL'),
+        message: $translate.instant('PLGN_DPLY_RESOURCE_UPDATED')
+      });
+    }
+
+    function errorNotification(message) {
+      Notifications.addMessage({
+        status: $translate.instant('PLGN_DPLY_DEPLOYMENT_FAILED'),
+        message: $translate.instant('PLGN_DPLY_RESOURCE_NOT_UPDATED') + message,
+        exclusive: true
+      });
+    }
+
     var deploymentResult;
 
     $scope.deploy = function() {
@@ -39,7 +58,6 @@ module.exports = [
 
       var $xml = $(processDefinition.bpmn20Xml);
       var $process = $xml.find('process');
-
       var versionTag = $process.attr('camunda:versiontag');
 
       var fields = {
@@ -56,24 +74,19 @@ module.exports = [
         file: {
           name: getFilename(deployment.deploymentName)
         },
-        content: processDefinition.bpmn20Xml
+        content: updateVersionTagToRelease(processDefinition.bpmn20Xml)
       }];
 
-      upload(Uri.appUri('engine://engine/:engine/cron-process-definition/deploy'), files, fields).then(function(deployment) {
+      var url = Uri.appUri('engine://engine/:engine/cron-process-definition/deploy');
+
+      upload(url, files, fields).then(function(deployment) {
         $scope.status = DEPLOY_SUCCESS;
         deploymentResult = deployment;
-        Notifications.addMessage({
-          'status': $translate.instant('PLGN_DPLY_DEPLOYMENT_SUCCESSFUL'),
-          'message': $translate.instant('PLGN_DPLY_RESOURCE_UPDATED')
-        });
+        successNotification();
       }).catch(function(err) {
         $scope.status = DEPLOY_FAILED;
         var message = JSON.parse(err.target.responseText).message;
-        Notifications.addError({
-          'status': $translate.instant('PLGN_DPLY_DEPLOYMENT_FAILED'),
-          'message': $translate.instant('PLGN_DPLY_RESOURCE_NOT_UPDATED') + message,
-          'exclusive': ['type']
-        });
+        errorNotification(message);
       });
     };
 
