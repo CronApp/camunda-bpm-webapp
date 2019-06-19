@@ -837,6 +837,7 @@
   "PLGN_DPLY_DEPLOYMENT_FAILED_2": "Review the process definition and try again.",
   "PLGN_DPLY_MODAL_REMOVE_FILE": "Remove file",
   "PLGN_DPLY_MODAL_DEPLOYMENT": "By clicking the Deploy button, a new deployment will be created, containing the process definition opened at this page!",
+  "PLGN_DPLY_MODAL_EXECUTABLE_REQUIRED": "Check the \"Executable\" checkbox to deploy this process definition.",
 
   "PLGN_PDEF_NOTIFICATION_FINISHED": "Finished",
   "PLGN_PDEF_NOTIFICATION_MSG_FINISHED": "The process definition \"{{id}}\" was successfully deleted.",
@@ -870,5 +871,6 @@
   "PLGN_SAVE_PROC_DEF": "This resource will be saved. When saving, a deploy in suspended state containing this process definition will be generated and you will be redirected to the edit page.",
   "PLGN_SAVE_PROC_DEF_SURE": "Are you sure to save this process definition?",
   "PLGN_SAVE_PROC_DEF_SUCCESS": "Process Definition saved successfully",
-  "PLGN_SAVE_PROC_DEF_FAILED": "Could not save process definition."
+  "PLGN_SAVE_PROC_DEF_FAILED": "Could not save process definition.",
+  "PLGN_SAVE_PROC_DEF_EXECUTABLE_REQUIRED": "Check the \"Executable\" checkbox to save this process definition."
 }

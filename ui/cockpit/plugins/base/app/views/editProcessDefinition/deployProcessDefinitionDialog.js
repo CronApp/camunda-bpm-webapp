@@ -44,9 +44,9 @@ module.exports = [
     }
 
     function errorNotification(message) {
-      Notifications.addMessage({
+      Notifications.addError({
         status: $translate.instant('PLGN_DPLY_DEPLOYMENT_FAILED'),
-        message: $translate.instant('PLGN_DPLY_RESOURCE_NOT_UPDATED') + message,
+        message: $translate.instant('PLGN_DPLY_RESOURCE_NOT_UPDATED') + ' ' + message,
         exclusive: true
       });
     }
@@ -58,7 +58,16 @@ module.exports = [
 
       var $xml = $(processDefinition.bpmn20Xml);
       var $process = $xml.find('process');
-      var versionTag = $process.attr('camunda:versiontag');
+
+      var isExecutable = $process.attr('isExecutable');
+
+      if (!isExecutable || isExecutable === 'false') {
+        $scope.status = DEPLOY_FAILED;
+        errorNotification($translate.instant('PLGN_DPLY_MODAL_EXECUTABLE_REQUIRED'));
+        return false;
+      }
+
+      var versionTag = $process.attr('camunda:versionTag');
 
       var fields = {
         'deployment-name': deployment.deploymentName,

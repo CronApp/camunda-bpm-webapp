@@ -1638,6 +1638,7 @@
     "PLGN_DPLY_DEPLOYMENT_FAILED_2": "Revise a definição de processo e tente novamente.",
     "PLGN_DPLY_MODAL_REMOVE_FILE": "Remover arquivo",
     "PLGN_DPLY_MODAL_DEPLOYMENT": "Ao clicar no botão Implantar, uma nova implantação será criada, contendo a definição de processo aberta nesta página!",
+    "PLGN_DPLY_MODAL_EXECUTABLE_REQUIRED": "Marque o checkbox \"Executável\" para implantar essa definição de processo.",
     "PLGN_CS_CASES": "Casos",
     "PLGN_CS_DEFINITION_VERSION": "Versão da Definição ",
     "PLGN_CS_DEFINITION_ID": "ID da Definição ",
@@ -2185,5 +2186,6 @@
     "PLGN_SAVE_PROC_DEF": "Este recurso será salvo. Ao salvar, será gerada uma implantação em estado suspenso contendo esta definição de processo e você será redirecionado para a página de edição.",
     "PLGN_SAVE_PROC_DEF_SURE": "Você tem certeza que quer salvar essa definição de processo?",
     "PLGN_SAVE_PROC_DEF_SUCCESS": "A definição de processo foi salva com sucesso.",
-    "PLGN_SAVE_PROC_DEF_FAILED": "Não foi possível salvar a definição de processo."
+    "PLGN_SAVE_PROC_DEF_FAILED": "Não foi possível salvar a definição de processo.",
+    "PLGN_SAVE_PROC_DEF_EXECUTABLE_REQUIRED": "Marque o checkbox \"Executável\" para salvar essa definição de processo."
   }

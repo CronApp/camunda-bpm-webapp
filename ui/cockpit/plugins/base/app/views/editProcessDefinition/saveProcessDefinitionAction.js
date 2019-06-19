@@ -8,14 +8,27 @@ var dialogTemplate = fs.readFileSync(__dirname + '/save-process-definition-dialo
 var Controller = [
   '$scope',
   '$modal',
+  '$timeout',
   '$rootScope',
   'PluginProcessDefinitionService',
   function(
     $scope,
     $modal,
+    $timeout,
     $rootScope,
     PluginProcessDefinitionService
   ) {
+    var executeAfterDestroy = [];
+
+    $scope.$on('$destroy', function() {
+      var job;
+      while((job = executeAfterDestroy.pop())) {
+        if (typeof job === 'function') {
+          $timeout(job);
+        }
+      }
+    });
+
     $scope.openSaveDialog = function() {
       $modal.open({
         controller: 'SaveProcessDefinitionController',
@@ -31,8 +44,13 @@ var Controller = [
 
     $scope.saveEdition = function() {
       PluginProcessDefinitionService.save($scope.processDefinition, $scope, function(deployment) {
-        PluginProcessDefinitionService.successNotification($scope);
-        PluginProcessDefinitionService.redirectToEdit(deployment.deployedProcessDefinition.id);
+        if (deployment) {
+          PluginProcessDefinitionService.redirectToEdit(deployment.deployedProcessDefinition.id);
+
+          executeAfterDestroy.push(function() {
+            PluginProcessDefinitionService.successNotification($scope);
+          });
+        }
       });
     };
   }];

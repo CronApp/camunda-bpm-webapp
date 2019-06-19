@@ -32,13 +32,15 @@ module.exports = [
       $scope.status = 'LOADING';
 
       PluginProcessDefinitionService.save(processDefinition, $scope, function(deployment) {
-        PluginProcessDefinitionService.redirectToEdit(deployment.deployedProcessDefinition.id);
+        if (deployment) {
+          PluginProcessDefinitionService.redirectToEdit(deployment.deployedProcessDefinition.id);
 
-        executeAfterDestroy.push(function() {
-          PluginProcessDefinitionService.successNotification($scope);
-        });
+          executeAfterDestroy.push(function() {
+            PluginProcessDefinitionService.successNotification($scope);
+          });
 
-        $modalInstance.close(deployment);
+          $modalInstance.close(deployment);
+        }
       });
     };
   }];

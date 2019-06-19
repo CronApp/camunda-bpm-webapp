@@ -4,6 +4,20 @@ var $ = window.jQuery = window.$ = require('jquery');
 
 var Service = ['$location', '$translate', 'upload', 'Notifications', 'Uri',
   function($location, $translate, upload, Notifications, Uri) {
+
+    function errorNotification($scope, message) {
+      Notifications.addError({
+        status: $translate.instant('PLGN_SAVE_PROCESS_FAILED'),
+        message: $translate.instant('PLGN_SAVE_PROC_DEF_FAILED') + ' ' + message,
+        exclusive: true,
+        scope: $scope
+      });
+    }
+
+    function updateVersionTagToSnapshot(bpmn20Xml) {
+      return bpmn20Xml.replace('camunda:versionTag="release"', 'camunda:versionTag="snapshot"');
+    }
+
     return {
       redirectToEdit: function(processDefinitionId) {
         $location.path('/process-definition/' + processDefinitionId + '/edit');
@@ -19,8 +33,16 @@ var Service = ['$location', '$translate', 'upload', 'Notifications', 'Uri',
         var $xml = $(processDefinition.bpmn20Xml);
         var $process = $xml.find('process');
 
+        var isExecutable = $process.attr('isExecutable');
+
+        if (!isExecutable || isExecutable === 'false') {
+          $scope.status = null;
+          errorNotification($scope, $translate.instant('PLGN_SAVE_PROC_DEF_EXECUTABLE_REQUIRED'));
+          return false;
+        }
+
         var deploymentName = $process.attr('name') || $process.attr('id');
-        var versionTag = $process.attr('camunda:versiontag');
+        var versionTag = $process.attr('camunda:versionTag');
 
         var fields = {
           'deployment-name': deploymentName,
@@ -36,19 +58,14 @@ var Service = ['$location', '$translate', 'upload', 'Notifications', 'Uri',
           file: {
             name: deploymentName + '.bpmn'
           },
-          content: processDefinition.bpmn20Xml
+          content: updateVersionTagToSnapshot(processDefinition.bpmn20Xml)
         }];
 
         var url = Uri.appUri('engine://engine/:engine/cron-process-definition/save');
 
         upload(url, files, fields).then(callback).catch(function(err) {
           $scope.status = null;
-          Notifications.addError({
-            status: $translate.instant('PLGN_SAVE_PROCESS_FAILED'),
-            message: $translate.instant('PLGN_SAVE_PROC_DEF_FAILED') + ' ' + JSON.parse(err.target.responseText).message,
-            exclusive: true,
-            scope: $scope
-          });
+          errorNotification($scope, JSON.parse(err.target.responseText).message);
         });
       }
     };
