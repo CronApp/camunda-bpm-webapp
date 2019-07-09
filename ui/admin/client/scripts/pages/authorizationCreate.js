@@ -42,7 +42,7 @@ module.exports = ['$scope', '$q', '$location', 'Uri', 'Notifications', 'camAPI',
     var resourcePermissions = $scope.getPermissionsForResource();
 
     for (var i = 0; i < resourcePermissions.length; i++) {
-      if(authorization.permissions.indexOf(resourcePermissions[i]) < 0) {
+      if (authorization.permissions.indexOf(resourcePermissions[i]) < 0) {
         availablePermissions.push(resourcePermissions[i]);
       }
     }
@@ -51,8 +51,7 @@ module.exports = ['$scope', '$q', '$location', 'Uri', 'Notifications', 'camAPI',
   };
 
   $scope.addPermissionTo = function(perm, authorization) {
-    if(authorization.permissions.indexOf('ALL')!= -1 ||
-         authorization.permissions.indexOf('NONE')!= -1) {
+    if (authorization.permissions.indexOf('ALL') !== -1 || authorization.permissions.indexOf('NONE') !== -1) {
       authorization.permissions = [];
     }
     authorization.permissions.push(perm);
@@ -73,7 +72,7 @@ module.exports = ['$scope', '$q', '$location', 'Uri', 'Notifications', 'camAPI',
       type: authorization.type
     };
     query[authorization.identityType === 'Group' ? 'groupId' : 'userId'] = authorization.identityId;
-    if(authorization.id) {
+    if (authorization.id) {
       query.id = authorization.id;
     }
 
@@ -81,18 +80,18 @@ module.exports = ['$scope', '$q', '$location', 'Uri', 'Notifications', 'camAPI',
     delete authorization.identityType;
 
     AuthorizationResource.save(query, function(err, result) {
-      if(err) {
+      if (err) {
         Notifications.addError({
           status: query.id ? $translate.instant('AUTHORIZATION_UPDATE') : $translate.instant('AUTHORIZATION_CREATE'),
           message: err.toString()
         });
         $scope.cancelUpdateAuthorization(authorization);
         var phase = $scope.$root.$$phase;
-        if(phase !== '$apply' && phase !== '$digest') {
+        if (phase !== '$apply' && phase !== '$digest') {
           $scope.$apply();
         }
       }
-      if(result) {
+      if (result) {
         authorization.id = result.id;
       }
     });
@@ -100,7 +99,7 @@ module.exports = ['$scope', '$q', '$location', 'Uri', 'Notifications', 'camAPI',
   };
 
   $scope.cancelUpdateAuthorization = function(authorization) {
-    if(!authorization.id) {
+    if (!authorization.id) {
       $scope.authorizations.splice($scope.authorizations.indexOf(authorization), 1);
     } else {
       delete authorization.userId;
@@ -124,7 +123,7 @@ module.exports = ['$scope', '$q', '$location', 'Uri', 'Notifications', 'camAPI',
   };
 
   $scope.ensureValidUser = function(authorization) {
-    if(authorization.type === '0') {
+    if (authorization.type === '0') {
       authorization.identityId = '*';
       authorization.identityType = 'User';
     }

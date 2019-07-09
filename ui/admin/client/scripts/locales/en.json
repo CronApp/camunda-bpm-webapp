@@ -347,5 +347,21 @@
   "PLUGIN_SEARCH_USER_LIKE" : "like",
   "PLUGIN_SEARCH_USER_EMAIL" : "Email",
   "PLUGIN_SEARCH_USER_TENANT_ID" : "Tenant ID",
-  "PLUGIN_SEARCH_USER_GROUP_ID" : "Group ID"
+  "PLUGIN_SEARCH_USER_GROUP_ID" : "Group ID",
+
+  "NONE": "None",
+  "READ": "Read",
+  "UPDATE": "Update",
+  "CREATE": "Create",
+  "CREATE_INSTANCE": "Create Instance",
+  "READ_INSTANCE": "Read Instance",
+  "UPDATE_INSTANCE": "Update Instance",
+  "DELETE_INSTANCE": "Delete Instance",
+  "MIGRATE_INSTANCE": "Migrate Instance",
+  "READ_TASK": "Read Task",
+  "UPDATE_TASK": "Update Task",
+  "TASK_ASSIGN": "Assign Task",
+  "TASK_WORK": "Work In Task",
+  "READ_HISTORY": "Read History",
+  "DELETE_HISTORY": "Delete History"
 }

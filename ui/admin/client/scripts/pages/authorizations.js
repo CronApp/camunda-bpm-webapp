@@ -84,7 +84,9 @@ module.exports = [ '$routeProvider', function($routeProvider) {
         function createResourceList() {
           $scope.resourceList = [];
           for(var entry in $scope.resourceMap) {
-            $scope.resourceList.push({id:entry, name:$scope.resourceMap[entry]});
+            if ($scope.resourceMap.hasOwnProperty(entry)) {
+              $scope.resourceList.push({id:entry, name:$scope.resourceMap[entry]});
+            }
           }
         }
 
@@ -106,19 +108,18 @@ module.exports = [ '$routeProvider', function($routeProvider) {
           }
 
           // remove others if ALL is contained:
-          if(permissionsList.indexOf('ALL')>-1) {
-            return 'ALL';
-
-          } else {
-            var result = '';
-            for (var i = 0; i < permissionsList.length; i++) {
-              if(i>0) {
-                result += ', ';
-              }
-              result += permissionsList[i];
-            }
-            return result;
+          if (permissionsList.indexOf('ALL') > -1) {
+            return $translate.instant('ALL');
           }
+
+          var result = '';
+          for (var i = 0; i < permissionsList.length; i++) {
+            if(i>0) {
+              result += ', ';
+            }
+            result += $translate.instant(permissionsList[i]);
+          }
+          return result;
         };
 
         $scope.deleteAuthorization = function(authorization) {
@@ -135,7 +136,7 @@ module.exports = [ '$routeProvider', function($routeProvider) {
           });
 
           dialog.result.then(function(result) {
-            if (result == 'SUCCESS') {
+            if (result === 'SUCCESS') {
               loadAuthorizations();
             }
           }, function() {
@@ -187,7 +188,7 @@ module.exports = [ '$routeProvider', function($routeProvider) {
         // page controls ////////////////////////////////////
 
         $scope.show = function(fragment) {
-          return fragment == $location.search().tab;
+          return fragment === $location.search().tab;
         };
 
         $scope.activeClass = function(link) {

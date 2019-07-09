@@ -36,6 +36,20 @@ module.exports = [
       return bpmn20Xml.replace('camunda:versionTag="snapshot"', 'camunda:versionTag="release"');
     }
 
+    function findProcess($xml) {
+      var selectors = ['process', 'bpmn\\:process', 'bpmn2\\:process'];
+
+      for (var process, index = 0; index < selectors.length; index++) {
+        process = $xml.find(selectors[index]);
+
+        if (process.length) {
+          break;
+        }
+      }
+
+      return process;
+    }
+
     function successNotification() {
       Notifications.addMessage({
         status: $translate.instant('PLGN_DPLY_DEPLOYMENT_SUCCESSFUL'),
@@ -57,7 +71,7 @@ module.exports = [
       $scope.status = PERFORM_DEPLOY;
 
       var $xml = $(processDefinition.bpmn20Xml);
-      var $process = $xml.find('process');
+      var $process = findProcess($xml);
 
       var isExecutable = $process.attr('isExecutable');
 

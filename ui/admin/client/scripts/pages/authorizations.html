@@ -124,7 +124,7 @@
 
                   <ul class="dropdown-menu dropdown-menu-right">
                     <li ng-repeat="perm in availablePermissionsFor(authorization)">
-                      <a ng-click="addPermissionTo(perm, authorization)">{{perm}}</a>
+                      <a ng-click="addPermissionTo(perm, authorization)">{{ perm | translate }}</a>
                     </li>
                   </ul>
                 </div><!-- /input-btn-group -->

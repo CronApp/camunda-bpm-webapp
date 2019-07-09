@@ -18,6 +18,20 @@ var Service = ['$location', '$translate', 'upload', 'Notifications', 'Uri',
       return bpmn20Xml.replace('camunda:versionTag="release"', 'camunda:versionTag="snapshot"');
     }
 
+    function findProcess($xml) {
+      var selectors = ['process', 'bpmn\\:process', 'bpmn2\\:process'];
+
+      for (var process, index = 0; index < selectors.length; index++) {
+        process = $xml.find(selectors[index]);
+
+        if (process.length) {
+          break;
+        }
+      }
+
+      return process;
+    }
+
     return {
       redirectToEdit: function(processDefinitionId) {
         $location.path('/process-definition/' + processDefinitionId + '/edit');
@@ -31,7 +45,7 @@ var Service = ['$location', '$translate', 'upload', 'Notifications', 'Uri',
       },
       save : function(processDefinition, $scope, callback) {
         var $xml = $(processDefinition.bpmn20Xml);
-        var $process = $xml.find('process');
+        var $process = findProcess($xml);
 
         var isExecutable = $process.attr('isExecutable');
 
