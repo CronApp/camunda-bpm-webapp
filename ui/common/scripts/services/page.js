@@ -56,7 +56,7 @@ module.exports = [
           $rootScope.userFullName = null;
           throw err;
         }
-        $rootScope.userFullName = info.firstName + ' ' + info.lastName;
+        $rootScope.userFullName = info.firstName + (info.lastName ? ' ' + info.lastName : '');
       });
     }
     $rootScope.$on('authentication.changed', function(ev, auth) {

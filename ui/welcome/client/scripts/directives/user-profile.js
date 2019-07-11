@@ -45,7 +45,7 @@ module.exports = ['camAPI', 'Notifications', '$translate', function(camAPI, Noti
         id: $scope.user.id
       }, function(err, data) {
         angular.extend($scope.user, data);
-        $scope.$root.userFullName = data.firstName + ' ' + data.lastName;
+        $scope.$root.userFullName = data.firstName + (data.lastName ? ' ' + data.lastName : '');
       });
 
       $scope.submitProfile = function() {

@@ -350,6 +350,7 @@
   "PLUGIN_SEARCH_USER_GROUP_ID" : "Group ID",
 
   "NONE": "None",
+  "ALL": "All",
   "READ": "Read",
   "UPDATE": "Update",
   "CREATE": "Create",

@@ -48,7 +48,7 @@
             $scope.userFullName = null;
             throw err;
           }
-          $scope.userFullName = info.firstName + ' ' + info.lastName;
+          $scope.userFullName = info.firstName + (info.lastName ? ' ' + info.lastName : '');
         });
       }
 

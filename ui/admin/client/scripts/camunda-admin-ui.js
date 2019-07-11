@@ -94,7 +94,7 @@ module.exports = function(pluginDependencies) {
 
         userService.profile(auth.name, function(err, info) {
           if (!err) {
-            $scope.userFullName = info.firstName + ' ' + info.lastName;
+            $scope.userFullName = info.firstName + (info.lastName ? ' ' + info.lastName : '');
           }
         });
       }

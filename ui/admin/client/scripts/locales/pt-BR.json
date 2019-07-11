@@ -452,6 +452,7 @@
   "ADMIN_LICENSE_SAVE_KEY": "Salvar Chave",
   "ADMIN_LICENSE_NOT_HAVE": "Não tem uma chave de licença?",
   "NONE": "Nenhuma",
+  "ALL": "Todas",
   "READ": "Ler",
   "UPDATE": "Atualizar",
   "CREATE": "Criar",
