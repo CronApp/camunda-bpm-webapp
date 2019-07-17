@@ -80,11 +80,16 @@ module.exports = function(pluginDependencies) {
     '$scope',
     '$route',
     'camAPI',
+    'AuthenticationService',
     function(
       $scope,
       $route,
-      camAPI
+      camAPI,
+      AuthenticationService
     ) {
+      AuthenticationService.logout = function() {
+        window.location.href = window.location.origin + '/#/home';
+      };
       var userService = camAPI.resource('user');
       function getUserProfile(auth) {
         if (!auth || !auth.name) {

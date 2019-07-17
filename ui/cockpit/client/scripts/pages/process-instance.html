@@ -93,9 +93,6 @@
               ng-if="processInstance.tenantId"
               ng-mouseenter="hoverTitle('tenant-id')"
               ng-mouseleave="hoverTitle()">{{ processInstance.tenantId }}</dd>
-          <dt ng-if="!processInstance.tenantId">{{ 'PROCESS_INSTANCE_TENANT_ID' | translate }}</dt>
-          <dd class="tenant-id"
-              ng-if="!processInstance.tenantId"><span class="null-value">{{ 'PROCESS_INSTANCE_NULL' | translate }}</span></dd>
 
           <dt cam-widget-clipboard="processDefinition.deploymentId"
               ng-class="{hovered: hovered === 'deployment-id'}">{{ 'PROCESS_INSTANCE_DEPLOYMENT_ID' | translate }}</dt>

@@ -14,11 +14,6 @@
       <div class="user-profile-email">{{ user.email }}</div>
     </div>
 
-    <ul class="action-links list-inline">
-      <li><a ng-click="showForm('profile')">{{'EDIT_PROFILE' | translate}}</a></li>
-      <li><a ng-click="showForm('password')">{{'CHANGE_PASSWORD' | translate}}</a></li>
-    </ul>
-
     <hr class="narrow"
         ng-if="user.groups.length">
 

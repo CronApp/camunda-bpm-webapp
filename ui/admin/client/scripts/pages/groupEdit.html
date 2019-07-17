@@ -5,9 +5,6 @@
       <li ng-class="activeClass('tab=group')">
         <a href="#/groups/{{group.id | escape}}?tab=group">{{ 'GROUP_EDIT_INFORMATION' | translate }}</a>
       </li>
-      <li ng-class="activeClass('tab=tenants')">
-        <a href="#/groups/{{ group.id | escape }}?tab=tenants">{{ 'GROUP_EDIT_TENANTS_LINK' | translate }}</a>
-      </li>
       <li ng-class="activeClass('tab=users')">
         <a href="#/groups/{{group.id | escape}}?tab=users">{{ 'GROUP_EDIT_USERS' | translate }}</a>
       </li>
@@ -98,61 +95,6 @@
         </button>
       </div>
     </form>
-
-    <div ng-if="show('tenants')">
-      <form class="form-horizontal"
-            name="updateTenantMemberships">
-
-        <div class="h4">
-          {{ 'GROUP_EDIT_TENANTS' | translate:'{ group: group.name }' }}
-        </div>
-
-        <div cam-widget-loader
-             loading-state="{{ tenantLoadingState }}"
-             text-empty="{{ 'GROUP_EDIT_MESSAGE_GROUP' | translate:'{ group: group.name }' }}">
-          <table class="cam-table"
-                 ng-hide="tenantList.length == 0">
-            <thead cam-sortable-table-header
-                   default-sort-by="id"
-                   default-sort-order="asc"
-                   sorting-id="admin-sorting-groups-tenants"
-                   on-sort-change="onTenantsSortingChanged(sorting)"
-                   on-sort-initialized="onTenantsSortingChanged(sorting)">
-            <tr>
-              <th class="tenant-id"
-                  cam-sortable-table-column
-                  sort-by-property="id">{{ 'GROUP_EDIT_TENANT_ID' | translate }}</th>
-              <th class="tenant-name"
-                  cam-sortable-table-column
-                  sort-by-property="name">{{ 'GROUP_EDIT_TENANT_NAME' | translate }}</th>
-              <th class="action"
-                  ng-show="availableOperations.removeTenant">
-                {{ 'GROUP_EDIT_ACTION' | translate }}
-              </th>
-            </tr>
-            </thead>
-
-            <tbody>
-            <tr ng-repeat="tenant in tenantList | orderBy:tenantsSorting.sortBy:tenantsSorting.sortReverse">
-              <td class="tenant-id">
-                <a href="#/tenants/{{ tenant.id | escape }}?tab=tenant">{{ tenant.id }}</a>
-              </td>
-
-              <td class="tenant-name">
-                {{ tenant.name }}
-              </td>
-
-              <td class="action"
-                  ng-show="availableOperations.removeTenant">
-                <a ng-click="removeTenant(tenant.id)">{{ 'GROUP_EDIT_REMOVE' | translate }}</a>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-
-      </form>
-    </div>
 
     <div ng-show="show('users')">
       <div class="h3">{{ 'GROUP_EDIT_GROUP_USERS' | translate }}</div>

@@ -11,7 +11,12 @@ module.exports = [
   '$injector',
   '$location',
   'Views',
-  function($scope, $injector, $location, Views) {
+  'AuthenticationService',
+  function($scope, $injector, $location, Views, AuthenticationService) {
+    AuthenticationService.logout = function() {
+      window.location.href = window.location.origin + '/#/home';
+    };
+
     $scope.navbarVars = { read: [] };
 
     $scope.menuActions = [];

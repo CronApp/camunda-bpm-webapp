@@ -3,7 +3,7 @@
   var dateExpLangHelp = 'E.g.: `${ now() }`, `${ dateTime() }` or `${ dateTime().plusWeeks(2) }`';
   var userExpLangHelp = 'E.g.: `${ currentUser() }`';
   var commaSeparatedExps = 'List of values separated by comma or an expression which evaluates to a list. E.g.: `camunda-admin, accounting` or `${ currentUserGroups() }`';
-  var commaSeparatedValues = 'List of values seperated by comma. E.g.: `keyC, keyA, keyB`';
+  var commaSeparatedValues = 'List of values separated by comma. E.g.: `keyC, keyA, keyB`';
 
   // yyyy-MM-dd'T'HH:mm:ss
   var dateRegex = /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(|\.[0-9]{0,4})$/;
@@ -11,16 +11,12 @@
   var numberRegex = /^-?[\d]+$/;
 
   function isValid(regex, error, exprSupport) {
-
     return function(value) {
-
-      if (exprSupport) {
-        if (expressionsRegex.test(value)) {
-          return { valid : true };
-        }
+      if (exprSupport && expressionsRegex.test(value)) {
+        return { valid : true };
       }
       if (regex.test(value)) {
-        if(error === 'date') {
+        if (error === 'date') {
           var isValidDateValue = !isNaN(new Date(value).getTime());
           if(!isValidDateValue) {
             return {
@@ -30,9 +26,7 @@
           }
         }
         return { valid : true };
-
-      }
-      else {
+      } else {
         return {
           valid : false,
           error: error || 'format'
@@ -90,55 +84,12 @@
       ]
     },
     {
-      group: 'Case Instance',
-      options: [
-        {
-          name: 'caseInstanceId',
-          label: 'ID'
-        },
-        {
-          name: 'caseInstanceBusinessKey',
-          label: 'Business Key'
-        },
-        {
-          name: 'caseInstanceBusinessKeyLike',
-          label: 'Business Key Like'
-        }
-      ]
-    },
-    {
-      group: 'Case definition',
-      options: [
-        {
-          name: 'caseDefinitionId',
-          label: 'ID'
-        },
-        {
-          name: 'caseDefinitionKey',
-          label: 'Key'
-        },
-        {
-          name: 'caseDefinitionName',
-          label: 'Name'
-        },
-        {
-          name: 'caseDefinitionNameLike',
-          label: 'Name Like'
-        }
-      ]
-    },
-    {
       group: 'Other',
       options: [
         {
           name: 'active',
           label: 'Active',
           bool: true
-        },
-        {
-          name: 'activityInstanceIdIn',
-          label: 'Activity Instance ID In',
-          help: commaSeparatedValues
         },
         {
           name: 'executionId',

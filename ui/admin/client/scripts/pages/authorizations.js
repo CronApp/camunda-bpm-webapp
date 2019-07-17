@@ -31,13 +31,7 @@ module.exports = [ '$routeProvider', function($routeProvider) {
           7: $translate.instant('AUTHORIZATION_TASK'),
           8: $translate.instant('AUTHORIZATION_PROCESS_INSTANCE'),
           9: $translate.instant('AUTHORIZATION_DEPLOYMENT'),
-          10: $translate.instant('AUTHORIZATION_DECISION_DEFINITION'),
-          11: $translate.instant('AUTHORIZATION_TENANT'),
-          12: $translate.instant('AUTHORIZATION_TENANT_MEMBERSHIP'),
-          13: $translate.instant('AUTHORIZATION_BATCH'),
-          14: $translate.instant('AUTHORIZATION_DECISION_REQUIREMENTS_DEFINITION'),
-          15: $translate.instant('AUTHORIZATION_REPORT'),
-          16: $translate.instant('AUTHORIZATION_DASHBOARD')
+          10: $translate.instant('AUTHORIZATION_DASHBOARD')
         };
 
         pageService.breadcrumbsAdd([
