@@ -6,8 +6,6 @@ var angular = require('angular');
 
 var Modeler = require('./util/modeler'),
     propertiesPanel = require('bpmn-js-properties-panel'),
-    propertiesProvider = require('bpmn-js-properties-panel/lib/provider/bpmn'),
-    camundaPropertiesProvider = require('bpmn-js-properties-panel/lib/provider/camunda'),
     cronPropertiesProvider = require('../providers/cronapp'),
     minimap = require('diagram-js-minimap'),
     translations = require('../locales/customTranslate'),
@@ -55,8 +53,6 @@ module.exports = ['$q', '$document', '$compile', '$location', 'debounce',
             },
             additionalModules: [
               propertiesPanel,
-              propertiesProvider,
-              camundaPropertiesProvider,
               cronPropertiesProvider,
               minimap,
               customTranslateModule

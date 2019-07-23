@@ -152,7 +152,7 @@ public class CsrfPreventionFilter implements Filter {
       }
     } else {
       // Fetch request -> provide new token
-      setCSRFToken(request, response);
+       setCSRFToken(request, response);
     }
 
     filterChain.doFilter(request, response);
