@@ -10,7 +10,7 @@
     {
       "name": "CronappStartEvent",
       "extends": [
-        "bpmn:StartEvent"
+        "bpmn:ServiceTask"
       ],
       "properties": [
         {

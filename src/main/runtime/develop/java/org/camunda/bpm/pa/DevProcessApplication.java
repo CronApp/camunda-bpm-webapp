@@ -338,11 +338,11 @@ public class DevProcessApplication extends ServletProcessApplication {
   private void createAdminDemoData(ProcessEngine engine) throws Exception {
     UserDto user = new UserDto();
     UserProfileDto profile = new UserProfileDto();
-    profile.setId("jonny1");
-    profile.setFirstName("Jonny");
-    profile.setLastName("Prosciutto");
+    profile.setId("admin");
+    profile.setFirstName("Ricardo");
+    profile.setLastName("Moreira");
     UserCredentialsDto credentials = new UserCredentialsDto();
-    credentials.setPassword("jonny1");
+    credentials.setPassword("admin");
     user.setProfile(profile);
     user.setCredentials(credentials);
 
