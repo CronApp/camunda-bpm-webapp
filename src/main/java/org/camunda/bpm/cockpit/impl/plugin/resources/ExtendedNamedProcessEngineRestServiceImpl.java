@@ -12,4 +12,9 @@ public class ExtendedNamedProcessEngineRestServiceImpl extends NamedProcessEngin
   public CronProcessDefinitionRestService getCreateProcessDefinitionResource(@PathParam("name") String engineName) {
     return new CronProcessDefinitionRestService(engineName);
   }
+
+  @Path("/{name}" + BlocklyRestService.PATH)
+  public BlocklyRestService getBlocklyResource(@PathParam("name") String engineName) {
+    return new BlocklyRestService(engineName);
+  }
 }
