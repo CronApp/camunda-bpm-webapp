@@ -5,6 +5,7 @@ import org.camunda.bpm.cockpit.impl.plugin.base.dto.BlocklyMethodDto;
 import org.camunda.bpm.cockpit.impl.plugin.base.dto.BlocklyMethodParameterDto;
 import org.camunda.bpm.cockpit.plugin.resource.AbstractCockpitPluginResource;
 import org.reflections.Reflections;
+import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.ws.rs.GET;
@@ -37,7 +38,7 @@ public class BlocklyRestService extends AbstractCockpitPluginResource {
   private List<BlocklyInfoDto> loadBlocklyInfos() {
     Reflections reflections = new Reflections(PREFIX);
 
-    Set<Class<?>> types = reflections.getTypesAnnotatedWith(org.springframework.stereotype.Component.class);
+    Set<Class<?>> types = reflections.getTypesAnnotatedWith(Component.class);
 
     if (CollectionUtils.isEmpty(types)) {
       return Collections.emptyList();

@@ -458,6 +458,7 @@ function createCronTabGroups(element) {
  * @param {BpmnFactory} bpmnFactory
  * @param {ElementRegistry} elementRegistry
  * @param {ElementTemplates} elementTemplates
+ * @param translate
  */
 function CronPropertiesProvider(eventBus, bpmnFactory, elementRegistry, elementTemplates, translate) {
 
