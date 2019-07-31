@@ -26,19 +26,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.logging.Logger;
 
 import static org.camunda.bpm.engine.authorization.Permissions.ACCESS;
 import static org.camunda.bpm.engine.authorization.Resources.APPLICATION;
 
-class AuthenticationService {
-
-  private final static Logger LOGGER = Logger.getLogger(AuthenticationService.class.getName());
+public class AuthenticationService {
 
   private static final String[] APPS = new String[] { "cockpit", "tasklist", "admin"};
   private static final String APP_WELCOME = "welcome";
 
-  Authentication createAuthenticate(ProcessEngine processEngine, String username, List<String> groupIds, List<String> tenantIds) {
+  public Authentication createAuthenticate(ProcessEngine processEngine, String username, List<String> groupIds, List<String> tenantIds) {
     User user = processEngine.getIdentityService().createUserQuery().userId(username).singleResult();
 
     String userId = user.getId();

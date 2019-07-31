@@ -50,7 +50,7 @@ public class Authentications implements Serializable {
   private static ThreadLocal<Authentications> currentAuthentications = new ThreadLocal<>();
 
   /**holds an entry for each processEngine->userId pair currently authenticated */
-  protected Map<String, Authentication> authentications = new HashMap<String, Authentication>();
+  protected Map<String, Authentication> authentications = new HashMap<>();
 
   public Authentications() {
   }
@@ -168,7 +168,7 @@ public class Authentications implements Serializable {
     }
   }
 
-  static void updateSession(HttpSession session, Authentications authentications) {
+  public static void updateSession(HttpSession session, Authentications authentications) {
     session.setAttribute(CAM_AUTH_SESSION_KEY, authentications);
   }
 

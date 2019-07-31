@@ -215,17 +215,10 @@ public class ProcessEnginesFilter extends AbstractTemplateFilter {
 
     if (processEngine.getIdentityService().isReadOnly()) {
       return false;
-
     } else {
-
-      return SecurityActions.runWithoutAuthentication(new SecurityAction<Boolean>() {
-        public Boolean execute() {
-          return processEngine.getIdentityService()
-              .createUserQuery()
-              .memberOfGroup(Groups.CAMUNDA_ADMIN).count() == 0;
-        }
-      }, processEngine);
-
+      return SecurityActions.runWithoutAuthentication(() -> processEngine.getIdentityService()
+          .createUserQuery()
+          .memberOfGroup(Groups.CAMUNDA_ADMIN).count() == 0, processEngine);
     }
 
   }

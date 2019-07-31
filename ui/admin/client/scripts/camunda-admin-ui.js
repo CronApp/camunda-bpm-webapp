@@ -75,18 +75,23 @@ module.exports = function(pluginDependencies) {
   appNgModule.config(ModuleConfig);
 
   require('./../../../common/scripts/services/locales')(appNgModule, getUri('app-root'), 'admin');
+  require('./../../../common/scripts/services/cron-interceptor')(appNgModule);
 
   appNgModule.controller('camAdminAppCtrl', [
     '$scope',
     '$route',
     'camAPI',
     'AuthenticationService',
+    'TokenService',
     function(
       $scope,
       $route,
       camAPI,
-      AuthenticationService
+      AuthenticationService,
+      TokenService
     ) {
+      TokenService.refreshToken();
+
       AuthenticationService.logout = function() {
         window.location.href = window.location.origin + '/#/home';
       };

@@ -73,11 +73,9 @@ public class SetupResource {
       throw new InvalidRequestException(Status.BAD_REQUEST, "Process Engine '"+processEngineName+"' does not exist.");
     }
 
-    SecurityActions.runWithoutAuthentication(new SecurityAction<Void>() {
-      public Void execute() {
-        createInitialUserInternal(processEngineName, user, processEngine);
-        return null;
-      }
+    SecurityActions.runWithoutAuthentication((SecurityAction<Void>) () -> {
+      createInitialUserInternal(processEngineName, user, processEngine);
+      return null;
     }, processEngine);
 
   }

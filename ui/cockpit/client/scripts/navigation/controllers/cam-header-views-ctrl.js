@@ -12,7 +12,10 @@ module.exports = [
   '$location',
   'Views',
   'AuthenticationService',
-  function($scope, $injector, $location, Views, AuthenticationService) {
+  'TokenService',
+  function($scope, $injector, $location, Views, AuthenticationService, TokenService) {
+    TokenService.refreshToken();
+
     AuthenticationService.logout = function() {
       window.location.href = window.location.origin + '/#/home';
     };

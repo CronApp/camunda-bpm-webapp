@@ -76,6 +76,16 @@
 
   <repositories>
     <repository>
+      <id>libs-release</id>
+      <name>artifactory-cronapp-release</name>
+      <url>https://artifactory.cronapp.io/libs-release</url>
+    </repository>
+    <repository>
+      <id>libs-snapshot</id>
+      <name>artifactory-cronapp-snapshot</name>
+      <url>https://artifactory.cronapp.io/libs-snapshot</url>
+    </repository>
+    <repository>
       <id>camunda-nexus</id>
       <name>camunda BPM Maven Repository</name>
       <url>https://app.camunda.com/nexus/content/groups/public</url>

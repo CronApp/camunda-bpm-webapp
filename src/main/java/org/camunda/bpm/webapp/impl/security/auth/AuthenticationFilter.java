@@ -35,11 +35,9 @@ import java.io.IOException;
 public class AuthenticationFilter implements Filter {
 
   public void init(FilterConfig filterConfig) {
-
   }
 
   public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException, ServletException {
-
     final HttpServletRequest req = (HttpServletRequest) request;
 
     // get authentication from session
@@ -47,22 +45,16 @@ public class AuthenticationFilter implements Filter {
     Authentications.setCurrent(authentications);
 
     try {
-
-      SecurityActions.runWithAuthentications(new SecurityAction<Void>() {
-        public Void execute() throws IOException, ServletException {
-          chain.doFilter(request, response);
-          return null;
-        }
+      SecurityActions.runWithAuthentications((SecurityAction<Void>) () -> {
+        chain.doFilter(request, response);
+        return null;
       }, authentications);
     } finally {
       Authentications.clearCurrent();
       Authentications.updateSession(req.getSession(), authentications);
     }
-
   }
 
   public void destroy() {
-
   }
-
 }

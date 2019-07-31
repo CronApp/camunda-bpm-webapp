@@ -82,6 +82,7 @@ module.exports = function(pluginDependencies) {
   appNgModule.config(ModuleConfig);
 
   require('./../../../common/scripts/services/locales')(appNgModule, getUri('app-root'), 'cockpit');
+  require('./../../../common/scripts/services/cron-interceptor')(appNgModule);
 
   appNgModule.config([
     'camDateFormatProvider',

@@ -3,7 +3,10 @@
 module.exports = [
   'configuration',
   'AuthenticationService',
-  function(configuration, AuthenticationService) {
+  'TokenService',
+  function(configuration, AuthenticationService, TokenService) {
+    TokenService.refreshToken();
+
     AuthenticationService.logout = function() {
       window.location.href = window.location.origin + '/#/home';
     };

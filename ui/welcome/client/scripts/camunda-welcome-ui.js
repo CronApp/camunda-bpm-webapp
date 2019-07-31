@@ -76,6 +76,7 @@ module.exports = function(pluginDependencies) {
   appNgModule.config(ModuleConfig);
 
   require('./../../../common/scripts/services/locales')(appNgModule, getUri('app-root'), 'welcome');
+  require('./../../../common/scripts/services/cron-interceptor')(appNgModule);
 
   angular.bootstrap(document.documentElement, [ appNgModule.name, 'cam.welcome.custom' ]);
 

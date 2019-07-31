@@ -70,10 +70,12 @@ module.exports = function(pluginDependencies) {
   var tasklistApp = angular.module('cam.tasklist', ngDeps);
 
   tasklistApp.factory('assignNotification', require('./services/cam-tasklist-assign-notification'));
+  tasklistApp.service('TokenService', require('./../../../common/scripts/services/tokenService'));
   tasklistApp.provider('configuration', require('./../../../common/scripts/services/cam-configuration')(window.camTasklistConf, 'Tasklist'));
 
   require('./../../../common/scripts/services/locales')(tasklistApp, uriConfig['app-root'], 'tasklist');
   require('./config/uris')(tasklistApp, uriConfig);
+  require('./../../../common/scripts/services/cron-interceptor')(tasklistApp);
 
 
   tasklistApp.config(require('./config/routes'));
