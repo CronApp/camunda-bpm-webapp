@@ -2,9 +2,9 @@
 
 module.exports = function(ngModule) {
   ngModule.config(['$httpProvider', function($httpProvider) {
-    var interceptor = [function () {
+    var interceptor = [function() {
       return {
-        'request': function (config) {
+        'request': function(config) {
           var _u = JSON.parse(localStorage.getItem('_u'));
           if (_u && _u.token) {
             config.headers['X-AUTH-TOKEN'] = _u.token;
@@ -13,8 +13,8 @@ module.exports = function(ngModule) {
           return config;
         }
       };
-    }
-    ];
+    }];
+
     $httpProvider.interceptors.push(interceptor);
   }]);
 };

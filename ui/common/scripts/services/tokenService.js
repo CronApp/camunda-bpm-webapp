@@ -1,7 +1,17 @@
 'use strict';
 
-module.exports = ['$http', 'AuthenticationService',
-  function($http, AuthenticationService) {
+module.exports = ['$rootScope', '$http', 'AuthenticationService',
+  function($rootScope, $http, AuthenticationService) {
+
+    $rootScope.$on('authentication.login.required', function(event) {
+      if (event.preventDefault) {
+        event.preventDefault();
+      }
+
+      $rootScope.$evalAsync(function() {
+        window.location.href = window.location.origin;
+      });
+    });
 
     function refreshToken() {
       var _u = JSON.parse(localStorage.getItem('_u'));
