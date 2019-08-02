@@ -6,11 +6,10 @@ var angular = require('angular');
 
 var Modeler = require('./util/modeler'),
     propertiesPanel = require('bpmn-js-properties-panel'),
-    cronPropertiesProvider = require('../providers/cronapp'),
+    camundaPropertiesProvider = require('bpmn-js-properties-panel/lib/provider/camunda'),
     minimap = require('diagram-js-minimap'),
     translations = require('../locales/customTranslate'),
     camundaModdleDescriptor = require('camunda-bpmn-moddle/resources/camunda'),
-    cronModdle = require('../providers/cronapp/moddle/cronappModdle'),
     template = fs.readFileSync(__dirname + '/camWidgetBpmnModeler.html', 'utf8');
 
 module.exports = ['$q', '$document', '$compile', '$location', 'debounce',
@@ -53,13 +52,12 @@ module.exports = ['$q', '$document', '$compile', '$location', 'debounce',
             },
             additionalModules: [
               propertiesPanel,
-              cronPropertiesProvider,
+              camundaPropertiesProvider,
               minimap,
               customTranslateModule
             ],
             moddleExtensions: {
-              camunda: camundaModdleDescriptor,
-              cronapp: cronModdle
+              camunda: camundaModdleDescriptor
             },
             canvas: {
               deferUpdate: false
