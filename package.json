@@ -33,7 +33,7 @@
     "bootstrap": "3.3.6",
     "bpmn-font": "0.8.0",
     "bpmn-js": "^3.4.1",
-    "bpmn-js-properties-panel": "git://github.com/CronApp/bpmn-js-properties-panel#master",
+    "bpmn-js-properties-panel": "git://github.com/CronApp/bpmn-js-properties-panel.git#master",
     "camunda-bpm-sdk-js": "git://github.com/camunda/camunda-bpm-sdk-js#7.10.0",
     "camunda-bpmn-moddle": "^3.2.0",
     "camunda-commons-ui": "git://github.com/CronApp/camunda-commons-ui.git#cronapp",
