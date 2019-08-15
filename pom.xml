@@ -109,8 +109,9 @@
     </dependency>
 
     <dependency>
-      <groupId>org.camunda.bpm</groupId>
+      <groupId>io.cronapp</groupId>
       <artifactId>camunda-engine</artifactId>
+      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
 
