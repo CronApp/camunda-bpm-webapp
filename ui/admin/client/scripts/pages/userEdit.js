@@ -185,12 +185,8 @@ module.exports = [ '$routeProvider', function($routeProvider) {
 
                 $location.path('/users');
               } else {
-                $http.get(Uri.appUri('engine://engine/')).then(function(response) {
-                  var engines = response.data;
-
-                  engines.forEach(function(engine) {
-                    AuthenticationService.logout(engine.name);
-                  });
+                $http.get(Uri.appUri('engine://engine/')).then(function() {
+                  AuthenticationService.logout();
                 });
               }
             });
