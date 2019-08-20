@@ -10,6 +10,7 @@ module.exports = [
   'search',
   'dataDepend',
   'camAPI',
+  'datepickerPopupConfig',
   function(
     $scope,
     $q,
@@ -17,8 +18,14 @@ module.exports = [
     $interval,
     search,
     dataDepend,
-    camAPI
+    camAPI,
+    datepickerPopupConfig
   ) {
+
+    datepickerPopupConfig.datepickerPopup = 'dd/MM/yyyy';
+    datepickerPopupConfig.currentText = 'Hoje';
+    datepickerPopupConfig.clearText = 'Limpar';
+    datepickerPopupConfig.closeText = 'Feito';
 
     function getPropertyFromLocation(property) {
       var search = $location.search() || {};
