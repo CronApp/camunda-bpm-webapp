@@ -12,8 +12,8 @@ var Modeler = require('./util/modeler'),
     camundaModdleDescriptor = require('camunda-bpmn-moddle/resources/camunda'),
     template = fs.readFileSync(__dirname + '/camWidgetBpmnModeler.html', 'utf8');
 
-module.exports = ['$q', '$document', '$compile', '$location', 'debounce',
-  function($q, $document, $compile, $location, debounce) {
+module.exports = ['$q', '$document', '$compile', '$location', 'debounce', '$http', 'Uri',
+  function($q, $document, $compile, $location, debounce, $http, Uri) {
     return {
       scope: {
         processDefinition: '=',
@@ -27,6 +27,11 @@ module.exports = ['$q', '$document', '$compile', '$location', 'debounce',
         var modeler = null;
         var canvas = null;
         var definitions;
+
+        $http.get(Uri.appUri('engine://engine/:engine/blockly/')).success(function(blocklyList) {
+          window.blocklyList = blocklyList;
+        });
+
         var diagramContainer = $element[0].querySelector('.diagram-holder');
         var customTranslateModule = {
           translate: ['value', translations]
