@@ -1,5 +1,5 @@
 <form name="form">
-  <h3>{{ 'EXECUTION_METRICS' | translate }}</h3>  
+  <h3>{{ 'EXECUTION_METRICS' | translate }}</h3>
 
   <div class="alert alert-info">
     <p>
@@ -13,32 +13,50 @@
       <label for="startDate">
         {{ 'EXECUTION_METRICS_START_DATE' | translate }}
       </label>
-      <input type="text"
-             name="startDate"
-             ng-model="startDate"
-             ng-required="true"
-             ng-change="handleDateChange()"
-             class="form-control"
-             id="startDate"
-             date />
+      <p class="input-group">
+        <input type="text"
+               name="startDate"
+               ng-model="startDate"
+               ng-required="true"
+               ng-change="handleDateChange()"
+               class="form-control"
+               id="startDate"
+               datepicker-popup="dd/MM/yyyy"
+               is-open="startDateFieldOpened" />
+        <span class="input-group-btn">
+          <button type="button"
+                  class="btn btn-default"
+                  ng-click="open($event, 'startDateFieldOpened')">
+            <i class="glyphicon glyphicon-calendar"></i>
+          </button>
+        </span>
+      </p>
     </div>
 
     <div class="form-group col-xs-12 col-sm-6">
       <label for="endDate">
         {{ 'EXECUTION_METRICS_END_DATE' | translate }}
       </label>
-      <input type="text"
-             name="endDate"
-             ui-datepicker-popup
-             ng-model="endDate"
-             ng-change="handleDateChange()"
-             ng-required="true"
-             class="form-control"
-             id="endDate"
-             date />
+      <p class="input-group">
+        <input type="text"
+               name="endDate"
+               ng-model="endDate"
+               ng-required="true"
+               ng-change="handleDateChange()"
+               class="form-control"
+               id="endDate"
+               datepicker-popup="dd/MM/yyyy"
+               is-open="endDateFieldOpened" />
+        <span class="input-group-btn">
+          <button type="button"
+                  class="btn btn-default"
+                  ng-click="open($event, 'endDateFieldOpened')">
+            <i class="glyphicon glyphicon-calendar"></i>
+          </button>
+        </span>
+      </p>
     </div>
   </div>
-
 
   <div cam-widget-loader
        loading-state="{{ loadingState }}"
@@ -64,5 +82,4 @@
       {{ 'EXECUTION_METRICS_REFRESH' | translate }}
     </button>
   </div>
-
 </form>

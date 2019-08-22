@@ -42,6 +42,64 @@ module.exports = function(pluginDependencies) {
     return uri;
   }
 
+  function $LocaleProvider() {
+    this.$get = function() {
+      return {
+        id: 'pt-BR',
+        NUMBER_FORMATS: {
+          DECIMAL_SEP: ',',
+          GROUP_SEP: '.',
+          PATTERNS: [
+            { // Decimal Pattern
+              minInt: 1,
+              minFrac: 0,
+              maxFrac: 3,
+              posPre: '',
+              posSuf: '',
+              negPre: '-',
+              negSuf: '',
+              gSize: 3,
+              lgSize: 3
+            },{ //Currency Pattern
+              minInt: 1,
+              minFrac: 2,
+              maxFrac: 2,
+              posPre: '\u00A4',
+              posSuf: '',
+              negPre: '-\u00A4',
+              negSuf: '',
+              gSize: 3,
+              lgSize: 3
+            }
+          ],
+          CURRENCY_SYM: 'R$'
+        },
+        DATETIME_FORMATS: {
+          MONTH: 'Janeiro,Fevereiro,Março,Abril,Maio,Junho,Julho,Agosto,Setembro,Outubro,Novembro,Dezembro'
+            .split(','),
+          SHORTMONTH:  'Jan,Fev,Mar,Abr,Mai,Jun,Jul,Ago,Set,Out,Nov,Dez'.split(','),
+          DAY: 'Domingo,Segunda,Terça,Quarta,Quinta,Sexta,Sábado'.split(','),
+          SHORTDAY: 'Dom,Seg,Ter,Qua,Qui,Sex,Sab'.split(','),
+          AMPMS: ['AM','PM'],
+          medium: 'd \'de\' MMM \'de\' y HH:mm:ss',
+          short: 'dd/MM/y HH:mm',
+          fullDate: 'EEEE, d \'de\' MMMM \'de\' y',
+          longDate: 'd \'de\' MMMM \'de\' y',
+          mediumDate: 'd \'de\' MMM \'de\' y',
+          shortDate: 'dd/MM/y',
+          mediumTime: 'HH:mm:ss',
+          shortTime: 'HH:mm'
+        },
+        pluralCat: function(num) {
+          if (num === 1) {
+            return 'um';
+          }
+          return 'outro';
+        }
+      };
+    };
+  }
+
   var ModuleConfig = [
     '$routeProvider',
     'UriProvider',
@@ -71,6 +129,7 @@ module.exports = function(pluginDependencies) {
     }];
 
   appNgModule.provider('configuration', require('./../../../common/scripts/services/cam-configuration')(window.camAdminConf, 'Admin'));
+  appNgModule.provider('$locale', $LocaleProvider);
 
   appNgModule.config(ModuleConfig);
 
@@ -83,13 +142,20 @@ module.exports = function(pluginDependencies) {
     'camAPI',
     'AuthenticationService',
     'TokenService',
+    'datepickerPopupConfig',
     function(
       $scope,
       $route,
       camAPI,
       AuthenticationService,
-      TokenService
+      TokenService,
+      datepickerPopupConfig
     ) {
+      datepickerPopupConfig.datepickerPopup = 'dd/MM/yyyy';
+      datepickerPopupConfig.currentText = 'Hoje';
+      datepickerPopupConfig.clearText = 'Limpar';
+      datepickerPopupConfig.closeText = 'Feito';
+
       TokenService.refreshToken();
 
       AuthenticationService.logout = function() {

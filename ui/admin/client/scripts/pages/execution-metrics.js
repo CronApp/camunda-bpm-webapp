@@ -7,31 +7,35 @@ var CamSDK = require('camunda-commons-ui/vendor/camunda-bpm-sdk');
 
 var Controller = [
   '$scope',
-  '$filter',
   'Uri',
   'camAPI',
   'fixDate',
-  function($scope, $filter, Uri, camAPI, fixDate) {
+  '$translate',
+  function($scope, Uri, camAPI, fixDate, $translate) {
 
     var MetricsResource = camAPI.resource('metrics');
 
-
     // date variables
     var now = new Date();
-    var dateFilter = $filter('date');
-    var dateFormat = 'yyyy-MM-dd\'T\'HH:mm:ss';
+    var dateFormat = 'dd/MM/yyyy';
 
     // initial scope data
-    $scope.startDate = dateFilter(now.getFullYear() + '-01-01T00:00:00.000', dateFormat);
-    $scope.endDate =   dateFilter(now.getFullYear() + '-12-31T23:59:59.999', dateFormat);
+    $scope.startDate = new Date(now.getFullYear(), 0, 1);
+    $scope.endDate =   new Date(now.getFullYear(), 11, 31, 23, 59, 59, 999);
     $scope.loadingState = 'INITIAL';
 
-    
     // sets loading state to error and updates error message
     function setLoadingError(error) {
       $scope.loadingState = 'ERROR';
       $scope.loadingError = error;
     }
+
+    $scope.open = function($event, field) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope[field] = true;
+    };
 
     // called every time date input changes
     $scope.handleDateChange = function handleDateChange() {
@@ -39,9 +43,9 @@ var Controller = [
       if(form.$valid) {
         return load();
       } else if(form.startDate.$error.datePattern || form.endDate.$error.datePattern) {
-        setLoadingError('Supported pattern \'yyyy-MM-ddTHH:mm:ss\'.');
+        setLoadingError($translate.instant('EXECUTION_METRICS_SUPPORTED_PATTERN_ERROR', { dateFormat: dateFormat }))
       } else if(form.startDate.$error.dateValue || form.endDate.$error.dateValue) {
-        setLoadingError('Invalid Date Value.');
+        setLoadingError($translate.instant('EXECUTION_METRICS_INVALID_DATE_VALUE_ERROR'));
       }
     };
 
@@ -70,21 +74,18 @@ var Controller = [
       }, function(err, res) {
         $scope.loadingState = 'LOADED';
         if (err) {
-          setLoadingError('Could not set start and end dates.');
+          setLoadingError($translate.instant('EXECUTION_METRICS_COULD_NOT_SET_START_AND_END_DATES_ERROR'));
           $scope.loadingState = 'ERROR';
           return;
         }
         $scope.metrics = res;
       });
-
     };
 
     load();
-
   }];
 
 module.exports = ['ViewsProvider', function PluginConfiguration(ViewsProvider) {
-
   ViewsProvider.registerDefaultView('admin.system', {
     id: 'system-settings-metrics',
     label: 'EXECUTION_METRICS',

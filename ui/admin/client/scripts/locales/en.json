@@ -88,6 +88,9 @@
   "EXECUTION_METRICS_RESULTS" : "Results",
   "EXECUTION_METRICS_REFRESH" : "Refresh",
   "AN_ERROR_OCCURRED" : "An error occurred",
+  "EXECUTION_METRICS_SUPPORTED_PATTERN_ERROR": "Supported pattern '{{dateFormat}}'.",
+  "EXECUTION_METRICS_INVALID_DATE_VALUE_ERROR": "Invalid Date Value.",
+  "EXECUTION_METRICS_COULD_NOT_SET_START_AND_END_DATES_ERROR": "Could not set start and end dates.",
 
   "GENERIC_CONFIRMATION_TITLE" : "Please confirm",
   "GENERIC_CONFIRMATION_CANCEL" : "Cancel",
